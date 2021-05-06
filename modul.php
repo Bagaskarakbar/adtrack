@@ -1,4 +1,124 @@
 <!doctype html>
+<?
+
+// logic layer ==========================================================================================================;
+session_start();
+//error_reporting(0);
+include "_lib/function/db_login.php";
+loadlib("function","function.variabel");
+loadlib("function","function.olah_tabel");
+loadlib("function","function.datetime");
+loadlib("class","Security");
+
+//$db->debug=true;
+$modulnya=array();
+$modularnya=array();
+$sec=new Security($db);
+
+if ($sec->isLoggedIn(session_id())) {
+	if ($sec->isValidUser()) {
+		$modularnya=$sec->hakModular();
+
+		foreach ($modularnya as $k=>$id_dc_modular) {
+			$modulnya[$id_dc_modular]=$sec->hakModul($id_dc_modular);
+		}
+
+		if (count($modulnya,COUNT_RECURSIVE)==1) {
+			$lokasi="modul.php";
+		}
+
+	} else {
+		$lokasi="modul.php";
+	}
+} else {
+	$lokasi="index.php";
+}
+//echo $lokasi;
+//die;
+if (isset($lokasi)) {
+	header('Location:'.$lokasi);
+}
+
+//print_r($modulnya);
+
+$userInfo=$sec->get("userInfo");
+$id_dd_user=$userInfo["id_dd_user"];
+$username=$userInfo["username"];
+$no_induk=$userInfo["no_induk"];
+$id_dd_jenis_user = $userInfo["id_dd_jenis_user"];
+$no_id_jenis = $userInfo["no_id_jenis"];
+if ($id_dd_jenis_user!="1"){
+	$hasil_admin = read_tabel("mt_karyawan","*","WHERE no_induk = $no_id_jenis");
+	$nama_user = $hasil_admin ->fields["nama_pegawai"];
+} else {
+	$nama_user = "Administrator";
+}
+
+// harusnya ngambil dari database..
+$nm_pegawai=baca_tabel("mt_karyawan","nama_pegawai","WHERE no_induk='".$no_induk."'");
+$kd_bagian=baca_tabel("mt_karyawan","kode_bagian","WHERE no_induk='".$no_induk."'");
+$foto_karyawan=baca_tabel("mt_karyawan","url_foto_karyawan","WHERE no_induk='".$no_induk."'");
+
+$r=read_tabel("dd_konfigurasi","*");
+while ($konf=$r->FetchRow()) {
+	$nama_perusahaan=$konf["nama_perusahaan"];
+	$nama_aplikasi=$konf["nama_aplikasi"];
+	$nama_singkat=$konf["nama_singkat"];
+	$alamat=$konf["alamat"];
+	$kota=$konf["kota"];
+	$kode_pos=$konf["kode_pos"];
+	$telpon=$konf["telpon"];
+	$fax=$konf["fax"];
+	$logo_small=$konf["logo_small"];
+	$html_title=$konf["html_title"];
+	$id_dd_paket=$konf["id_dd_paket"];
+}
+
+
+
+// seharusnya pake login_time
+$status_tgl=$userInfo["status_tgl"];
+$tanggal=$status_tgl;
+//list($tanggal,$waktu)=split('[ ]',$status_tgl);
+$halo=greeting(date("H"));
+$npp=$userInfo["npp"];
+
+
+
+// seharusnya pake ip log seblmnya
+$ip=$_SERVER['REMOTE_ADDR'];
+
+//$=$userInfo[""];
+
+
+//======================= 	GET MODUL 	========================//
+foreach ($modularnya as $k=>$id_dc_modular) {
+	$nama_modular=baca_tabel("dc_modular","nama_modular","WHERE id_dc_modular=".$id_dc_modular);
+
+	foreach ($modulnya[$id_dc_modular] as $k=>$id_dc_modul) {
+
+		$rModul=read_tabel("dc_modul","*","WHERE id_dc_modul=".$id_dc_modul);
+
+		while ($resModul=$rModul->FetchRow()) {
+			$icon=$resModul["logo"];
+			$arrIcon = explode(".",$icon);
+			$icon_hover = $arrIcon[0]."_hover.".$arrIcon[1];
+			$nama_modul=$resModul["nama_modul"];
+			$id_dc_modul=$resModul["id_dc_modul"];
+			$folder=$resModul["folder"];
+		}
+	}
+}
+
+$userInfo['nama_user']=$nama_user;
+$userInfo['foto_karyawan']=$foto_karyawan;
+$userInfo['nm_pegawai']=$nm_pegawai;
+$userInfo['id_dd_paket']=$id_dd_paket;
+$_SESSION['logininfo']=$userInfo;
+
+//=======================	END 	=======================//
+//echo $nama_modular;
+?>
 <html lang="en">
 
 <head>
@@ -95,19 +215,16 @@
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                             <button type="button" tabindex="0" class="dropdown-item">User Account</button>
                                             <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                            <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                            <button type="button" tabindex="0" class="dropdown-item">Actions</button>
-                                            <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
+                                            <a type="button" href="logout.php" tabindex="0" class="dropdown-item">Sign Out</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Alina Mclourd
+                                        <?=$nama_user?>
                                     </div>
                                     <div class="widget-subheading">
-                                        VP People Manager
+                                       <?=$_SESSION['logininfo']['username']?>
                                     </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">

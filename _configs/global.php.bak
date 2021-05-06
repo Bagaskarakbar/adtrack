@@ -1,0 +1,54 @@
+<?
+$AV_CONF=array();
+
+//$AV_CONF["db"]["adodb"]=true;				// unusable
+/*$AV_CONF["db"]["type"]="MSSQL";
+$AV_CONF["db"]["user"]="sa";
+$AV_CONF["db"]["pass"]="cakrawalarspc";
+$AV_CONF["db"]["name"]="test";
+$AV_CONF["db"]["host"]="192.168.1.1";*/
+
+// Not work..
+$AV_CONF["db"]["type"]="MSSQL";
+$AV_CONF["db"]["user"]="sa";
+$AV_CONF["db"]["pass"]="averin";
+$AV_CONF["db"]["name"]="SIRS_RSJIWA";
+$AV_CONF["db"]["host"]="AVRSVR";
+
+/*
+$AV_CONF["db"]["host"]="192.168.1.90";
+$AV_CONF["db"]["pass"]="sa";
+$AV_CONF["db"]["name"]="SIRS_RSUD_20060426";
+*/
+//$AV_CONF["db"]["host"]="127.0.0.1";
+
+$AV_CONF["etc"]["login_satu_saja"]=true;
+$AV_CONF["etc"]["session_time_out"]=15;
+$AV_CONF["etc"]["password_expired"]=true;
+$AV_CONF["etc"]["development"]=true;		// development flag, to track whether in development mode
+
+//$AV_CONF["smarty"]["active"]=true;
+//$AV_CONF["smarty"]["template_dir"]="/_templates";
+//$AV_CONF["smarty"]["compile_dir"]="/temp";
+//$AV_CONF["smarty"]["configs_dir"]="/_lib/configs";
+//$AV_CONF["smarty"]["smarty_dir"]="/_lib/smarty";
+//$AV_CONF["smarty"]["trusted_dir"]="/_lib";
+
+$AV_CONF["skin"]["name"]="default";
+
+$AV_CONF["free_page"][]="/login.php";
+$AV_CONF["free_page"][]="/login_act.php";
+$AV_CONF["free_page"][]="/login1.php";
+$AV_CONF["free_page"][]="/login1_act.php";
+
+
+
+/*
+$AV_CONF["dir"][""]="";
+$AV_CONF["dir"][""]="";
+$AV_CONF["dir"][""]="";
+$AV_CONF["dir"][""]="";
+*/
+
+//echo "di dalam /_configs/global.php<br>\n";
+?>

@@ -1,7 +1,29 @@
 <!DOCTYPE html>
+<?
+session_start();
+//error_reporting(0);
+include "_lib/function/db_login.php";
+loadlib("function","function.olah_tabel");
+//$db->debug=true;
+
+$r=read_tabel("dd_konfigurasi","*");
+while ($konf=$r->FetchRow()) {
+	$nama_perusahaan=$konf["nama_perusahaan"];
+	$nama_aplikasi=$konf["nama_aplikasi"];
+	$nama_singkat=$konf["nama_singkat"];
+	$alamat=$konf["alamat"];
+	$kota=$konf["kota"];
+	$kode_pos=$konf["kode_pos"];
+	$telpon=$konf["telpon"];
+	$fax=$konf["fax"];
+	$logo_small=$konf["logo_small"];
+	$html_title=$konf["html_title"];
+	$id_dd_paket=$konf["id_dd_paket"];
+}
+?>
 <html lang="en">
 <head>
-	<title>Login V1</title>
+	<title>AdMedika || Documen Tracking</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -30,13 +52,13 @@
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="form" method="post"  action="login_act.php">
 					<span class="login100-form-title">
-						Member Login
+						Login <?=$nama_perusahaan?>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" name="txt_name" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -44,7 +66,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="txt_pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -58,19 +80,19 @@
 					</div>
 
 					<div class="text-center p-t-12">
-						<span class="txt1">
+						<!--<span class="txt1">
 							Forgot
 						</span>
 						<a class="txt2" href="#">
 							Username / Password?
-						</a>
+						</a>-->
 					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
+						<!--<a class="txt2" href="#">
 							Create your Account
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
+						</a>-->
 					</div>
 				</form>
 			</div>
