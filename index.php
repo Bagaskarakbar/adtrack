@@ -23,7 +23,7 @@ while ($konf=$r->FetchRow()) {
 ?>
 <html lang="en">
 <head>
-	<title>AdMedika || Documen Tracking</title>
+	<title>DocTrec - AdMedika</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
