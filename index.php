@@ -49,7 +49,7 @@ while ($konf=$r->FetchRow()) {
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
+					<img src="images/admedika.png" alt="IMG">
 				</div>
 
 				<form class="form" method="post"  action="login_act.php">
