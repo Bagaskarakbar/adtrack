@@ -52,12 +52,12 @@ while ($konf=$r->FetchRow()) {
 					<img src="images/admedika.png" alt="IMG">
 				</div>
 
-				<form class="form" method="post"  action="login_act.php">
+				<form class="login100-form validate-form" method="post"  action="login_act.php">
 					<span class="login100-form-title">
 						Login <?=$nama_perusahaan?>
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input" data-validate = "Username is required">
 						<input class="input100" type="text" name="txt_name" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
