@@ -209,7 +209,7 @@ $_SESSION['logininfo']=$userInfo;
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left">
                                     <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn" style="color:#ffffff;">
                                             <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
@@ -237,8 +237,8 @@ $_SESSION['logininfo']=$userInfo;
                         </div>
                     </div>        </div>
             </div>
-        </div>        
-		<div class="ui-theme-settings">
+        </div>
+		<!-- <div class="ui-theme-settings">
             <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
                 <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
             </button>
@@ -516,7 +516,7 @@ $_SESSION['logininfo']=$userInfo;
                     </div>
                 </div>
             </div>
-        </div>        
+        </div> -->
 		<div class="app-main">
                 <div class="app-sidebar sidebar-shadow">
                     <div class="app-header__logo">
@@ -581,27 +581,27 @@ $_SESSION['logininfo']=$userInfo;
                                         </li>
                                         <li>
                                             <a href="elements-dropdowns.html">
-                                                <i class="metismenu-icon"></i> 
+                                                <i class="metismenu-icon"></i>
 												AM Example 2
                                             </a>
                                         </li>
-                                       
+
                                     </ul>
                                 </li>
 								<li class="app-sidebar__heading">Administrasi</li>
                                 <li>
                                     <a href="index.html" class="mm">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
-                                        Administrasi Example 
+                                        Administrasi Example
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </div>    
+                </div>
 				<div class="app-main__outer">
                     <div class="app-main__inner">
-                        
+
 						<!-- 	Content 	 -->
                         <div class="row">
                             <div class="col-md-12">
@@ -611,16 +611,16 @@ $_SESSION['logininfo']=$userInfo;
 							</div>
 						</div>
 						<!-- 	End Content 	-->
-						
+
                     </div>
-					
-					
+
+
 					<!-- 	Footer 	-->
                     <div class="app-wrapper-footer">
                         <?php include "_footer.php"?>
                     </div>
-					<!-- 	End Footer 	-->			
-					
+					<!-- 	End Footer 	-->
+
 				</div>
                 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>
