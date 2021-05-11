@@ -6,8 +6,6 @@ $AV_CONF["db"]["user"]="root";
 $AV_CONF["db"]["pass"]="";
 $AV_CONF["db"]["name"]="dev_dokumen_tracking";
 $AV_CONF["db"]["host"]="localhost";
-// $AV_CONF["db"]["host"]="192.168.1.20";
-
 
 // $AV_CONF["db"]["type"]="mssqlnative";
 // $AV_CONF["db"]["user"]="sa";
