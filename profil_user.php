@@ -1,3 +1,4 @@
+
 <div class="app-header-right">
 	<div class="header-btn-lg pr-0">
 		<div class="widget-content p-0">
@@ -23,5 +24,6 @@
 				</div>
 			</div>
 		</div>
-	</div>        
+	</div>
 </div>
+	<script type="text/javascript" src="./assets/scripts/main.js"></script></body>

@@ -227,6 +227,9 @@ $_SESSION['logininfo']=$userInfo;
 		function loadModul(a,b){
 			$("#kt_wrapper").load("_header_shift.php",{modul:a,folder:b});
 		}
+		function loadHeader(a,b){
+			$("#kt_header").load("_header.php",{modul:a,folder:b});
+		}
 		function loadKonten(link){
 			$("#kt_content").load(link);
 		}
@@ -237,8 +240,9 @@ $_SESSION['logininfo']=$userInfo;
 		function change_frame(link){
 			$("#tab_frame").load(link);
 		}
-		
+
 		//loadKonten("<?=$folder?>/index.php");
+		loadHeader(<?=$modul?>,'<?=$folder?>');
 		loadModul(<?=$modul?>,'<?=$folder?>');
 
 	</script>

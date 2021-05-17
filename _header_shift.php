@@ -7,7 +7,7 @@ loadlib("class","Security");
 
 //$db->debug=true;
 ?>
-<?php include "_header.php"?>
+<?//php include "_header.php"?>
 <div class="app-main__inner" id="kt_content">
 	<!-- 	Content 	 -->
 	<div class="row">
@@ -40,4 +40,4 @@ loadlib("class","Security");
 	<script type="text/javascript" src="assets/scripts/main.js"></script>
 <script>
 loadKonten("<?=$link?>");
-</script>					
+</script>

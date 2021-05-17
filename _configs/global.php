@@ -3,9 +3,10 @@ $AV_CONF=array();
 
 $AV_CONF["db"]["type"]="mysqli";
 $AV_CONF["db"]["user"]="root";
-$AV_CONF["db"]["pass"]="";
-$AV_CONF["db"]["name"]="dev_dokumen_tracking";
-$AV_CONF["db"]["host"]="localhost";
+//$AV_CONF["db"]["pass"]="";
+$AV_CONF["db"]["pass"]="qluhyd0q4u6y7";
+$AV_CONF["db"]["name"]="dev_dok_tracking";
+$AV_CONF["db"]["host"]="103.28.53.66";
 
 // $AV_CONF["db"]["type"]="mssqlnative";
 // $AV_CONF["db"]["user"]="sa";
