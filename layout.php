@@ -47,8 +47,3 @@ loadlib("class","Security");
 			<div class="app-main__outer" id="kt_wrapper"></div>
     </div>
 </div>
-<script src="assets/plugins/global/plugins.bundle.js?v=7.0.4"></script>
-<script src="assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.4"></script>
-<script src="assets/js/scripts.bundle.js?v=7.0.4"></script>
-<script src="assets/js/pages/widgets.js?v=7.0.4"></script>
-<script type="text/javascript" src="assets/scripts/main.js"></script>
