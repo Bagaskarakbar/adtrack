@@ -1,14 +1,10 @@
-
-<div class="container mb-8">
-	<div class="card card-custom p-6">
+<div class="card-header">Konfigurasi Menu </div>
+<div class="main-card mb-3 card">
 		<div class="card-body">
 		<div id="topLayer" class="loading"></div>
 		<!-- ========================================================================================= -->
 		<div id="isiAtas">
 			
-			<div class="card-title">
-				<h3 class="card-label">Konfigurasi Menu</h3>
-			</div>	
 			<div id="barTools">
 				<form method="get" action="#" style='float:left;'>
 					<table cellpadding="0" cellspacing="0" class="table" >
@@ -50,7 +46,6 @@
 		</form>
 		</div>
 	<!-- ========================================================================================= -->
-	</div>
 	</div>
 </div>
 <div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

@@ -6,7 +6,7 @@
 	loadlib("function","function.olah_tabel");
 	loadlib("class","Paging");
 
-	switch ($tipeCari) {
+	/* switch ($tipeCari) {
 		case "nama" :
 			$sqlPlus = "WHERE nama_pegawai LIKE'%$filter%'";
 			break;
@@ -15,6 +15,10 @@
 			break;
 		default :
 			$sqlPlus = "";
+	} */
+	
+	if(!empty($search)){
+		$sqlPlus=" where (nama_pegawai like '%$search%' or username like '%$search%' or nama_bagian like '%$search%')";
 	}
 
 	$sql = "SELECT * FROM user_karyawan_v $sqlPlus ORDER BY username";
@@ -43,10 +47,10 @@
 				$no_induk = $tampil["no_induk"];
 				$nama_group = $tampil["nama_group"];
 				$tampil["action_hapus"]="<a href='#' title='Hapus Data' onclick='hapus_user_view($id_dd_user)'>
-							<i class='las la-trash-alt icon-lg text-danger '></i>
+							<i class='pe-7s-trash text-danger '></i>
 							</a>";
-				$tampil["action_edit"]="<a href='#' title='Edit  Data' onclick='ubah_user_view($id_dd_user)'>
-							<i class='las la-edit icon-lg text-success '></i>
+				$tampil["action_edit"]="<a title='Edit  Data' onclick='ubah_user_view($id_dd_user)'>
+							<i class='pe-7s-edit text-success '></i>
 							</a>";
 				$status = $tampil["status"];
 				$kode_dokter = $tampil["kode_dokter"];

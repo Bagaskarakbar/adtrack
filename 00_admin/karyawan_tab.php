@@ -4,62 +4,30 @@
 	require_once("../_lib/function/db.php");
 	
 ?>
-<div class="container mb-8" id="idTabKaryawan">
-			<div class="card card-custom p-6">
-				<div class="card-body" id="tab_frame">
-		<div id="topLayer" class="loading"></div>
-		<!-- ========================================================================================= -->
-		<div class="card-header flex-wrap border-0 pt-6 pb-0">
-			<div class="card-title" style='font-weight:bold'>Karyawan</div>
-			<div class="mb-7">
-				<div class="row align-items-center">
-					<div class="col-lg-9 col-xl-8">
-					
-				</div>
-					<div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-						<a href="#" class="btn btn-primary font-weight-bolder rm-5" onClick="tambah_pegawai('/00_admin/karyawan_tambah.php')">Tambah Karyawan</a>
-					</div>
-				
+	<div class="card-header">Data Karyawan </div>
+	<div class="tab-content">
+		<div id="isiAtas">
+			<div id="barTools">
+				<form method="get" action="#" style='float:left;'>
+					<table cellpadding="0" cellspacing="0" class="table" >
+						<tr>
+							<td><b>Cari</b></td>
+							<td>
+								<select name="tipeCari" class="form-control" id="kt_datatable_search_status" tabindex="null">
+									<option value="nama" <?= ($tipeCari == "nama") ? ("selected") : ("") ?>>Nama</option>
+									<option value="bagian" <?= ($tipeCari == "bagian") ? ("selected") : ("") ?>>Bagian</option>
+									<option value="noinduk" <?= ($tipeCari == "noinduk") ? ("selected") : ("") ?>>No Induk</option>
+								</select>
+							</td>
+							<td><input type="text" class="form-control" size="20" value="<?= $filter ?>" name="filter"></td>
+							<td><input type="button" name="cari" value="Cari" class="btn btn-success" onclick="cari_user()"> </td>
+						</tr>
+					</table>
+				</form>				
+				<input type="button" class="btn btn-success" onClick="tambah_pegawai('/00_admin/karyawan_tambah.php')" value="Tambah Karyawan" style='float:right;'>
 			</div>
 		</div>
-		<!-- ========================================================================================= -->
-
-		<!-- ========================================================================================= -->
-		<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable">
-							<!--begin::Search Form-->
-					<form method="get">
-					<div class="mb-7">
-						<div class="row align-items-center">
-							<div class="col-lg-9 col-xl-8">
-								<div class="row align-items-center">
-									<div class="col-md-4 my-2 my-md-0">
-										
-									</div>
-									<div class="col-md-4 my-2 my-md-0">
-										<div class="d-flex align-items-center">
-											<label class="mr-4 mb-0 d-none d-md-block">Cari:</label>
-											<select name="tipeCari" class="form-control" id="kt_datatable_search_status" tabindex="null">
-											<option value="nama" <?= ($tipeCari == "nama") ? ("selected") : ("") ?>>Nama</option>
-											<option value="bagian" <?= ($tipeCari == "bagian") ? ("selected") : ("") ?>>Bagian</option>
-											<option value="noinduk" <?= ($tipeCari == "noinduk") ? ("selected") : ("") ?>>No Induk</option>
-										</select>
-										</div>
-									</div>
-									<div class="col-md-4 my-2 my-md-0">
-										<div class="d-flex align-items-center">
-											<input type="text" size="20" value="<?= $filter ?>" name="filter" class="form-control">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-								<input type="button" name="cari" value="Cari" onclick="cari_user()" class="btn btn-light-primary px-6 font-weight-bold">
-							</div>
-						</div>
-					</div>
-					</form>
-					
-					<!--end::Search Form-->
+		
 		<table id="TableViewUserAdd" class="table" data-toggle="table" data-url="/00_admin/user_addcaripegawai_json.php"  data-pagination="true" data-trim-on-search="false"  data-sort-order="asc" data-side-pagination="server" data-total-field="count"
 		data-data-field="items" data-search="false" >
 		<thead>
@@ -84,22 +52,13 @@
 		</tbody>
 	</table>
 
-
-
-
-
-	<div class="formInputSubmitMulti">
-		<div class="modal-footer">
-			
-		</div>
-	</div>
+		
+	</div>	
+		
 	<div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content" id="idIsiModal"></div>
 		</div>
-	</div>
-</div>
-</div>
 <!-- ========================================================================================= -->
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script language="JavaScript" type="text/javascript">	

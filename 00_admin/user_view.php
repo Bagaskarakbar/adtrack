@@ -1,40 +1,19 @@
-<div class="container mb-8">
-			<div class="card card-custom p-6">
-				<div class="card-body" id="tab_frame">
-		<div id="topLayer" class="loading"></div>
-		<!-- ========================================================================================= -->
-		<div class="card-header flex-wrap border-0 pt-6 pb-0">
-			<div class="card-title"><h3>User</h3></div>
-			<div class="mb-12">
-				<div class="row align-items-center">
-					<div class="col-lg-9 col-xl-9">
-					
-						<table cellpadding="0" cellspacing="0" class="singleRow">
-							<tr>
-								<td><label class="mr-3 mb-0 d-none d-md-block"><b>Cari  </b> </label></td>
-								<td>
-									<select name="tipeCari" class="form-control form-control-solid form-control-lg" id="kt_datatable_search_status">
-										<option value="nama" <?= ($tipeCari == "nama") ? ("selected") : ("") ?>>Nama Pegawai</option>
-										<option value="id" <?= ($tipeCari == "id") ? ("selected") : ("") ?>>User ID</option>	
-									</select>
-								</td>
-								<td><input type="text" size="20" class="form-control form-control-solid form-control-lg" value="<?= $filter ?>" name="filter"></td>
-								<td><input type="button" name="cari" value="Cari" onclick="cari_user()" class="btn btn-light-primary px-6 font-weight-bold"></td>
-							</tr>
-						</table>
-					
-				</div>
-				<div class="col-lg-3 col-xl-4 mt-5 mt-lg-0" style="position:absolute;right:0;border:0px solid black;">
-						<a href="#" class="btn btn-primary font-weight-bolder rm-5" onClick="tambah('/00_admin/user_addcaripegawai.php')">Tambah User</a>
-				</div>
-			</div>
-		</div>
-		<!-- ========================================================================================= -->
+<?
+	session_start();
+	require_once("../_lib/function/db.php");
+	//$db->debug=true;
+	loadlib("function","variabel");
+	loadlib("function","function.olah_tabel");
+?>
+<div class="card-header">User </div>
+<div class="main-card mb-3 card">
 
-		<!-- ========================================================================================= -->
+<div class="card-body">
+<button class="mb-2 mr-2 btn btn-success" onClick="tambah('/00_admin/user_addcaripegawai.php')">Tambah User</button>
+
+	<div class="tab-content">
 		<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable">
-			<table id="TableView" class="table" data-toggle="table" data-url="/00_admin/user_view_json.php" data-pagination="true" data-trim-on-search="false" data-sort-order="asc" data-side-pagination="server" data-total-field="count"
-  data-data-field="items">
+			<table id="TableView" class="table" data-toggle="table" data-url="/00_admin/user_view_json.php" data-pagination="true" data-trim-on-search="false" data-sort-order="asc" data-side-pagination="server" data-search="true" data-total-field="count" data-data-field="items">
 				<thead>
 					<tr>
 						<th class="thno" data-field="no">No.</th>
@@ -50,19 +29,40 @@
 				</thead>
 			</table>
 		</div>
-	<!-- ========================================================================================= -->
-
-		</div>
-	</div>
-	<div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content" id="idIsiModal"></div>
-		</div>
+			
 	</div>
 	
 </div>
+</div>
+<div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" id="idIsiModal"></div>
+	</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
+	}
 	function ubah_user_view(a){
 		$("#idIsiModal").load('/00_admin/user_addedit.php',{id_dd_user:a,act:'edit'},function(){
 			$("#BuatModal").modal("show");

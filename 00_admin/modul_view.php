@@ -1,16 +1,14 @@
 
 <!-- presentation layer ------------------------------------------------------------------------------------------------------->
-<div class="container mb-8">
-	<div class="card card-custom p-6">
+<div class="card-header">Konfigurasi Modul</div>
+<div class="main-card mb-3 card">
 		<div class="card-body">
 
 	
 
 	<!-- ========================================================================================= -->
 	<div id="isiAtas">
-		<div class="card-title" style='float:left;'>
-			<h3 class="card-label">Konfigurasi Modul</h3>
-		</div>	
+		
 		<div id="barTools" style='float:right;'>
 			
 			<input type="button" class="btn btn-success" onclick="TambahModul()" value="Tambah Modul">
@@ -49,7 +47,6 @@
 
 <!-- ############################################################################################# -->
 </div>
-	</div>
 </div>
 <div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
