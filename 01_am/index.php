@@ -1,8 +1,14 @@
 <?
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
+session_start();
+require_once("../_lib/function/db.php");
+loadlib("function","function.pilihan_list");
+loadlib("function","function.olah_tabel");
+// $db->debug=true;
 ?>
-
-
 <div class="card-header">List Projek
 		<div class="btn-actions-pane-right" style="padding-right:10px;">
 			<!-- <div role="group" class="btn-group-sm btn-group">
@@ -131,30 +137,35 @@
 			<input type="text" id="unit" class="swal2-input" placeholder="Departmen/Unit">
 			<select name="jenis_pelanggan" id="jenis_pelanggan" class="swal2-input">
 				<option value="" disabled selected>Jenis Pelanggan</option>
-  			<option value="klinik">Klinik</option>
-  			<option value="rs">Rumah Sakit</option>
-  			<option value="puskesmas">Puskesmas</option>
+				<?
+				$getJenisPelanggan="SELECT * FROM mt_jenis_pelanggan ORDER BY id_mt_jenis_pelanggan ASC";
+				pilihan_list($getJenisPelanggan,"jenis_pelanggan","id_mt_jenis_pelanggan","id_mt_jenis_pelanggan");
+				?>
 			</select>
-			<select name="layanan" id="layanan" class="swal2-input">
+			<select name="layanan" id="layanan" class="swal2-input" onchange="get_jenis_layanan()">
 				<option value="" disabled selected>Jenis Layanan</option>
-				<option value="hysis">HiSys</option>
-				<option value="digiclinic">DigiClinic</option>
-				<option value="telemedika">Telemedika</option>
-				<option value="epuskesmas">ePuskesmas</option>
+				<?
+				$getJenisLayanan="SELECT * FROM mt_layanan ORDER BY id_mt_layanan ASC";
+				pilihan_list($getJenisLayanan,"nama_layanan","id_mt_layanan","id_mt_layanan");
+				?>
 			</select>
 			<select name="bundling" id="bundling" class="swal2-input">
 				<option value="" disabled selected>Jenis Bundling</option>
-  			<option value="">test</option>
+				<?
+				$getJenisLayanan="SELECT * FROM mt_bundling ORDER BY id_mt_bundling ASC";
+				pilihan_list($getJenisLayanan,"nama_bundling","id_mt_bundling","id_mt_bundling");
+				?>
 			</select>
 			<select name="paket_layanan" id="paket_layanan" class="swal2-input">
   			<option value="" disabled selected>Paket Layanan</option>
-  			<option value="standard">RS Standard</option>
-  			<option value="klinik_light">Klinik Light</option>
-  			<option value="klinik_standard">Klinik Standard</option>
+				<option value="" disabled>Pilih Jenis Layanan dahulu!!!</option>
 			</select>
 			<select name="jenis_projek" id="jenis_projek" class="swal2-input">
 				<option value="" disabled selected>Jenis Projek</option>
-  			<option value="">test</option>
+				<?
+				$getJenisLayanan="SELECT * FROM mt_jenis_project ORDER BY id_mt_jenis_project ASC";
+				pilihan_list($getJenisLayanan,"jenis_project","id_mt_jenis_project","id_mt_jenis_project");
+				?>
 			</select>
 			<input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK" onfocus="(this.type='date')">
 			<input type="number" id="nomor" class="swal2-input" placeholder="Nomor" style="max-width:none !important;">
@@ -163,31 +174,39 @@
 			confirmButtonText: 'Masuk',
 			focusConfirm: false,
 			preConfirm: () => {
-				const nama = Swal.getPopup().querySelector('#nama_mitra').value
-				const jenis = Swal.getPopup().querySelector('#jenis_mitra').value
-				if (!nama) {
-					Swal.showValidationMessage(`Nama Mitra harus dimasukan!!`)
+					const nama_pelanggan = Swal.getPopup().querySelector('#nama_pelanggan').value
+					const nama_am = Swal.getPopup().querySelector('#nama_am').value
+					if (!nama_pelanggan) {
+						Swal.showValidationMessage(`Nama Pelanggan harus dimasukan!!`)
+					}
+					if(!nama_am){
+						Swal.showValidationMessage(`Nama AM harus dimasukan!!`)
+					}
+					return {
+						nama_pelanggan: nama_pelanggan,
+						nama_am: nama_am
+					}
+				}
+		}).then(function(result){
+			if(result.value){
+				Swal.fire({
+					icon: 'success',
+					title: 'Yayy...',
+					text: 'Data berhasil dimasukan!!'
+				})
+			}else{
+				Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Data gagal dimasukan!!',
+				footer: '<a href>Why do I have this issue?</a>'
+				})
 			}
-			if(!jenis){
-					Swal.showValidationMessage(`Jenis Mitra harus dimasukan!!`)
-			}
-			return { nama: nama, jenis: jenis }
+		})
 	}
-}).then(function(result){
-	if(result.value){
-		Swal.fire({
-			icon: 'success',
-			title: 'Yayy...',
-			text: 'Data berhasil dimasukan!!'
-	})
-}else{
-		Swal.fire({
-			icon: 'erorr',
-			title: 'Oops...',
-			text: 'Data gagal dimasukan!!',
-			footer: '<a href>Why do I have this issue?</a>'
-	})
-}
-})
-}
+
+	function get_jenis_layanan(){
+		var id_mt_layanan=$('#layanan').val();
+		$('#paket_layanan').load('../01_am/get_jenis_layanan.php',{id_mt_layanan:id_mt_layanan});
+	}
 </script>
