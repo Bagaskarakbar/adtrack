@@ -169,26 +169,114 @@ loadlib("function","function.olah_tabel");
 			</select>
 			<input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK" onfocus="(this.type='date')">
 			<input type="number" id="nomor" class="swal2-input" placeholder="Nomor" style="max-width:none !important;">
-			<textarea rows="4" cols="50" placeholder="Perihal" class="swal2-textarea"></textarea>
-			<input type="number" id="unit" class="swal2-input" placeholder="Lama Kontrak" style="max-width:none !important;">`,
+			<textarea rows="4" cols="50" placeholder="Perihal" class="swal2-textarea" id="perihal"></textarea>
+			<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak" style="max-width:none !important;">`,
 			confirmButtonText: 'Masuk',
+			confirmButtonColor: '#007bff',
+			cancelButtonText:	'Batal',
+			cancelButtonColor:	'#dc3545',
+			showCancelButton:	true,
+			reverseButtons:	true,
 			focusConfirm: false,
+			showCloseButton: true,
 			preConfirm: () => {
 					const nama_pelanggan = Swal.getPopup().querySelector('#nama_pelanggan').value
 					const nama_am = Swal.getPopup().querySelector('#nama_am').value
+					const unit = Swal.getPopup().querySelector('#unit').value
+					const jenis_pelanggan = Swal.getPopup().querySelector('#jenis_pelanggan').value
+					const layanan = Swal.getPopup().querySelector('#layanan').value
+					const bundling = Swal.getPopup().querySelector('#bundling').value
+					const paket_layanan = Swal.getPopup().querySelector('#paket_layanan').value
+					const jenis_projek = Swal.getPopup().querySelector('#jenis_projek').value
+					const tgl_spk = Swal.getPopup().querySelector('#tgl_spk').value
+					const nomor = Swal.getPopup().querySelector('#nomor').value
+					const perihal = Swal.getPopup().querySelector('#perihal').value
+					const lama_kontrak = Swal.getPopup().querySelector('#lama_kontrak').value
 					if (!nama_pelanggan) {
 						Swal.showValidationMessage(`Nama Pelanggan harus dimasukan!!`)
 					}
 					if(!nama_am){
 						Swal.showValidationMessage(`Nama AM harus dimasukan!!`)
 					}
+					if(!unit){
+						Swal.showValidationMessage(`Departmen/Unit harus dimasukan!!`)
+					}
+					if(!jenis_pelanggan){
+						Swal.showValidationMessage(`Jenis Pelanggan harus dipilih!!`)
+					}
+					if (!layanan) {
+						Swal.showValidationMessage(`Jenis Layanan harus dipilih!!`)
+					}
+					if(!bundling){
+						Swal.showValidationMessage(`Jenis Bundling harus dipilih!!`)
+					}
+					if(!paket_layanan){
+						Swal.showValidationMessage(`Paket Layanan harus dipilih!!`)
+					}
+					if(!jenis_projek){
+						Swal.showValidationMessage(`Jenis Projek harus dipilih!!`)
+					}
+					if (!tgl_spk) {
+						Swal.showValidationMessage(`Tanggal SPK harus dimasukan!!`)
+					}
+					if(!nomor){
+						Swal.showValidationMessage(`Nomor harus dimasukan!!`)
+					}
+					if(!perihal){
+						Swal.showValidationMessage(`Perihal harus dimasukan!!`)
+					}
+					if(!lama_kontrak){
+						Swal.showValidationMessage(`Lama Kontrak harus dimasukan!!`)
+					}
 					return {
 						nama_pelanggan: nama_pelanggan,
-						nama_am: nama_am
+						nama_am: nama_am,
+						unit: unit,
+						jenis_pelanggan: jenis_pelanggan,
+						layanan: layanan,
+						bundling: bundling,
+						paket_layanan: paket_layanan,
+						jenis_projek: jenis_projek,
+						tgl_spk: tgl_spk,
+						nomor: nomor,
+						perihal: perihal,
+						lama_kontrak: lama_kontrak
 					}
 				}
 		}).then(function(result){
 			if(result.value){
+				// var datastring = {
+        //     name: $("#name").val(),
+        //     email: $("#email").val(),
+        //     superheroAlias: $("#superheroAlias").val(),
+        // };
+  			// $.ajax({
+  			// 	type:"post",
+  			// 	url:'/01_sam/am_form_act.php',
+  			// 	data:datastring,
+  			// 	success:function(data){
+  			// 		if(data.code != "500" ){
+				// 			Swal.fire({
+				// 				icon: 'success',
+				// 				title: 'Yayy...',
+				// 				text: 'Data berhasil dimasukan!!'
+				// 			})
+        //       setTimeout(function(){
+        //         $('#BuatModal').modal('hide');
+    		// 				$('.modal-backdrop').hide();
+    		// 				$("#loadHTML").load("../16_sie/news_form.php");
+        //       }, 2000);
+  			// 		}else{
+				// 			Swal.fire({
+				// 			icon: 'error',
+				// 			title: 'Oops...',
+				// 			text: 'Data gagal dimasukan!!',
+				// 			footer: 'Note: Terjadi kesalahan saat memasukan data!'
+				// 			})
+  			// 		}
+  			// 	},
+  			// 	dataType:"json"
+  			// })
 				Swal.fire({
 					icon: 'success',
 					title: 'Yayy...',
@@ -199,7 +287,7 @@ loadlib("function","function.olah_tabel");
 				icon: 'error',
 				title: 'Oops...',
 				text: 'Data gagal dimasukan!!',
-				footer: '<a href>Why do I have this issue?</a>'
+				footer: 'Note: Proses Dibatalkan oleh user!'
 				})
 			}
 		})
