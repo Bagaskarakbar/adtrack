@@ -19,7 +19,7 @@ loadlib("function","function.olah_tabel");
 		</div>
 </div>
 		<div class="table-responsive">
-				<table class="align-middle mb-0 table table-borderless table-striped table-hover">
+				<!-- <table class="align-middle mb-0 table table-borderless table-striped table-hover">
 						<thead>
 								<tr>
 										<th class="text-center">No</th>
@@ -39,7 +39,6 @@ loadlib("function","function.olah_tabel");
 														<div class="widget-content-wrapper">
 																<div class="widget-content-left flex2">
 																		<div class="widget-heading" style="color:#495057">Rs. Hermina</div>
-																		<!-- <div class="widget-subheading opacity-7">Web Developer</div> -->
 																</div>
 														</div>
 												</div>
@@ -78,7 +77,6 @@ loadlib("function","function.olah_tabel");
 														<div class="widget-content-wrapper">
 																<div class="widget-content-left flex2">
 																		<div class="widget-heading" style="color:#495057">Rs. Kebayoran</div>
-																		<!-- <div class="widget-subheading opacity-7">Lorem ipsum dolor sic</div> -->
 																</div>
 														</div>
 												</div>
@@ -98,7 +96,6 @@ loadlib("function","function.olah_tabel");
 														<div class="widget-content-wrapper">
 																<div class="widget-content-left flex2">
 																		<div class="widget-heading" style="color:#495057">Puskesmas Cikini</div>
-																		<!-- <div class="widget-subheading opacity-7">UI Designer</div> -->
 																</div>
 														</div>
 												</div>
@@ -112,6 +109,20 @@ loadlib("function","function.olah_tabel");
 										</td>
 								</tr>
 						</tbody>
+				</table> -->
+				<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/01_am/get_index_view.php" data-pagination="true" data-trim-on-search="false"  data-search="false" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
+				<thead>
+				<tr>
+					<th class="thno" data-field="no">No.</th>
+					<th style="text-align:left;" width="150" data-field="nama_pelanggan">Nama Pelanggan</th>
+					<th style="text-align:left;" width="150" data-field="jenis_pelanggan">Jenis Pelanggan</th>
+					<th style="text-align:left;" width="150" data-field="nama_layanan">Nama Layanan</th>
+					<th style="text-align:left;" width="150" data-field="paket_layanan">Paket Layanan</th>
+					<th style="text-align:left;" width="150" data-field="tgl_input">Tanggal Input</th>
+					<th class="thicons" data-field="details">Aksi</th>
+				</tr>
+				</thead>
+
 				</table>
 		</div>
 <div class="d-block text-center card-footer">
@@ -119,6 +130,8 @@ loadlib("function","function.olah_tabel");
 			<button class="btn-wide btn btn-success">Save</button> -->
 </div>
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
+<script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
+<script type="text/javascript" src="./assets/scripts/jquery-3.6.0.js"></script>
 <script>
 	function detail_form(){
 			Swal.fire({
@@ -228,61 +241,66 @@ loadlib("function","function.olah_tabel");
 					if(!lama_kontrak){
 						Swal.showValidationMessage(`Lama Kontrak harus dimasukan!!`)
 					}
-					return {
-						nama_pelanggan: nama_pelanggan,
-						nama_am: nama_am,
-						unit: unit,
-						jenis_pelanggan: jenis_pelanggan,
-						layanan: layanan,
-						bundling: bundling,
-						paket_layanan: paket_layanan,
-						jenis_projek: jenis_projek,
-						tgl_spk: tgl_spk,
-						nomor: nomor,
-						perihal: perihal,
-						lama_kontrak: lama_kontrak
-					}
+					// return {
+					// 	nama_pelanggan: nama_pelanggan,
+					// 	nama_am: nama_am,
+					// 	unit: unit,
+					// 	jenis_pelanggan: jenis_pelanggan,
+					// 	layanan: layanan,
+					// 	bundling: bundling,
+					// 	paket_layanan: paket_layanan,
+					// 	jenis_projek: jenis_projek,
+					// 	tgl_spk: tgl_spk,
+					// 	nomor: nomor,
+					// 	perihal: perihal,
+					// 	lama_kontrak: lama_kontrak
+					// }
 				}
 		}).then(function(result){
 			if(result.value){
-				// var datastring = {
-        //     name: $("#name").val(),
-        //     email: $("#email").val(),
-        //     superheroAlias: $("#superheroAlias").val(),
-        // };
-  			// $.ajax({
-  			// 	type:"post",
-  			// 	url:'/01_sam/am_form_act.php',
-  			// 	data:datastring,
-  			// 	success:function(data){
-  			// 		if(data.code != "500" ){
-				// 			Swal.fire({
-				// 				icon: 'success',
-				// 				title: 'Yayy...',
-				// 				text: 'Data berhasil dimasukan!!'
-				// 			})
-        //       setTimeout(function(){
-        //         $('#BuatModal').modal('hide');
-    		// 				$('.modal-backdrop').hide();
-    		// 				$("#loadHTML").load("../16_sie/news_form.php");
-        //       }, 2000);
-  			// 		}else{
-				// 			Swal.fire({
-				// 			icon: 'error',
-				// 			title: 'Oops...',
-				// 			text: 'Data gagal dimasukan!!',
-				// 			footer: 'Note: Terjadi kesalahan saat memasukan data!'
-				// 			})
-  			// 		}
-  			// 	},
-  			// 	dataType:"json"
-  			// })
-				Swal.fire({
-					icon: 'success',
-					title: 'Yayy...',
-					text: 'Data berhasil dimasukan!!'
-				})
+				console.log("masuk if");
+  			$.ajax({
+  				method:"POST",
+					dataType:"json",
+  				url:'/01_am/am_form_act.php',
+  				data:{
+						'nama_pelanggan': nama_pelanggan,
+						'nama_am': nama_am,
+						'unit': unit,
+						'jenis_pelanggan': jenis_pelanggan,
+						'layanan': layanan,
+						'bundling': bundling,
+						'paket_layanan': paket_layanan,
+						'jenis_projek': jenis_projek,
+						'tgl_spk': tgl_spk,
+						'nomor': nomor,
+						'perihal': perihal,
+						'lama_kontrak': lama_kontrak
+	        },
+  				success:function(data){
+						console.log("masuk if ajax");
+						console.log(data);
+  					if(data.code != "500" ){
+							Swal.fire({
+								icon: 'success',
+								title: 'Yayy...',
+								text: 'Data berhasil dimasukan!!'
+							})
+  					}else{
+							Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Data gagal dimasukan!!',
+							footer: 'Note: Terjadi kesalahan saat memasukan data!'
+							})
+  					}
+  				},
+					error:function(xhr,ajaxOptions,thrownError){
+						alert("ERROR:" + xhr.responseText+" - "+thrownError);
+					}
+  			})
 			}else{
+				console.log("masuk else");
 				Swal.fire({
 				icon: 'error',
 				title: 'Oops...',

@@ -1,6 +1,6 @@
 <?
 session_start();
-require_once("../../../_lib/function/db.php");
+require_once("../_lib/function/db.php");
 loadlib("function","function.olah_tabel");
 
 $db->debug=true;
