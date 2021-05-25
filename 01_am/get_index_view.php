@@ -1,10 +1,14 @@
 <?
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 	session_start();
 	require_once("../_lib/function/db.php");
-	//$db->debug=true;
 	loadlib("function","variabel");
+	loadlib("function","function.olah_tabel");
 	loadlib("class","Paging");
-	loadlib("function","function.tidak_berulang");
+	// $db->debug=true;
 
 	// switch ($tipeCari) {
 	// 	case "kelompok" :
@@ -26,22 +30,19 @@
 		JOIN mt_jenis_project AS b ON a.id_mt_jenis_project = b.id_mt_jenis_project
 		JOIN mt_bundling AS c ON a.id_mt_bundling = c.id_mt_bundling
 		JOIN mt_layanan AS d ON a.id_mt_layanan = d.id_mt_layanan
-		JOIN id_mt_paket AS e ON a.id_mt_paket = e.id_mt_paket
+		JOIN mt_paket AS e ON a.id_mt_paket = e.id_mt_paket
 		ORDER BY id_tc_pengajuan ASC";
-	$sql_count="select count(id_tc_pengajuan) as jum from ($sql) as a";
+	$sql_count="select count(id_tc_pengajuan) as jum from ($sql) as rec";
 	$run_count=$db->Execute($sql_count);
 	while($tpl_count=$run_count->fetchRow()){
 		$data['count']=$tpl_count['jum'];
 	}
 	$recperpage = $limit;
 	$hal=($offset/$limit)+1;
-
 	$pagenya = new Paging($db, $sql, $recperpage);
 	$rsPaging = $pagenya->ExecPage($hal);
 	$NoAwal = ($hal == "" || $hal < 1) ? 0 : ($rsPaging->_currentPage - 1) * $recperpage;
-
-
-		$i = $pagenya->pagingVars["firstno"];
+	$i = $pagenya->pagingVars["firstno"];
 
 		while ($tampil=$rsPaging->FetchRow()) {
 			$i++;
@@ -59,7 +60,7 @@
 			$DataList['nama_layanan']=$nama_layanan;
 			$DataList['paket_layanan']=$paket_layanan;
 			$DataList['tgl_input']=$tgl_input;
-			$DataList['details']="<button type='button' id='PopoverCustomT-4' class='btn btn-primary btn-sm'><a href='#' style='color: white; text-decoration: none;' onClick="">Detail</a></button>";
+			$DataList['details']="<button type='button' id='PopoverCustomT-4' class='btn btn-primary btn-sm'><a href='#' style='color: white; text-decoration: none;' onClick=''>Detail</a></button>";
 			$data['items'][]=$DataList;
 		}
 
