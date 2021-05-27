@@ -151,17 +151,16 @@ loadlib("function","function.olah_tabel");
 		const pages = ['1', '2', '3'];
 		// const values = [];
 		// let currPage;
-
-		const queuePages = Swal.mixin({
-			confirmButtonText: 'Selanjutnya &rarr;',
-			confirmButtonColor: '#007bff',
-			cancelButtonText:	'Batal',
-			cancelButtonColor:	'#dc3545',
+		Swal.mixin({
+		confirmButtonText: 'Selanjutnya &rarr;',
+		confirmButtonColor: '#007bff',
+		cancelButtonText:	'Batal',
+		cancelButtonColor:	'#dc3545',
 			// showCancelButton:	true,
-			reverseButtons:	true,
-			focusConfirm: false,
-			showCloseButton: true,
-		  progressSteps: pages
+		reverseButtons:	true,
+		focusConfirm: false,
+		showCloseButton: true,
+		progressSteps: pages
 		}).queue([{
 			title: 'Tambah Proyek',
 			html: `<input type="text" id="nama_am" class="swal2-input" placeholder="Nama AM" disabled>
@@ -173,35 +172,37 @@ loadlib("function","function.olah_tabel");
 					$getJenisPelanggan="SELECT * FROM mt_jenis_pelanggan ORDER BY id_mt_jenis_pelanggan ASC";
 					pilihan_list($getJenisPelanggan,"jenis_pelanggan","id_mt_jenis_pelanggan","id_mt_jenis_pelanggan");
 					?>
-				</select>`,
+				</select>
+				<textarea rows="4" cols="50" placeholder="Perihal" class="swal2-textarea" id="keterangan"></textarea>`,
 			// inputValue: 1,
 			// showCancelButton: 1,
 	    // currentProgressStep: 1,
-			preConfirm: function(value){
+			preConfirm: ()=>{
 				const nama_pelanggan = Swal.getPopup().querySelector('#nama_pelanggan').value
 				const nama_am = Swal.getPopup().querySelector('#nama_am').value
 				const unit = Swal.getPopup().querySelector('#unit').value
 				const jenis_pelanggan = Swal.getPopup().querySelector('#jenis_pelanggan').value
+				const keterangan = Swal.getPopup().querySelector('#keterangan').value
 				if(!nama_pelanggan){
 					Swal.showValidationMessage(`Nama Pelanggan harus dimasukan!!`)
 				}
 				if(!jenis_pelanggan){
 					Swal.showValidationMessage(`Jenis Pelanggan harus dipilih!!`)
 				}
-						// return {
-						// 	nama_pelanggan: nama_pelanggan,
-						// 	nama_am: nama_am,
-						// 	unit: unit,
-						// 	jenis_pelanggan: jenis_pelanggan,
-						// 	layanan: layanan,
-						// 	bundling: bundling,
-						// 	paket_layanan: paket_layanan,
-						// 	jenis_projek: jenis_projek,
-						// 	tgl_spk: tgl_spk,
-						// 	nomor: nomor,
-						// 	perihal: perihal,
-						// 	lama_kontrak: lama_kontrak
-						// }
+				if(!keterangan){
+					Swal.showValidationMessage(`Keterangan harus dimasukkan!!`)
+				}
+				var	arr1 = {
+					nama_am: nama_am,
+					unit: unit,
+					nama_pelanggan: nama_pelanggan,
+					jenis_pelanggan: jenis_pelanggan,
+					keterangan: keterangan
+				}
+				q1=arr1;
+				return{
+					q1
+				}
 			}
 		},
 		{
@@ -238,7 +239,7 @@ loadlib("function","function.olah_tabel");
 			// showCancelButton: 2,
       // currentProgressStep: 2,
 			cancelButtonText:	'Kembali',
-			preConfirm: function(value){
+			preConfirm: ()=>{
 				const layanan = Swal.getPopup().querySelector('#layanan').value
 				const bundling = Swal.getPopup().querySelector('#bundling').value
 				const paket_layanan = Swal.getPopup().querySelector('#paket_layanan').value
@@ -267,19 +268,80 @@ loadlib("function","function.olah_tabel");
 				if(!perihal){
 					Swal.showValidationMessage(`Perihal harus dimasukan!!`)
 				}
+				var	arr2 = {
+					layanan: layanan,
+					bundling: bundling,
+					paket_layanan:paket_layanan,
+					jenis_projek: jenis_projek,
+					tgl_spk: tgl_spk,
+					nomor: nomor,
+					perihal: perihal
+				}
+				q2=arr2;
+				return{
+					q2
+				}
 			}
 		},
 		{
 			title: 'Tambah Proyek',
-			html: `<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak" style="max-width:none !important;">`,
+			html: `<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak" style="max-width:none !important;">
+			<input type="number" id="jumlah_dana" class="swal2-input" placeholder="Jumlah Dana" style="max-width:none !important;">
+			<select name="jumlah_term" id="jumlah_term" class="swal2-input" onchange="gantiTerm()">
+					<option value="0" disabled selected>Jumlah Term</option>
+					<option value="1">1 Term</option>
+					<option value="2">2 Term</option>
+					<option value="3">3 Term</option>
+					<option value="4">4 Term</option>
+					<option value="5">5 Term</option>
+					<option value="6">6 Term</option>
+			</select>
+			<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important; display: none;">
+			<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important; display: none;">
+			<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important; display: none;">
+			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;">
+			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;">
+			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;">
+			<input type="checkbox" id="cb_ri" name="cb_ri" value="1" class="swal2-checkbox"><label for="cb_ri">Masukkan transaksi RI?</label><br>
+			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;">
+			<input type="checkbox" id="cb_ri" name="cb_rj" value="1" class="swal2-checkbox"><label for="cb_rj">Masukkan transaksi RJ?</label>
+			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;">`,
 			// inputValue: 3,
 			// showCancelButton: 3,
       // currentProgressStep: 3,
 			cancelButtonText:	'Kembali',
-			preConfirm: function(value){
+			preConfirm: ()=>{
 				const lama_kontrak = Swal.getPopup().querySelector('#lama_kontrak').value
+				const jumlah_dana = Swal.getPopup().querySelector('#jumlah_dana').value
+				const jumlah_term = Swal.getPopup().querySelector('#jumlah_term').value
+				const term1 = Swal.getPopup().querySelector('#term1').value
+				const term2 = Swal.getPopup().querySelector('#term2').value
+				const term3 = Swal.getPopup().querySelector('#term3').value
+				const term4 = Swal.getPopup().querySelector('#term4').value
+				const term5 = Swal.getPopup().querySelector('#term5').value
+				const term6 = Swal.getPopup().querySelector('#term6').value
 				if(!lama_kontrak){
 					Swal.showValidationMessage(`Lama Kontrak harus dimasukan!!`)
+				}
+				if(!jumlah_dana){
+					Swal.showValidationMessage(`Jumlah Dana harus dimasukan!!`)
+				}
+				if(!jumlah_term){
+					Swal.showValidationMessage(`Jumlah Term harus dipilih!!`)
+				}
+				var	arr3 = {
+					lama_kontrak: lama_kontrak,
+					jumlah_dana: jumlah_dana,
+					term1: term1,
+					term2: term2,
+					term3: term3,
+					term4: term4,
+					term5: term5,
+					term6: term6
+				}
+				q3=arr3;
+				return{
+					q3
 				}
 			}
 		},
@@ -290,23 +352,8 @@ loadlib("function","function.olah_tabel");
 		      method:"POST",
 		      dataType:"json",
 		      url:'/01_am/am_form_act.php',
-		      data:{
-		        'nama_pelanggan': nama_pelanggan,
-		        'nama_am': nama_am,
-		        'unit': unit,
-		        'jenis_pelanggan': jenis_pelanggan,
-		        'layanan': layanan,
-		        'bundling': bundling,
-		        'paket_layanan': paket_layanan,
-		        'jenis_projek': jenis_projek,
-		        'tgl_spk': tgl_spk,
-		        'nomor': nomor,
-		        'perihal': perihal,
-		        'lama_kontrak': lama_kontrak
-		      },
+		      data:{q1,q2,q3},
 		      success:function(data){
-		        console.log("masuk if ajax");
-		        console.log(data);
 		        if(data.code != "500" ){
 		          Swal.fire({
 		            icon: 'success',
@@ -322,9 +369,9 @@ loadlib("function","function.olah_tabel");
 		          })
 		        }
 		      },
-		      error:function(xhr,ajaxOptions,thrownError){
-		        alert("ERROR:" + xhr.responseText+" - "+thrownError);
-		      }
+		      // error:function(xhr,ajaxOptions,thrownError){
+		      //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
+		      // }
 		    })
 		  }else{
 		    console.log("masuk else");
@@ -348,6 +395,107 @@ loadlib("function","function.olah_tabel");
 		//   }
 		// }
 
+	}
+
+	function gantiTerm(){
+		var jumlah_term=$('#jumlah_term').val();
+		if(jumlah_term=='1'){
+			if(($('#term1').css('visibility') === 'hidden')){
+				$('#term1').show();
+				$('#term2').hide();
+				$('#term3').hide();
+				$('#term4').hide();
+				$('#term5').hide();
+				$('#term6').hide();
+			}else{
+				$('#term1').show();
+				$('#term2').hide();
+				$('#term3').hide();
+				$('#term4').hide();
+				$('#term5').hide();
+				$('#term6').hide();
+			}
+		}else if(jumlah_term=='2'){
+			if(($('#term2').css('visibility') === 'hidden')){
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').hide();
+				$('#term4').hide();
+				$('#term5').hide();
+				$('#term6').hide();
+			}else{
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').hide();
+				$('#term4').hide();
+				$('#term5').hide();
+				$('#term6').hide();
+			}
+		}else if(jumlah_term=='3'){
+			if(($('#term3').css('visibility') === 'hidden')){
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').hide();
+				$('#term5').hide();
+				$('#term6').hide();
+			}else{
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').hide();
+				$('#term5').hide();
+				$('#term6').hide();
+			}
+		}else if(jumlah_term=='4'){
+			if(($('#term4').css('visibility') === 'hidden')){
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').show();
+				$('#term5').hide();
+				$('#term6').hide();
+			}else{
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').show();
+				$('#term5').hide();
+				$('#term6').hide();
+			}
+		}else if(jumlah_term=='5'){
+			if(($('#term5').css('visibility') === 'hidden')){
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').show();
+				$('#term5').show();
+				$('#term6').hide();
+			}else{
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').show();
+				$('#term5').show();
+				$('#term6').hide();
+			}
+		}else{
+			if(($('#term6').css('visibility') === 'hidden')){
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').show();
+				$('#term5').show();
+				$('#term6').show();
+			}else{
+				$('#term1').show();
+				$('#term2').show();
+				$('#term3').show();
+				$('#term4').show();
+				$('#term5').show();
+				$('#term6').show();
+			}
+		}
 	}
 
 	function get_jenis_layanan(){
