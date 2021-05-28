@@ -13,17 +13,17 @@ loadlib("function","function.max_kode_text");
 //Foto Handler
 switch($act){
 	case "tambah":
-	if(isset($_POST["upload_foto_dokter"])){
+	if(isset($_POST["foto_karyawan"])){
 
-		$ArrDat=explode(";",$_POST["upload_foto_dokter"]);
+		$ArrDat=explode(";",$_POST["foto_karyawan"]);
 		$ArrDat1=explode("/",$ArrDat[0]);
 		$typeFile=$ArrDat1[1];
 
-		$rawData = $_POST['upload_foto_dokter'];
+		$rawData = $_POST['foto_karyawan'];
 		list($type, $rawData) = explode(';', $rawData);
 		list(, $rawData)      = explode(',', $rawData);
 		$alamatimg="../_images/foto/foto_dokter/";
-		$nama_file_asli="_FotoDokter".$nama_pegawai.date("YmdHis").".".$typeFile;
+		$nama_file_asli="_FotoKaryawan".$nama_pegawai.date("YmdHis").".".$typeFile;
 		file_put_contents($alamatimg.$nama_file_asli, base64_decode($rawData));
 
 		$foto_karyawan=$alamatimg.$nama_file_asli;
@@ -51,17 +51,17 @@ switch($act){
 
 	break;
 	case "edit":
-	if(isset($_POST["upload_foto_dokter"])){
+	if(isset($_POST["foto_karyawan"])){
 
-		$ArrDat=explode(";",$_POST["upload_foto_dokter"]);
+		$ArrDat=explode(";",$_POST["foto_karyawan"]);
 		$ArrDat1=explode("/",$ArrDat[0]);
 		$typeFile=$ArrDat1[1];
 
-		$rawData = $_POST['upload_foto_dokter'];
+		$rawData = $_POST['foto_karyawan'];
 		list($type, $rawData) = explode(';', $rawData);
 		list(, $rawData)      = explode(',', $rawData);
 		$alamatimg="../_images/foto/foto_dokter/";
-		$nama_file_asli="_FotoDokter".$nama_pegawai.date("YmdHis").	".".$typeFile;
+		$nama_file_asli="_FotoKaryawan".$nama_pegawai.date("YmdHis").	".".$typeFile;
 		file_put_contents($alamatimg.$nama_file_asli, base64_decode($rawData));
 
 		$foto_karyawan=$alamatimg.$nama_file_asli;
@@ -79,10 +79,11 @@ switch($act){
 	}
 	$insertNewKaryawan["kode_jabatan"] = $jabatan;
 	$insertNewKaryawan["id_dd_ptkp_pajak"] = $pajak;
-		//$result=false;
+	$result=true;
 	$result = update_tabel("mt_karyawan", $insertNewKaryawan,"WHERE no_induk = $no_induk");
 	$db->CommitTrans($result !== false);
 	break;
+	
 	case "delete":
 
 	$result = true;
@@ -92,6 +93,7 @@ switch($act){
 
 	break;
 }
+//die;
 if($result){
 	$data['code']='200';
 }else{

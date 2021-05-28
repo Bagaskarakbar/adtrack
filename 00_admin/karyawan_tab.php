@@ -32,12 +32,14 @@
 		data-data-field="items" data-search="false" >
 		<thead>
 			<tr>
-				<th data-field="action_edit"></th>
-				<th data-field="action_hapus"></th>
+				<th data-align="center" data-field="no">No</th>
+				<th data-align="center" data-field="action_edit"></th>
+				<th data-align="center" data-field="action_hapus"></th>
+				<th data-align="center" data-field="no_induk">No. Induk</th>
 				<th data-field="nama_pegawai">Pegawai</th>
-				<th data-field="nama_bagian">Bagian</th>
-				<th data-field="no_induk">No. Induk</th>
-				<th data-field="status">Status</th>
+				<th data-align="center" data-field="nama_bagian">Bagian</th>
+				<th data-align="center" data-field="foto">Foto</th>
+				<th data-align="center" data-field="status">Status</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,11 +56,7 @@
 
 		
 	</div>	
-		
-	<div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content" id="idIsiModal"></div>
-		</div>
+
 <!-- ========================================================================================= -->
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script language="JavaScript" type="text/javascript">	
@@ -91,12 +89,11 @@
 					data: {no_induk:a,act:'delete'},
 					success: function(data){
 						if(data.code='200'){
-							$("#BuatModal").modal('hide');
-							$('.modal-backdrop').hide();
-							$('#idTabKaryawan').load("../00_admin/karyawan_tab.php");
-							Swal.fire("Success!","Data Berhasil dihapus!","success");
+							$("#TableViewUserAdd").bootstrapTable('refresh');
+							$('#BuatModal').modal('hide');
 						}else{
-							Swal.fire("Gagal!","Terjadi Kesalahan!","warning");
+							//Swal.fire("Gagal!","Terjadi Kesalahan!","warning");
+							alert('Gagal');
 						}
 					},
 					dataType: "json"

@@ -35,10 +35,10 @@
 					
 					
 					$tampil["action_hapus"]="<a href='#' title='Hapus' onclick='hapusBagian($id_mt_bagian)'>
-							<i class='las la-trash-alt icon-lg text-danger '></i>
+							<i class='pe-7s-trash text-danger '></i>
 							</a>";
-					$tampil["action_edit"]="<a href='#' title='Edit' onclick='addBagian($id_mt_bagian)'>
-							<i class='las la-edit icon-lg text-success '></i>
+					$tampil["action_edit"]="<a href='#' title='Edit' onclick='ubahBagian($id_mt_bagian)'>
+							<i class='pe-7s-edit text-success '></i>
 							</a>";
 					$tampil["detail"]="<button class='btn btn-primary' onclick='detailDokter(".$kode_dokter.")'>Detail</button>";		
 					$tampil["nm_status_dr"]=$nm_status_dr;

@@ -1,12 +1,17 @@
-
-<div class="container mb-8">
-	<div class="card card-custom p-6">
+<?
+	session_start();
+	require_once("../_lib/function/db.php");
+	//$db->debug=true;
+	loadlib("function","variabel");
+	loadlib("function","function.olah_tabel");
+?>
+<div class="card-header">Konfigurasi Sub Menu </div>
+<!--
+<div class="main-card mb-3 card">
 		<div class="card-body">
+-->
 		<!-- ========================================================================================= -->
-		<div id="isiAtas">			
-			<div class="card-title">
-				<h3 class="card-label">Konfigurasi Sub Menu</h3>
-			</div>
+		<div id="isiAtas">
 			<div id="barTools">
 				<form method="get" action="<?= $PHP_SELF ?>" style='float:left;'>
 					<table cellpadding="0" cellspacing="0" class="table">
@@ -50,14 +55,10 @@
 			</table>
 		</div>
 	<!-- ========================================================================================= -->
+<!--
 		</div>
 	</div>
-</div>
-<div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content" id="idIsiModal"></div>
-	</div>
-</div>
+-->
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
 function fungsi_cari(){
@@ -91,11 +92,13 @@ var act='delete';
 		  data: {id_dc_sub_menu,act},
 		  success: function (res){
 			  if(res.code=='200'){
+				   alert('Sukses');
 				  $("#BuatModal").modal('hide');
-				  Swal.fire("Sukses ","Berhasil Menghapus Sub Menu","success");						 
+				  //Swal.fire("Sukses ","Berhasil Menghapus Sub Menu","success");						 
 				  $("#kt_datatable1").bootstrapTable('refresh');
 			  }else{
-				  Swal.fire('Gagal Menghapus Sub Menu');
+				  //Swal.fire('Gagal Menghapus Sub Menu');
+				   alert('Gagal');
 			  }
 		  },
 		  dataType: "json"

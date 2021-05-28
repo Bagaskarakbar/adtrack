@@ -1,6 +1,15 @@
+<?
+	session_start();
+	require_once("../_lib/function/db.php");
+	//$db->debug=true;
+	loadlib("function","variabel");
+	loadlib("function","function.olah_tabel");
+?>
 <div class="card-header">Konfigurasi Menu </div>
+<!--
 <div class="main-card mb-3 card">
 		<div class="card-body">
+-->
 		<div id="topLayer" class="loading"></div>
 		<!-- ========================================================================================= -->
 		<div id="isiAtas">
@@ -46,13 +55,10 @@
 		</form>
 		</div>
 	<!-- ========================================================================================= -->
+<!--	
 	</div>
 </div>
-<div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content" id="idIsiModal"></div>
-	</div>
-</div>
+-->
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
 	function cari_menu(){
@@ -88,7 +94,7 @@
 			  success: function (res){
 				  if(res.code=='200'){
 					  $("#BuatModal").modal('hide');
-					  Swal.fire("Sukses ","Berhasil Menghapus Menu","success");						 
+					  //Swal.fire("Sukses ","Berhasil Menghapus Menu","success");						 
 					  $("#kt_datatable1").bootstrapTable('refresh');
 				  }else{
 					  Swal.fire('Gagal Menghapus Menu');

@@ -5,7 +5,7 @@
 
 	<!-- ========================================================================================= -->
 	<div id="isiUtama">
-		<div class="modal-header register-modal-head" style="background-color:#2ca4d7">
+		<div class="modal-header register-modal-head" style="background-color:#d92550">
 			<h5 class="modal-title" style="color:white">Tambah User</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
@@ -17,14 +17,14 @@
 				<tr>
 					<td class="field"><label class="mr-3 mb-0 d-none d-md-block"><b>Cari</b> </label></td>
 					<td class="input">
-						<select name="tipeCari_user" class="form-control form-control-solid form-control-lg" >
+						<select name="tipeCari_user" class="form-control" >
 							<option value="nama" <?= ($tipeCari == "nama") ? ("selected") : ("") ?>>Pegawai</option>
 							<option value="bagian" <?= ($tipeCari == "bagian") ? ("selected") : ("") ?>>Bagian</option>
 							<option value="noinduk" <?= ($tipeCari == "noinduk") ? ("selected") : ("") ?>>No. Induk</option>	
 						</select>
 					</td>
-					<td><input type="text" value="<?= $filter ?>" name="filter_user" class="form-control form-control-solid form-control-lg"></td>
-					<td><input type="button" name="cari" value="Cari" onclick="cari_user_add()" class="btn btn-light-primary px-6 font-weight-bold"></td>
+					<td><input type="text" value="<?= $filter ?>" name="filter_user" class="form-control"></td>
+					<td><input type="button" name="cari" value="Cari" onclick="cari_user_add()" class="btn btn-success font-weight-bold"></td>
 				</tr>
 				</table>
 			<table id="TableViewUserAdd" class="table" data-toggle="table" data-url="/00_admin/user_addcaripegawai_json.php"  data-pagination="true" data-trim-on-search="false"  data-sort-order="asc" data-side-pagination="server" data-total-field="count"
@@ -57,7 +57,7 @@ data-data-field="items"  >
 		<div class="formInputSubmitMulti">
 			<div class="modal-footer">
 			
-			<input type="reset" value="Batal" class="btn btn-warning font-weight-bold" data-dismiss="modal">
+			<input type="reset" value="Close" class="btn btn-danger font-weight-bold" data-dismiss="modal">
 		</div>
 		</div>
 

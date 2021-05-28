@@ -33,11 +33,14 @@ if ($id_dc_modul) {
 
 ?>
 
-<div class="card-body">
-	<!-- ========================================================================================= -->
-	<div class="card-title">
-		<h3 class="card-label"><?=$judul?> Modul</h3>
+<div class="modal-content">
+	<div class="modal-header" style="background-color:#d92550">
+		<h5 class="modal-title" id="staticBackdropLabel" style="color:white"><?= $judul?> Modul</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+		  <span aria-hidden="true">&times;</span>
+		</button>
 	</div>
+	<div class="modal-body">
 	<div id="isiUtama">
 
 		<form name="xxx" method="post" action="#" id="formDataModul">
@@ -86,10 +89,15 @@ if ($id_dc_modul) {
 		</tr>
 		</table>
 		<input type="hidden" name="id_dc_modul" value="<?=$id_dc_modul?>">
-		<div class="formInputSubmit"><input type="button" name="Submit" value="Submit" class="btn btn-success" onclick="SaveModul()">&nbsp;<input type="reset" value="Batal" class="btn btn-danger" onclick="javascript:window.close();return false;"></div>
+		
+		<div class="modal-footer">
+			<input type="button" name="Submit" value="Submit" class="btn btn-success" onclick="SaveModul()">
+			<button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+		</div>
 		</form>
 
 	</div>
+</div>
 </div>
 <script>
 function SaveModul(){
@@ -103,7 +111,7 @@ function SaveModul(){
 				  success: function (res){
 					  if(res.code=='200'){
 						  $("#BuatModal").modal('hide');
-						  Swal.fire("Sukses ","Berhasil Menyimpan Modul","success");						 
+						  //Swal.fire("Sukses ","Berhasil Menyimpan Modul","success");						 
 						  $("#kt_datatable1").bootstrapTable('refresh');
 					  }else{
 						  Swal.fire('Gagal Menyimpan Modul');

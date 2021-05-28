@@ -49,7 +49,7 @@
 				$tampil["action_hapus"]="<a href='#' title='Hapus Data' onclick='hapus_user_view($id_dd_user)'>
 							<i class='pe-7s-trash text-danger '></i>
 							</a>";
-				$tampil["action_edit"]="<a title='Edit  Data' onclick='ubah_user_view($id_dd_user)'>
+				$tampil["action_edit"]="<a href='#' title='Edit  Data' onclick='ubah_user_view($id_dd_user)'>
 							<i class='pe-7s-edit text-success '></i>
 							</a>";
 				$status = $tampil["status"];

@@ -8,14 +8,6 @@ loadlib("function","function.olah_tabel");
 
 //echo "$kode_bagian"; 
 //$kode_dokter=baca_tabel('tc_registrasi','kode_dokter',"where no_registrasi=$no_registrasi");
-// GET KECAMATAN ////////////////////////////////////////////////////////
-if ($id_dc_propinsi) {
-	$sqlGetKec = "SELECT * from dc_propinsi where id_dc_propinsi=$id_dc_propinsi";
-
-	$hasil =& $db->Execute($sqlGetKec);
-	$id_dc_negara = $hasil->Fields('id_dc_negara');
-}
-// END ////////////////////////////////////////////////////////
 
 $date=date("Y-m-d H:i:s");
 
@@ -25,8 +17,7 @@ $MtBagian["nama_bagian"] = $nama_bagian;
 $MtBagian["group_bag"] = $group_bag;
 $MtBagian["validasi"] = $nama_validasi;
 $MtBagian["status_aktif"] = $status_aktif;
-$MtBagian["kode_rs"] = $kode_rs;
-$MtBagian["pelayanan"] = $pelayanan;
+$MtBagian["tgl_input"] = $date;
 
 
 switch ($validasi) {

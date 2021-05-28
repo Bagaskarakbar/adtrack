@@ -54,7 +54,7 @@ if($kode_dokter!="" && $kode_dokter!=" "){
 ?>
 
 	<div id="isiUtama">
-		<div class="modal-header register-modal-head" style="background-color:#2ca4d7">
+		<div class="modal-header register-modal-head" style="background-color:#d82550">
 			<h5 class="modal-title" style="color:white">Tambah User</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
@@ -70,29 +70,29 @@ if($kode_dokter!="" && $kode_dokter!=" "){
 				
 				<div class="form-group row fv-plugins-icon-container">
 				
-					<label class="col-xl-3 col-lg-3 col-form-label">Nama Pegawai</label>
-					<div class="col-lg-9 col-xl-9"><label ><?= $nama_pegawai ?></label></div>
+					<label class="col-xl-4 col-lg-4 col-form-label">Nama Pegawai</label>
+					<div class="col-lg-8 col-xl-8"><label ><?= $nama_pegawai ?></label></div>
 				</div>
 				<div class="form-group row fv-plugins-icon-container">
-					<label class="col-xl-3 col-lg-3 col-form-label">Bagian</label>
-					<div class="col-lg-9 col-xl-9"><label ><?= $nama_bagian ?></label></div>
+					<label class="col-xl-4 col-lg-4 col-form-label">Bagian</label>
+					<div class="col-lg-8 col-xl-8"><label ><?= $nama_bagian ?></label></div>
 				</div>
 				<div class="form-group row fv-plugins-icon-container">
-					<label class="col-xl-3 col-lg-3 col-form-label">User ID</label>
-					<div class="col-lg-9 col-xl-9">
-						<input type="text"  class="form-control form-control-solid form-control-lg"  name="username" value="<?= $username ?>">
+					<label class="col-xl-4 col-lg-4 col-form-label">User ID</label>
+					<div class="col-lg-8 col-xl-8">
+						<input type="text"  class="form-control "  name="username" value="<?= $username ?>">
 					</div>
 				</div>
 				<div class="form-group row fv-plugins-icon-container">
-					<label class="col-xl-3 col-lg-3 col-form-label"><?= $rubah ?>Password</label>
-					<div class="col-lg-9 col-xl-9">
-						<input type="password"  class="form-control form-control-solid form-control-lg"  name="password" value="<?= $password ?>">
+					<label class="col-xl-4 col-lg-4 col-form-label"><?= $rubah ?>Password</label>
+					<div class="col-lg-8 col-xl-8">
+						<input type="password"  class="form-control"  name="password" value="<?= $password ?>">
 					</div>
 				</div>
 				<div class="form-group row fv-plugins-icon-container">
-					<label class="col-xl-3 col-lg-3 col-form-label">Group User</label>
-					<div class="col-lg-9 col-xl-9">
-						<select name="id_dd_user_group"  class="form-control form-control-solid form-control-lg"  style="width:200px">
+					<label class="col-xl-4 col-lg-4 col-form-label">Group User</label>
+					<div class="col-lg-8 col-xl-8">
+						<select name="id_dd_user_group"  class="form-control"  style="width:200px">
 							<option value="">-- Pilih Group User --</option>
 							<?
 							$sql_kategori="SELECT id_dd_user_group,nama_group FROM dd_user_group ";
@@ -103,8 +103,8 @@ if($kode_dokter!="" && $kode_dokter!=" "){
 				</div>
 				
 				<div class="form-group row fv-plugins-icon-container">
-					<label class="col-xl-3 col-lg-3 col-form-label">Status Aktif</label>
-					<div class="col-lg-9 col-xl-9">
+					<label class="col-xl-4 col-lg-4 col-form-label">Status Aktif</label>
+					<div class="col-lg-8 col-xl-8">
 							<div class="checkbox-inline">
 								<label class="radio">
 									<input type="radio" name="status" value="0" <? if($status=="0") echo("checked"); ?>>Aktif
@@ -130,14 +130,14 @@ if($kode_dokter!="" && $kode_dokter!=" "){
 			<div class="modal-footer">
 		<? if($id_dd_user){ ?>
 		<div class="formInputSubmit">
-			<input type="button" value="Edit" name="submit" onclick="tambah_user_add_edit()" class="btn btn-primary font-weight-bold">
-			<input type="reset" value="Batal" class="btn btn-warning font-weight-bold" data-dismiss="modal">
+			<input type="button" value="Edit" name="submit" onclick="tambah_user_add_edit()" class="btn btn-success">
+			<input type="reset" value="Close" class="btn btn-danger" data-dismiss="modal">
 		</div>
 		<? }else{ ?>
 		<div class="formInputSubmitMulti">
 			
-			<input type="button" value="Selesai" name="submit" onclick="tambah_user_add_edit()" class="btn btn-primary font-weight-bold">&nbsp;
-			<input type="reset" value="Batal" class="btn btn-warning font-weight-bold" data-dismiss="modal">
+			<input type="button" value="Selesai" name="submit" onclick="tambah_user_add_edit()" class="btn btn-success">&nbsp;
+			<input type="reset" value="Close" class="btn btn-danger" data-dismiss="modal">
 		</div>
 		<? } ?>
 			</div>
@@ -154,9 +154,9 @@ if($kode_dokter!="" && $kode_dokter!=" "){
 			  data: dataform,
 			  success: function(data){
 				  if(data.code=='200'){
-					  alert('Sukses');
-					  $("#TableView").bootstrapTable('refresh');
-					  $('#BuatModal').modal('hide');
+						alert('Sukses');
+						$("#TableView").bootstrapTable('refresh');
+						$('#BuatModal').modal('hide');		
 				  }else{
 					  alert('Gagal');
 				  }

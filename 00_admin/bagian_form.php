@@ -31,9 +31,9 @@
 	}
 ?>
 <div class="modal-content">
-	<div class="modal-header">
-		<h3 class="modal-title">Form Bagian Hi Sehat</h3>
-		<button type="button" class="close" style="color:black" data-dismiss="modal" aria-label="Close">
+	<div class="modal-header" style="background-color:#d92550">
+		<h5 class="modal-title">Form Bagian</h5>
+		<button type="button" class="close" style="color:white" data-dismiss="modal" aria-label="Close">
 				<i class="fa fa-times" aria-hidden="true"></i>
 		</button>
 	</div>
@@ -70,15 +70,6 @@
 			<br>
 			<div class="row">
 					<div class="col-lg-4 text-right">
-					<label>Kode RS</label>
-					</div>
-					<div class="col-lg-5">
-						<input type="text" class="form-control" name="kode_rs" id="kode_rs" value="<?=$kode_rs?>"> 
-					</div>
-			</div>
-			<br>
-			<div class="row">
-					<div class="col-lg-4 text-right">
 					<label>Group Bagian</label>
 					</div>
 					<div class="col-lg-8">
@@ -110,24 +101,6 @@
 						</div>
 					</div>
 			</div>
-			<br>
-			<div class="row">
-					<div class="col-lg-4 text-right">
-					<label>Bagian Pelayanan</label>
-					</div>
-					<div class="col-lg-8">
-						<div class="radio-unline">
-						<label class="radio radio-outline radio-outline-2x radio-primary">
-						<input type="radio" name="pelayanan" value="1" <? if($pelayanan=="1") echo("checked"); ?>>Ya
-						<span></span></label>
-						<label class="radio radio-outline radio-outline-2x radio-primary">
-						<input type="radio" name="pelayanan" value="0" <? if($pelayanan=="0") echo("checked"); ?>>Tidak
-						<span></span></label>
-						</div>
-					</div>
-			</div>
-			<br>
-			
 			<input type="hidden" class="form-control" name="id_mt_bagian" value="<?=$id_mt_bagian?>"> 
 
 			<?if($id_mt_bagian==""){?>
@@ -141,12 +114,12 @@
 	
 	 <div class="modal-footer">
 			<?if($id_mt_bagian==""){?>
-				<button type="button" class="btn btn-success" onclick="CekBagian()">Save</button>
+				<button type="button" class="btn btn-success" onclick="CekBagian()">Add</button>
 			<?}else{?>
-				  <button type="button" class="btn btn-primary" onclick="CekBagian()">Edit</button>
+				  <button type="button" class="btn btn-success" onclick="CekBagian()">Edit</button>
 			<?}?>
        
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
 	</form>
 <script>
@@ -158,7 +131,7 @@ function cekAlert(){
 </script>
 </div>
 <script>
-	function CekBagian(){
+	/* function CekBagian(){
 		Swal.fire({
         title: "Simpan Data Bagian ?",
         text: "apakah data yang di pilih sudah benar ?",
@@ -193,5 +166,24 @@ function cekAlert(){
 		});
 		
 
-	}
+	} */
+	
+	
+function CekBagian(){
+	var dataform=$("#FormBagian").serialize();
+	$.ajax({
+		type: "POST",
+		url: '/00_admin/bagian_form_act.php',
+		data: dataform,
+		success: function(data){
+			if(data.code=='200'){
+				$("#TableViewBagian").bootstrapTable('refresh');
+				$('#BuatModal').modal('hide');
+			}else{
+				alert('Gagal');
+			}
+		},
+		dataType: "json"
+	});
+}
 </script>

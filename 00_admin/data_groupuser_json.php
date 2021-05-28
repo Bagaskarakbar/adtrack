@@ -43,10 +43,10 @@
 					
 					
 					$tampil["action_hapus"]="<a href='#' title='Hapus' onclick='hapusGroupuser($id_dd_user_group)'>
-							<i class='las la-trash-alt icon-lg text-danger '></i>
+							<i class='pe-7s-trash text-danger '></i>
 							</a>";
 					$tampil["action_edit"]="<a href='#' title='Edit' onclick='ubahGroupuser($id_dd_user_group)'>
-							<i class='las la-edit icon-lg text-success '></i>
+							<i class='pe-7s-edit text-success '></i>
 							</a>";
 					
 					$tampil["nm_status_dr"]=$nm_status_dr;

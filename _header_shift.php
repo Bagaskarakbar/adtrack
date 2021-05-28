@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "_lib/function/db_login.php";
 include "_lib/function/function.olah_tabel.php";
 loadlib("function","function.variabel");
@@ -37,7 +38,7 @@ loadlib("class","Security");
 
 <!--begin::Page Scripts(used by this page)-->
 <script src="assets/js/pages/widgets.js?v=7.0.4"></script>
-	<script type="text/javascript" src="assets/scripts/main.js"></script>
+<script type="text/javascript" src="./assets/scripts/main.js"></script>
 <script>
 loadKonten("<?=$link?>");
 </script>

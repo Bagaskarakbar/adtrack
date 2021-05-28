@@ -53,8 +53,8 @@
 			$DataList['no']=$no;
 			$DataList['nama_modular']=$nama_modular;
 			$DataList['no_urut']="<input value='$no_urut' type='text' size='1' name='oid[]'><input type='hidden' name='id_moduls[]' value='$id_modul'>";
-			$DataList['act_hapus']="<a class='hapus' href='#' title='Hapus Modul $nama_modul' onclick=HapusModul($id_modul)><i class='las la-trash-alt icon-lg text-danger '></i></a>";
-			$DataList['act_edit']="<a href='#' title='Edit Modul $nama_modul' onclick=EditModul($id_modul)><i class='las la-edit icon-lg text-success '></i></a>";
+			$DataList['act_hapus']="<a class='hapus' href='#' title='Hapus Modul $nama_modul' onclick=HapusModul($id_modul)><i class='pe-7s-trash text-danger '></i></a>";
+			$DataList['act_edit']="<a href='#' title='Edit Modul $nama_modul' onclick=EditModul($id_modul)><i class='pe-7s-edit text-success '></i></a>";
 			$DataList['nama_modul']=$nama_modul;
 			$DataList['kode_bagian']=$kode_bagian;
 			$DataList['folder']=$folder;

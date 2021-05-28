@@ -34,40 +34,40 @@ if ($id_dc_sub_menu) {
 
 ?>
 
-<div class="card-body">
-	<!-- ========================================================================================= -->
-	<div class="card-title">
-		<h3 class="card-label"><?= $judul?> Sub Menu</h3>
-	</div>	
-	<!-- ========================================================================================= -->
-
+<div class="modal-content">
+	<div class="modal-header" style="background-color:#d92550">
+		<h5 class="modal-title" id="staticBackdropLabel" style="color:white"><?= $judul?> Sub Menu</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+<div class="modal-body">
 	<!-- ========================================================================================= -->
 	<div id="isiUtama">
 
 		<form name="xxx" method="post" action="#" id="formSubMenu">
 		<input type='hidden' name='act' value='<?= $aksi?>'>
-		<table cellpadding="0" cellspacing="0" class="formInput">
-		<tr>
-			<!-- --------------------------------------------------------------------------------- -->
-			<td class="kiri">
-
-				<table cellpadding="0" cellspacing="0">
-				<tr>
-					<td class="field">Modul</td>
-					<td class="input">
-						<select class="form-control"name="id_dc_modul" onchange="rubahMenu()" style="width:200px">
-							<option value="">-- Pilih Modul --</option>
-							<?
-							$sql_kategori="SELECT id_dc_modul,nama_modul FROM dc_modul ";
-							pilihan_list($sql_kategori,"nama_modul","id_dc_modul","id_dc_modul",$id_dc_modul);
-							?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td class="field">Menu</td>
-					<td class="input" id="menu">
-						<select class="form-control" name="id_dc_menu" style="width:200px" >
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-lg-5">
+					<label >Modul</label>
+				</div>
+				<div class="col-lg-7">
+					<select class="form-control"name="id_dc_modul" onchange="rubahMenu()">
+						<?  
+						$sql_kelompok = "select * from dc_modul";
+						pilihan_list($sql_kelompok,"nama_modul","id_dc_modul","id_dc_modul",$id_dc_modul);
+						?>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-5">
+					<label >Menu</label>
+				</div>
+				<div class="col-lg-7">
+					<select class="form-control" name="id_dc_menu" >
 							<option value="">-- Pilih Menu --</option>
 							<?
 							if (is_numeric($id_dc_modul)){
@@ -76,32 +76,52 @@ if ($id_dc_sub_menu) {
 							}
 							?>
 						</select>
-					</td>
-				</tr>
-				<tr>
-					<td class="field">Nama Sub Menu</td>
-					<td class="input"><input type="text" class="form-control" name="nama_sub_menu" value="<?= $nama_sub_menu ?>" style="width:300px" <?= $inputDisabled?> ></td>
-				</tr>
-				<tr>
-					<td class="field">URL</td>
-					<td class="input"><input type="text" class="form-control" name="url_sub_menu" value="<?= $url_sub_menu ?>" style="width:300px" <?= $inputDisabled?> ></td>
-				</tr>
-				<tr>
-					<td class="field">No Urut</td>
-					<td class="input"><input type="text" class="form-control" name="no_urut" value="<?= $no_urut ?>" style="width:300px" <?= $inputDisabled?> ></td>
-				</tr>
-
-				</table>
-
-			</td>
-			<!-- --------------------------------------------------------------------------------- -->
-		</tr>
-		</table>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-5">
+					<label >Nama Sub Menu</label>
+				</div>
+				<div class="col-lg-7">
+					<input type="text" class="form-control" name="nama_sub_menu" value="<?= $nama_sub_menu ?>" <?= $inputDisabled?> >
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-5">
+					<label >URL</label>
+				</div>
+				<div class="col-lg-7">
+					<input type="text" class="form-control" name="url_sub_menu" value="<?= $url_sub_menu ?>"<?= $inputDisabled?> >
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-5">
+					<label >No Urut</label>
+				</div>
+				<div class="col-lg-7">
+					<input type="text" class="form-control" name="no_urut" value="<?= $no_urut ?>"<?= $inputDisabled?> >
+				</div>
+			</div>
+			<br>
+		</div>
+		
+		
+		
 		<input type="hidden" name="id_dc_sub_menu" value="<?=$id_dc_sub_menu?>">
-		<div class="formInputSubmit"><input type="button" name="Submit" value="Submit" class="btn btn-success" onclick="SaveSubMenu()" <?= $inputDisabled?> >&nbsp;<input type="reset" value="Batal" class="btn btn-danger" onclick="javascript:window.close();return false;" <?= $inputDisabled?> ></div>
+		
+		<div class="modal-footer">
+		
+		<input type="button" name="Submit" value="Submit" class="btn btn-success" onclick="SaveSubMenu()" <?= $inputDisabled?> >&nbsp;
+		<button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+		
+		</div>
 		</form>
 
 	</div>
+</div>
 </div>
 	<!-- ========================================================================================= -->
 <script language="JavaScript" type="text/javascript">
@@ -121,11 +141,13 @@ function SaveSubMenu(){
 				  data: dataFormSubMenu,
 				  success: function (res){
 					  if(res.code=='200'){
+						  alert('Sukses');
 						  $("#BuatModal").modal('hide');
-						  Swal.fire("Sukses ","Berhasil Menyimpan Sub Menu","success");						 
+						 // Swal.fire("Sukses ","Berhasil Menyimpan Sub Menu","success");						 
 						  $("#kt_datatable1").bootstrapTable('refresh');
 					  }else{
-						  Swal.fire('Gagal Menyimpan Sub Menu');
+						 // Swal.fire('Gagal Menyimpan Sub Menu');
+						  alert('Gagal');
 					  }
 				  },
 				  dataType: "json"

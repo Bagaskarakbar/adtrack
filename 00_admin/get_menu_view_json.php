@@ -57,8 +57,8 @@
 				$DataList['no']=$no;
 				$DataList['nama_modul']=$nama_modul;
 				$DataList['no_urut']="<input value='$no_urut' type='text' class='form-control' size='1' name='oid[]'><input type='hidden' name='id_menus[]' value='$id_dc_menu'>";
-				$DataList['act_hapus']="<a class='hapus' href='#' title='Hapus Menu $nama_menu ' onclick=HapusMenu($id_dc_menu)><i class='las la-trash-alt icon-lg text-danger '></i></a>";
-				$DataList['act_edit']="<a href='#' title='Edit Menu $nama_menu' onclick=EditMenu('/00_admin/menu_addedit.php?id_dc_menu=$id_dc_menu')><i class='las la-edit icon-lg text-success '></i></a>";
+				$DataList['act_hapus']="<a class='hapus' href='#' title='Hapus Menu $nama_menu ' onclick=HapusMenu($id_dc_menu)><i class='pe-7s-trash text-danger '></i></a>";
+				$DataList['act_edit']="<a href='#' title='Edit Menu $nama_menu' onclick=EditMenu('/00_admin/menu_addedit.php?id_dc_menu=$id_dc_menu')><i class='pe-7s-edit text-success '></i></a>";
 				$DataList['nama_menu']=$nama_menu;
 				$data['items'][]=$DataList;
 			}

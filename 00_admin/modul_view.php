@@ -1,8 +1,16 @@
-
+<?
+	session_start();
+	require_once("../_lib/function/db.php");
+	//$db->debug=true;
+	loadlib("function","variabel");
+	loadlib("function","function.olah_tabel");
+?>
 <!-- presentation layer ------------------------------------------------------------------------------------------------------->
 <div class="card-header">Konfigurasi Modul</div>
+<!--
 <div class="main-card mb-3 card">
 		<div class="card-body">
+-->
 
 	
 
@@ -25,7 +33,7 @@
 		<tr>
 			<th class="thno" data-field="no">No.</th>
 			<th style="text-align:left;" width="150" data-field="nama_modular">Nama Kelompok</th>
-			<th class="thicons" data-field="no_urut"><a href="#" title="Simpan Urutan" onclick="SaveSort();"><i class='las la-save icon-lg text-success '></i></a></th>
+			<th class="thicons" data-field="no_urut"><a href="#" title="Simpan Urutan" onclick="SaveSort();"><i class='pe-7s-diskette text-success'></i></a></th>
 			<th class="thicons" data-field="act_hapus">&nbsp;</th>
 			<th class="thicons" data-field="act_edit">&nbsp;</th>
 			<th width="150" style="text-align:left;" data-field="nama_modul">Nama Modul</th>
@@ -46,13 +54,10 @@
 <!-- ========================================================================================= -->
 
 <!-- ############################################################################################# -->
+<!--
 </div>
 </div>
-<div id="BuatModal" class="modal fade bd-modal-packing-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content" id="idIsiModal"></div>
-	</div>
-</div>
+-->
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
 	function SaveSort(){
@@ -65,9 +70,9 @@
 				  data: dataForm,
 				  success: function (res){
 					  if(res.code=='200'){
-						  Swal.fire("Sukses ","Berhasil Melakukan Sort","success");
-						 bootstrapTable('removeAll');
-						 $("#kt_datatable1").bootstrapTable('refresh');
+						 //Swal.fire("Sukses ","Berhasil Melakukan Sort","success");
+						 //bootstrapTable('removeAll');
+						  $("#kt_datatable1").bootstrapTable('refresh');
 					  }else{
 						  Swal.fire('Gagal Melakukan Sort');
 					  }
@@ -99,7 +104,7 @@ var act='delete';
 		  success: function (res){
 			  if(res.code=='200'){
 				  $("#BuatModal").modal('hide');
-				  Swal.fire("Sukses ","Berhasil Menghapus Modul","success");						 
+				  //Swal.fire("Sukses ","Berhasil Menghapus Modul","success");						 
 				  $("#kt_datatable1").bootstrapTable('refresh');
 			  }else{
 				  Swal.fire('Gagal Menghapus Modul');

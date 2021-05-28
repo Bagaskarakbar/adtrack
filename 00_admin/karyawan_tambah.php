@@ -9,7 +9,7 @@ loadlib("function","function.olah_tabel");
 loadlib("function","function.pilihan_list");
 loadlib("function","function.mandatory");
 loadlib("function","function.max_kode_text");
-
+//$db->debug=true;
 $no_induk = max_kode_text("mt_karyawan","no_induk");
 $act="tambah";
 
@@ -17,10 +17,10 @@ $act="tambah";
 
 <div id="FormEditVitalSign">
 
-	<form id="idTambahDokter" method="POST" action="#"  enctype="multipart/form-data">
+	<form id="idTambahKaryawan" method="POST" action="#"  enctype="multipart/form-data">
 
 		<div id="content">
-			<div class="modal-header register-modal-head" style="background-color:#2b345f">
+			<div class="modal-header register-modal-head" style="background-color:#d92550">
 				<h5 class="modal-title" style="color:white"><b>Tambah Karyawan</b></h5>
 				<button type="button" class="close" style="color:white" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-times" aria-hidden="true"></i>
@@ -77,20 +77,7 @@ $act="tambah";
 					</div>
 				</div>
 				<br>
-				<div class="row">
-					<div class="col-lg-4">
-						<label for="exampleSelect1">PTKP<?=mandatory();?></label>
-					</div>
-					<div class="col-lg-8">
-						<select class="form-control" name="pajak">
-							<?  
-							$sql_pajak = "select * from dd_ptkp_pajak";
-							pilihan_list($sql_pajak,"uraian","id_dd_ptkp_pajak","id_dd_ptkp_pajak");
-							?>
-						</select>
-					</div>
-				</div>
-				<br>
+				<!--
 				<div class="row">
 					<div class="col-lg-4">Status</div>
 					<div class="col-lg-8">
@@ -103,13 +90,14 @@ $act="tambah";
 						</select>
 					</div>
 				</div>
+				-->
 
 				<div class="row">
 					<div class="col-lg-4">
 						<label for="exampleSelect1">Upload Foto <?=mandatory();?></label>
 					</div>
 					<div class="col-lg-8">
-						<input type="file" class="form-control"  id="upload_foto_dokter" name="upload_foto_dokter" value="<?=$upload_foto_dokter?>">
+						<input type="file" class="form-control"  id="foto_karyawan" name="foto_karyawan" value="<?=$foto_karyawan?>">
 					</div>
 				</div> <br>
 				<div class="row">
@@ -126,8 +114,8 @@ $act="tambah";
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card-footer" align="right">
-							<button type="button" class="btn btn-danger font-weight-bolder font-size-sm" data-dismiss="modal">Kembali</button>
 							<button type="button" class="btn btn-success font-weight-bolder font-size-sm" onclick="TambahDokter()">Submit</button>
+							<button type="button" class="btn btn-danger font-weight-bolder font-size-sm" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
@@ -146,7 +134,7 @@ $act="tambah";
 
 <!-- ############################################################################################# -->
 <script type="text/javascript">
-	function readFile() {
+	 function readFile() {
 
 		if (this.files && this.files[0]) {
 
@@ -154,7 +142,7 @@ $act="tambah";
 
 			FR.addEventListener("load", function(e) {
 				$("#loadImage").html("<img src='"+e.target.result+"' width='150' height='100'>");
-				$("#loadImage").append("<input type='hidden' value='"+e.target.result+"' name='upload_foto_dokter'>");
+				$("#loadImage").append("<input type='hidden' value='"+e.target.result+"' name='foto_karyawan'>");
 			}); 
 
 			FR.readAsDataURL( this.files[0] );
@@ -162,23 +150,23 @@ $act="tambah";
 
 	}
 	
-	$("#idTambahDokter input[name=upload_foto_dokter]").change(readFile);
+	$("#idTambahKaryawan input[name=foto_karyawan]").change(readFile); 
 </script>
 
 <script>
 	function TambahDokter(){
-		var dataform=$("#idTambahDokter").serialize();
+		var dataform=$("#idTambahKaryawan").serialize();
 		$.ajax({
 			type: "POST",
 			url: '/00_admin/karyawan_act.php',
 			data: dataform,
 			success: function(data){
 				if(data.code=='200'){
-					Swal.fire("Success!","Data Berhasil ditambah!","success");
+					//Swal.fire("Success!","Data Berhasil ditambah!","success");
 					$("#TableViewUserAdd").bootstrapTable('refresh');
 					$('#BuatModal').modal('hide');
 				}else{
-					Swal.fire("Gagal!","Terjadi Kesalahan!","warning");
+					//Swal.fire("Gagal!","Terjadi Kesalahan!","warning");
 				}
 			},
 			dataType: "json"

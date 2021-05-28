@@ -7,24 +7,22 @@
 <div class="card-body">
 	<div class="tab-content">
 		<p>
-			Sistem kinerja Administrasi Sistem  yang baik, cepat, handal, akurat dan 
-			up to date sehingga dapat dijadikan bahan pertanggungjawaban pihak manajemen 
-			Rumah Sakit  kepada share holder maupun kepada pihak lain yang terkait.
-			</p>
+			Sistem kinerja Administrasi Sistem  yang baik, cepat, handal, akurat dan up to date sehingga dapat dijadikan bahan pertanggung jawaban pihak manajemen AdMedika kepada share holder maupun kepada pihak lain yang terkait.
+		</p>
 
 			<p>
 			Membantu pihak manajemen dalam rangka meningkatkan  sektor administrasi 
-			Administrasi Sistem  Rumah Sakit, dengan adanya informasi yang cepat dan 
+			Administrasi Sistem  AdTrack, dengan adanya informasi yang cepat dan 
 			akurat dapat dipergunakan sebagai bahan evaluasi, monitoring, kontrol dan 
 			perencanaan yang pada akhirnya dapat digunakan sebagai sumber dalam 
-			pengambilan keputusan, dalam rangka  memajukan Rumah Sakit  sesuai dengan 
+			pengambilan keputusan, dalam rangka  memajukan AdMedika  sesuai dengan 
 			kondisi yang ada.
 			</p>
 
 			<p>
 			Dengan dibentuknya Sistem Informasi Administrasi Sistem, maka diharapkan 
 			secara umum dapat meningkatkan Kinerja Staf Administrasi Sistem, 
-			efisiensi Biaya dan dapat meningkatkan  Pendapatan Rumah Sakit. Secara 
+			efisiensi. Secara 
 			ringkas manfaat yang diperoleh dari sistem informasi Administrasi Sistem  
 			yang akan dikembangkan adalah sebagai berikut:
 			</p>
