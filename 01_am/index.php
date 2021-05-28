@@ -131,7 +131,7 @@ loadlib("function","function.olah_tabel");
 </div>
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
 <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
-<script type="text/javascript" src="./assets/scripts/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="./assets/scripts/jquery-3.6.0.min.js"></script>
 <script>
 	function detail_form(){
 			Swal.fire({
@@ -148,7 +148,7 @@ loadlib("function","function.olah_tabel");
 		var q3;
 		var q4;
 
-		const pages = ['1', '2', '3'];
+		const pages = ['1', '2', '3', '4'];
 		// const values = [];
 		// let currPage;
 		Swal.mixin({
@@ -302,9 +302,9 @@ loadlib("function","function.olah_tabel");
 			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;">
 			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;">
 			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;">
-			<input type="checkbox" id="cb_ri" name="cb_ri" value="1" class="swal2-checkbox"><label for="cb_ri">Masukkan transaksi RI?</label><br>
+			<input type="checkbox" id="cb_ri" name="cb_ri" value="1" class="swal2-checkbox" onchange="checkedRI()"><label for="cb_ri">Masukkan transaksi RI?</label><br>
 			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;">
-			<input type="checkbox" id="cb_ri" name="cb_rj" value="1" class="swal2-checkbox"><label for="cb_rj">Masukkan transaksi RJ?</label>
+			<input type="checkbox" id="cb_rj" name="cb_rj" value="1" class="swal2-checkbox"onchange="checkedRJ()"><label for="cb_rj">Masukkan transaksi RJ?</label>
 			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;">`,
 			// inputValue: 3,
 			// showCancelButton: 3,
@@ -340,6 +340,53 @@ loadlib("function","function.olah_tabel");
 					term6: term6
 				}
 				q3=arr3;
+				return{
+					q3
+				}
+			}
+		},
+		{
+			title: 'Tambah Proyek',
+			html: `<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
+			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
+			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
+			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
+			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
+			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">`,
+			// inputValue: 3,
+			// showCancelButton: 3,
+      // currentProgressStep: 3,
+			cancelButtonText:	'Kembali',
+			preConfirm: ()=>{
+				const lama_kontrak = Swal.getPopup().querySelector('#lama_kontrak').value
+				const jumlah_dana = Swal.getPopup().querySelector('#jumlah_dana').value
+				const jumlah_term = Swal.getPopup().querySelector('#jumlah_term').value
+				const term1 = Swal.getPopup().querySelector('#term1').value
+				const term2 = Swal.getPopup().querySelector('#term2').value
+				const term3 = Swal.getPopup().querySelector('#term3').value
+				const term4 = Swal.getPopup().querySelector('#term4').value
+				const term5 = Swal.getPopup().querySelector('#term5').value
+				const term6 = Swal.getPopup().querySelector('#term6').value
+				if(!lama_kontrak){
+					Swal.showValidationMessage(`Lama Kontrak harus dimasukan!!`)
+				}
+				if(!jumlah_dana){
+					Swal.showValidationMessage(`Jumlah Dana harus dimasukan!!`)
+				}
+				if(!jumlah_term){
+					Swal.showValidationMessage(`Jumlah Term harus dipilih!!`)
+				}
+				var	arr4 = {
+					lama_kontrak: lama_kontrak,
+					jumlah_dana: jumlah_dana,
+					term1: term1,
+					term2: term2,
+					term3: term3,
+					term4: term4,
+					term5: term5,
+					term6: term6
+				}
+				q4=arr4;
 				return{
 					q3
 				}
@@ -395,7 +442,23 @@ loadlib("function","function.olah_tabel");
 		//   }
 		// }
 
-	}
+  }
+
+  function checkedRI(){
+    if($("#cb_ri").is(":checked")){
+      $("#transaksional_ri").show();
+    }else{
+      $("#transaksional_ri").hide();
+    }
+  }
+
+  function checkedRJ(){
+    if($("#cb_rj").is(":checked")){
+      $("#transaksional_rj").show();
+    }else{
+      $("#transaksional_rj").hide();
+    }
+  }
 
 	function gantiTerm(){
 		var jumlah_term=$('#jumlah_term').val();
