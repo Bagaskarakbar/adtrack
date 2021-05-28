@@ -2,6 +2,7 @@
 session_start();
 require_once("../_lib/function/db.php");
 loadlib("function","function.olah_tabel");
+loadlib("function","function.max_kode_number");
 
 $db->debug=true;
 
@@ -10,8 +11,7 @@ $db->BeginTrans();
 // print_r($_POST);
 
 $date=date("Y-m-d H:i:s");
-// $judul=$_POST["judulBerita"];
-// $berita=$_POST["isiBerita"];
+$id_tc_pengajuan=max_kode_number("tc_pengajuan","id_tc_pengajuan");
 
 if(isset($_POST["q4"]["npwp"])){
 	$ArrDat=explode(";",$_POST["q4"]["npwp"]);
@@ -123,8 +123,45 @@ $insertAM["term4"]=$_POST["q3"]["term4"];
 $insertAM["term5"]=$_POST["q3"]["term5"];
 $insertAM["term6"]=$_POST["q3"]["term6"];
 $insertAM["tgl_input"]=$date;
-// $insertAM["foto_berita"]=$file;
+
 $result = insert_tabel("tc_pengajuan", $insertAM);
+
+$insertNPWP["id_tc_pengajuan"]=$id_tc_pengajuan;
+$insertNPWP["url_dokumen"]=$npwp;
+$insertNPWP["tg_input"]=$date;
+
+if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertNPWP);
+
+$insertSI["id_tc_pengajuan"]=$id_tc_pengajuan;
+$insertSI["url_dokumen"]=$surat_ijin;
+$insertSI["tg_input"]=$date;
+
+if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSI);
+
+$insertTDP["id_tc_pengajuan"]=$id_tc_pengajuan;
+$insertTDP["url_dokumen"]=$tdp;
+$insertTDP["tg_input"]=$date;
+
+if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertTDP);
+
+$insertSK["id_tc_pengajuan"]=$id_tc_pengajuan;
+$insertSK["url_dokumen"]=$sk_direktur;
+$insertSK["tg_input"]=$date;
+
+if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSK);
+
+$insertSPKWO["id_tc_pengajuan"]=$id_tc_pengajuan;
+$insertSPKWO["url_dokumen"]=$spk_wo;
+$insertSPKWO["tg_input"]=$date;
+
+if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSPKWO);
+
+
+$insertPengajuan["id_tc_pengajuan"]=$id_tc_pengajuan;
+$insertPengajuan["url_dokumen"]=$form_pengajuan;
+$insertPengajuan["tg_input"]=$date;
+
+if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertPengajuan);
 
 $db->CommitTrans($result!== false);
 
