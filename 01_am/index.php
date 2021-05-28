@@ -9,12 +9,18 @@ loadlib("function","function.pilihan_list");
 loadlib("function","function.olah_tabel");
 // $db->debug=true;
 ?>
+<style media="screen">
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+	}
+	input[type=number] {
+			-moz-appearance:textfield;
+	}
+</style>
 <div class="card-header">List Projek
 		<div class="btn-actions-pane-right" style="padding-right:10px;">
-			<!-- <div role="group" class="btn-group-sm btn-group">
-						<button class="active btn btn-focus">Last Week</button>
-						<button class="btn btn-focus">All Month</button>
-				</div> -->
 				<button class="btn-wide btn btn-info" onclick="am_form()"><i class="fa fa-plus"></i>  Proyek Baru</button>
 		</div>
 </div>
@@ -162,9 +168,15 @@ loadlib("function","function.olah_tabel");
 		showCloseButton: true,
 		progressSteps: pages
 		}).queue([{
-			title: 'Tambah Proyek',
-			html: `<input type="text" id="nama_am" class="swal2-input" placeholder="Nama AM" disabled>
-				<input type="text" id="unit" class="swal2-input" placeholder="Departmen/Unit" disabled>
+			title: 'Form General',
+			html: `<input type="text" id="nama_am" class="swal2-input" placeholder="Nama AM" value="<?=$_SESSION['logininfo']['username']?>" disabled>
+				<select name="unit" id="unit" class="swal2-input">
+					<option value="" disabled selected>Departmen/Unit</option>
+					<?
+					$getUnit="SELECT * FROM mt_unit ORDER BY id_mt_unit ASC";
+					pilihan_list($getUnit,"nama_unit","id_mt_unit","id_mt_unit");
+					?>
+				</select>
 				<input type="text" id="nama_pelanggan" class="swal2-input" placeholder="Nama Pelanggan">
 				<select name="jenis_pelanggan" id="jenis_pelanggan" class="swal2-input">
 					<option value="" disabled selected>Jenis Pelanggan</option>
@@ -183,6 +195,9 @@ loadlib("function","function.olah_tabel");
 				const unit = Swal.getPopup().querySelector('#unit').value
 				const jenis_pelanggan = Swal.getPopup().querySelector('#jenis_pelanggan').value
 				const keterangan = Swal.getPopup().querySelector('#keterangan').value
+				if(!unit){
+					Swal.showValidationMessage(`Unit harus dipilih!!`)
+				}
 				if(!nama_pelanggan){
 					Swal.showValidationMessage(`Nama Pelanggan harus dimasukan!!`)
 				}
@@ -206,7 +221,7 @@ loadlib("function","function.olah_tabel");
 			}
 		},
 		{
-			title: 'Tambah Proyek',
+			title: 'Form Detail',
 			html: `<select name="layanan" id="layanan" class="swal2-input" onchange="get_jenis_layanan()">
 					<option value="" disabled selected>Jenis Layanan</option>
 						<?
@@ -232,8 +247,8 @@ loadlib("function","function.olah_tabel");
 					  pilihan_list($getJenisLayanan,"jenis_project","id_mt_jenis_project","id_mt_jenis_project");
 					  ?>
 					</select>
-					<input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK" onfocus="(this.type='date')">
-					<input type="number" id="nomor" class="swal2-input" placeholder="Nomor" style="max-width:none !important;">
+					<input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
+					<input type="number" id="nomor" class="swal2-input" placeholder="Nomor" style="max-width:none !important;" onkeypress="checkNum(event)">
 					<textarea rows="4" cols="50" placeholder="Perihal" class="swal2-textarea" id="perihal"></textarea>`,
 			// inputValue: 2,
 			// showCancelButton: 2,
@@ -284,9 +299,9 @@ loadlib("function","function.olah_tabel");
 			}
 		},
 		{
-			title: 'Tambah Proyek',
-			html: `<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak" style="max-width:none !important;">
-			<input type="number" id="jumlah_dana" class="swal2-input" placeholder="Jumlah Dana" style="max-width:none !important;">
+			title: 'Form Kontrak',
+			html: `<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak | Per Bulan" style="max-width:none !important;" onkeypress="checkNum(event)">
+			<input type="number" id="jumlah_dana" class="swal2-input" placeholder="Jumlah Dana" style="max-width:none !important;" onkeypress="checkNum(event)">
 			<select name="jumlah_term" id="jumlah_term" class="swal2-input" onchange="gantiTerm()">
 					<option value="0" disabled selected>Jumlah Term</option>
 					<option value="1">1 Term</option>
@@ -296,16 +311,16 @@ loadlib("function","function.olah_tabel");
 					<option value="5">5 Term</option>
 					<option value="6">6 Term</option>
 			</select>
-			<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important; display: none;">
-			<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important; display: none;">
-			<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important; display: none;">
-			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;">
-			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;">
-			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;">
+			<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
+			<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
+			<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
+			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
+			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
+			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
 			<input type="checkbox" id="cb_ri" name="cb_ri" value="1" class="swal2-checkbox" onchange="checkedRI()"><label for="cb_ri">Masukkan transaksi RI?</label><br>
-			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;">
+			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
 			<input type="checkbox" id="cb_rj" name="cb_rj" value="1" class="swal2-checkbox"onchange="checkedRJ()"><label for="cb_rj">Masukkan transaksi RJ?</label>
-			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;">`,
+			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">`,
 			// inputValue: 3,
 			// showCancelButton: 3,
       // currentProgressStep: 3,
@@ -346,49 +361,54 @@ loadlib("function","function.olah_tabel");
 			}
 		},
 		{
-			title: 'Tambah Proyek',
-			html: `<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
-			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
-			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
-			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
-			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">
-			<label for="myfile">npwp:</label><input type="file" class="swal2-input" id="myfile" name="npwp">`,
+			title: 'Form Dokumen',
+			html: `<label for="myfile">npwp: </label>&nbsp;<input type="file" class="swal2-file" id="npwp" name="npwp" style="max-width:60% !important;"><br>
+			<label for="myfile">Surat Ijin: </label>&nbsp;<input type="file" class="swal2-file" id="surat_ijin" name="surat_ijin" style="max-width:60% !important;"><br>
+			<label for="myfile">TDP: </label>&nbsp;<input type="file" class="swal2-file" id="tdp" name="tdp" style="max-width:60% !important;"><br>
+			<label for="myfile">SK Direktur: </label>&nbsp;<input type="file" class="swal2-file" id="sk_direktur" name="sk_direktur" style="max-width:60% !important;"><br>
+			<label for="myfile">SPK/WO: </label>&nbsp;<input type="file" class="swal2-file" id="spk_wo" name="spk_wo" style="max-width:60% !important;"><br>
+			<label for="myfile">Form Pengajuan: </label>&nbsp;<input type="file" class="swal2-file" id="form_pengajuan" name="form_pengajuan" style="max-width:60% !important;"><br>`,
 			// inputValue: 3,
 			// showCancelButton: 3,
       // currentProgressStep: 3,
+			confirmButtonText: 'Masukkan',
 			cancelButtonText:	'Kembali',
 			preConfirm: ()=>{
-				const lama_kontrak = Swal.getPopup().querySelector('#lama_kontrak').value
-				const jumlah_dana = Swal.getPopup().querySelector('#jumlah_dana').value
-				const jumlah_term = Swal.getPopup().querySelector('#jumlah_term').value
-				const term1 = Swal.getPopup().querySelector('#term1').value
-				const term2 = Swal.getPopup().querySelector('#term2').value
-				const term3 = Swal.getPopup().querySelector('#term3').value
-				const term4 = Swal.getPopup().querySelector('#term4').value
-				const term5 = Swal.getPopup().querySelector('#term5').value
-				const term6 = Swal.getPopup().querySelector('#term6').value
-				if(!lama_kontrak){
-					Swal.showValidationMessage(`Lama Kontrak harus dimasukan!!`)
+				const npwp = Swal.getPopup().querySelector('#npwp').value
+				const surat_ijin = Swal.getPopup().querySelector('#surat_ijin').value
+				const tdp = Swal.getPopup().querySelector('#tdp').value
+				const sk_direktur = Swal.getPopup().querySelector('#sk_direktur').value
+				const spk_wo = Swal.getPopup().querySelector('#spk_wo').value
+				const form_pengajuan = Swal.getPopup().querySelector('#form_pengajuan').value
+				if(!npwp){
+					Swal.showValidationMessage(`NPWP harus dimasukan!!`)
 				}
-				if(!jumlah_dana){
-					Swal.showValidationMessage(`Jumlah Dana harus dimasukan!!`)
+				if(!surat_ijin){
+					Swal.showValidationMessage(`Surat ijin operasional klinik harus dimasukan!!`)
 				}
-				if(!jumlah_term){
-					Swal.showValidationMessage(`Jumlah Term harus dipilih!!`)
+				if(!tdp){
+					Swal.showValidationMessage(`TDP harus dimasukan!!`)
+				}
+				if(!sk_direktur){
+					Swal.showValidationMessage(`Surat Keterangan Direktur harus dimasukan!!`)
+				}
+				if(!spk_wo){
+					Swal.showValidationMessage(`SPK/WO harus dimasukan!!`)
+				}
+				if(!form_pengajuan){
+					Swal.showValidationMessage(`Form Pengajuan harus dipilih!!`)
 				}
 				var	arr4 = {
-					lama_kontrak: lama_kontrak,
-					jumlah_dana: jumlah_dana,
-					term1: term1,
-					term2: term2,
-					term3: term3,
-					term4: term4,
-					term5: term5,
-					term6: term6
+					npwp: npwp,
+					surat_ijin: surat_ijin,
+					tdp: tdp,
+					sk_direktur: sk_direktur,
+					spk_wo: spk_wo,
+					form_pengajuan: form_pengajuan
 				}
 				q4=arr4;
 				return{
-					q3
+					q4
 				}
 			}
 		},
@@ -443,6 +463,21 @@ loadlib("function","function.olah_tabel");
 		// }
 
   }
+
+	function checkNum(evt) {
+		var theEvent = evt || window.event;
+		if (theEvent.type === 'paste') {
+				key = event.clipboardData.getData('text/plain');
+		} else {
+				var key = theEvent.keyCode || theEvent.which;
+				key = String.fromCharCode(key);
+		}
+		var regex = /[0-9]|\./;
+		if( !regex.test(key) ) {
+			theEvent.returnValue = false;
+			if(theEvent.preventDefault) theEvent.preventDefault();
+		}
+	}
 
   function checkedRI(){
     if($("#cb_ri").is(":checked")){
