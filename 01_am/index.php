@@ -191,7 +191,7 @@ loadlib("function","function.olah_tabel");
 	    // currentProgressStep: 1,
 			preConfirm: ()=>{
 				const nama_pelanggan = Swal.getPopup().querySelector('#nama_pelanggan').value
-				const nama_am = Swal.getPopup().querySelector('#nama_am').value
+				const id_dd_user = <?=$_SESSION['logininfo']['id_dd_user']?>;
 				const unit = Swal.getPopup().querySelector('#unit').value
 				const jenis_pelanggan = Swal.getPopup().querySelector('#jenis_pelanggan').value
 				const keterangan = Swal.getPopup().querySelector('#keterangan').value
@@ -208,7 +208,7 @@ loadlib("function","function.olah_tabel");
 					Swal.showValidationMessage(`Keterangan harus dimasukkan!!`)
 				}
 				var	arr1 = {
-					nama_am: nama_am,
+					id_dd_user: id_dd_user,
 					unit: unit,
 					nama_pelanggan: nama_pelanggan,
 					jenis_pelanggan: jenis_pelanggan,
@@ -419,7 +419,7 @@ loadlib("function","function.olah_tabel");
 		      method:"POST",
 		      dataType:"json",
 		      url:'/01_am/am_form_act.php',
-		      data:{q1,q2,q3},
+		      data:{q1,q2,q3,q4},
 		      success:function(data){
 		        if(data.code != "500" ){
 		          Swal.fire({
