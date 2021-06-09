@@ -78,8 +78,10 @@ loadlib("function","function.olah_tabel");
 				}
 				?>
 				<li>
-					<a class="mm" onclick="loadModul('<?=$id_dc_modul?>','<?=$folderx?>')" >
-						<i class="metismenu-icon pe-7s-rocket"></i><?=$nama_modul?>
+					<a class="mm" style="cursor: pointer; font-size: 11pt; padding-left: 10px;" onclick="loadModul('<?=$id_dc_modul?>','<?=$folderx?>')" >
+						<!-- <i class="metismenu-icon pe-7s-rocket"></i> -->
+						<img src="<?=$icon?>" style="width: 30px; height: auto;"> &nbsp;
+						<?=$nama_modul?>
 					</a>
 				</li>
 				<?
