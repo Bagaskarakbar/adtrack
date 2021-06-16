@@ -22,7 +22,6 @@ loadlib("function","function.olah_tabel");
 			-moz-appearance:textfield;
 	}
 </style>
->>>>>>> 723501c1219a6282ab31d8c63932f71b549c01da
 <div class="card-header">List Projek
 		<div class="btn-actions-pane-right" style="padding-right:10px;">
 				<button class="btn-wide btn btn-info" onclick="am_form()"><i class="fa fa-plus"></i>  Proyek Baru</button>
@@ -145,14 +144,12 @@ loadlib("function","function.olah_tabel");
 <<<<<<< HEAD
 <!--<div class="d-block text-center card-footer">
  <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
-			<button class="btn-wide btn btn-success">Save</button> 
+			<button class="btn-wide btn btn-success">Save</button>
 </div>-->
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
-=======
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
 <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
 <script type="text/javascript" src="./assets/scripts/jquery-3.6.0.min.js"></script>
->>>>>>> 723501c1219a6282ab31d8c63932f71b549c01da
 <script>
 	function DetailProjek(a){
 		$("#idContent").load('../01_am/projek_detail.php',{id:a});
