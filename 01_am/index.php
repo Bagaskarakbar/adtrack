@@ -9,6 +9,7 @@ loadlib("function","function.pilihan_list");
 loadlib("function","function.olah_tabel");
 // $db->debug=true;
 ?>
+<div id="idContent">
 <div class="card-header">List Projek
 		<div class="btn-actions-pane-right" style="padding-right:10px;">
 			<!-- <div role="group" class="btn-group-sm btn-group">
@@ -18,6 +19,9 @@ loadlib("function","function.olah_tabel");
 				<button class="btn-wide btn btn-info" onclick="am_form()"><i class="fa fa-plus"></i>  Proyek Baru</button>
 		</div>
 </div>
+<div class="main-card mb-3 card">
+	<div class="card-body">
+		<div class="tab-content">
 		<div class="table-responsive">
 				<!-- <table class="align-middle mb-0 table table-borderless table-striped table-hover">
 						<thead>
@@ -125,14 +129,19 @@ loadlib("function","function.olah_tabel");
 
 				</table>
 		</div>
-<div class="d-block text-center card-footer">
-<!-- <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
-			<button class="btn-wide btn btn-success">Save</button> -->
+		</div>
+	</div>
 </div>
-<script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
-<script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
-<script type="text/javascript" src="./assets/scripts/jquery-3.6.0.js"></script>
+</div>
+<!--<div class="d-block text-center card-footer">
+ <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
+			<button class="btn-wide btn btn-success">Save</button> 
+</div>-->
+<script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
+	function DetailProjek(a){
+		$("#idContent").load('../01_am/projek_detail.php',{id:a});
+	}
 	function detail_form(){
 			Swal.fire({
 				icon: 'error',
