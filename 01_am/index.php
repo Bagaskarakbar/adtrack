@@ -185,7 +185,7 @@ loadlib("function","function.olah_tabel");
 					pilihan_list($getJenisPelanggan,"jenis_pelanggan","id_mt_jenis_pelanggan","id_mt_jenis_pelanggan");
 					?>
 				</select>
-				<textarea rows="4" cols="50" placeholder="Perihal" class="swal2-textarea" id="keterangan"></textarea>`,
+				<textarea rows="4" cols="50" placeholder="Keterangan" class="swal2-textarea" id="keterangan"></textarea>`,
 			// inputValue: 1,
 			// showCancelButton: 1,
 	    // currentProgressStep: 1,
@@ -238,7 +238,7 @@ loadlib("function","function.olah_tabel");
 					</select>
 					<select name="paket_layanan" id="paket_layanan" class="swal2-input">
 					  <option value="" disabled selected>Paket Layanan</option>
-					  <option value="" disabled>Pilih Jenis Layanan dahulu!!!</option>
+					  <option value="" disabled>Mohon Ditunggu...</option>
 					</select>
 					<select name="jenis_projek" id="jenis_projek" class="swal2-input">
 					  <option value="" disabled selected>Jenis Projek</option>
@@ -249,7 +249,13 @@ loadlib("function","function.olah_tabel");
 					</select>
 					<input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
 					<input type="number" id="nomor" class="swal2-input" placeholder="Nomor" style="max-width:none !important;" onkeypress="checkNum(event)">
-					<textarea rows="4" cols="50" placeholder="Perihal" class="swal2-textarea" id="perihal"></textarea>`,
+					<select name="channel" id="channel" class="swal2-input">
+					  <option value="" disabled selected>Channel</option>
+						<?
+					  $getChannel="SELECT * FROM mt_channel ORDER BY id_mt_channel ASC";
+					  pilihan_list($getChannel,"nama_channel","id_mt_channel","id_mt_channel");
+					  ?>
+					</select>`,
 			// inputValue: 2,
 			// showCancelButton: 2,
       // currentProgressStep: 2,
@@ -261,7 +267,7 @@ loadlib("function","function.olah_tabel");
 				const jenis_projek = Swal.getPopup().querySelector('#jenis_projek').value
 				const tgl_spk = Swal.getPopup().querySelector('#tgl_spk').value
 				const nomor = Swal.getPopup().querySelector('#nomor').value
-				const perihal = Swal.getPopup().querySelector('#perihal').value
+				const channel = Swal.getPopup().querySelector('#channel').value
 				if (!layanan) {
 					Swal.showValidationMessage(`Jenis Layanan harus dipilih!!`)
 				}
@@ -280,8 +286,8 @@ loadlib("function","function.olah_tabel");
 				if(!nomor){
 					Swal.showValidationMessage(`Nomor harus dimasukan!!`)
 				}
-				if(!perihal){
-					Swal.showValidationMessage(`Perihal harus dimasukan!!`)
+				if(!channel){
+					Swal.showValidationMessage(`Channel harus dipilih!!`)
 				}
 				var	arr2 = {
 					layanan: layanan,
@@ -290,7 +296,7 @@ loadlib("function","function.olah_tabel");
 					jenis_projek: jenis_projek,
 					tgl_spk: tgl_spk,
 					nomor: nomor,
-					perihal: perihal
+					channel: channel
 				}
 				q2=arr2;
 				return{
@@ -319,8 +325,12 @@ loadlib("function","function.olah_tabel");
 			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
 			<input type="checkbox" id="cb_ri" name="cb_ri" value="1" class="swal2-checkbox" onchange="checkedRI()"><label for="cb_ri">Masukkan transaksi RI?</label><br>
 			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="checkbox" id="cb_rj" name="cb_rj" value="1" class="swal2-checkbox"onchange="checkedRJ()"><label for="cb_rj">Masukkan transaksi RJ?</label>
-			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">`,
+			<input type="checkbox" id="cb_rj" name="cb_rj" value="1" class="swal2-checkbox"onchange="checkedRJ()"><label for="cb_rj">Masukkan transaksi RJ?</label><br>
+			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
+			<input type="checkbox" id="cb_min_caps" name="cb_min_caps" value="1" class="swal2-checkbox" onchange="checkedMinCaps()"><label for="cb_min_caps">Masukkan minimum caps?</label><br>
+			<input type="number" id="min_caps" class="swal2-input" placeholder="Jumlah minimum caps" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
+			<input type="checkbox" id="cb_kso" name="cb_kso" value="1" class="swal2-checkbox"onchange="checkedKSO()"><label for="cb_kso">Masukkan KSO Flat?</label><br>
+			<input type="number" id="kso" class="swal2-input" placeholder="Jumlah KSO Flat" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">`,
 			// inputValue: 3,
 			// showCancelButton: 3,
       // currentProgressStep: 3,
@@ -335,6 +345,10 @@ loadlib("function","function.olah_tabel");
 				const term4 = Swal.getPopup().querySelector('#term4').value
 				const term5 = Swal.getPopup().querySelector('#term5').value
 				const term6 = Swal.getPopup().querySelector('#term6').value
+				const transaksional_ri = Swal.getPopup().querySelector('#transaksional_ri').value
+				const transaksional_rj = Swal.getPopup().querySelector('#transaksional_rj').value
+				const min_caps = Swal.getPopup().querySelector('#min_caps').value
+				const kso = Swal.getPopup().querySelector('#kso').value
 				if(!lama_kontrak){
 					Swal.showValidationMessage(`Lama Kontrak harus dimasukan!!`)
 				}
@@ -352,7 +366,11 @@ loadlib("function","function.olah_tabel");
 					term3: term3,
 					term4: term4,
 					term5: term5,
-					term6: term6
+					term6: term6,
+					transaksional_ri: transaksional_ri,
+					transaksional_rj: transaksional_rj,
+					min_caps: min_caps,
+					kso: kso
 				}
 				q3=arr3;
 				return{
@@ -380,18 +398,6 @@ loadlib("function","function.olah_tabel");
 				const sk_direktur = Swal.getPopup().querySelector('#sk_direktur').value
 				const spk_wo = Swal.getPopup().querySelector('#spk_wo').value
 				const form_pengajuan = Swal.getPopup().querySelector('#form_pengajuan').value
-				if(!npwp){
-					Swal.showValidationMessage(`NPWP harus dimasukan!!`)
-				}
-				if(!surat_ijin){
-					Swal.showValidationMessage(`Surat ijin operasional klinik harus dimasukan!!`)
-				}
-				if(!tdp){
-					Swal.showValidationMessage(`TDP harus dimasukan!!`)
-				}
-				if(!sk_direktur){
-					Swal.showValidationMessage(`Surat Keterangan Direktur harus dimasukan!!`)
-				}
 				if(!spk_wo){
 					Swal.showValidationMessage(`SPK/WO harus dimasukan!!`)
 				}
@@ -432,7 +438,7 @@ loadlib("function","function.olah_tabel");
 		          icon: 'error',
 		          title: 'Oops...',
 		          text: 'Data gagal dimasukan!!',
-		          footer: 'Note: Terjadi kesalahan saat memasukan data!'
+		          footer: 'Note: Terjadi kesalahan saat memasukan data!!'
 		          })
 		        }
 		      },
@@ -492,6 +498,22 @@ loadlib("function","function.olah_tabel");
       $("#transaksional_rj").show();
     }else{
       $("#transaksional_rj").hide();
+    }
+  }
+
+	function checkedMinCaps(){
+    if($("#cb_min_caps").is(":checked")){
+      $("#min_caps").show();
+    }else{
+      $("#min_caps").hide();
+    }
+  }
+
+	function checkedKSO(){
+    if($("#cb_kso").is(":checked")){
+      $("#kso").show();
+    }else{
+      $("#kso").hide();
     }
   }
 
