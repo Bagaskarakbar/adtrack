@@ -39,7 +39,7 @@ loadlib("function","function.olah_tabel");
 				</span>
 			</button>
 		</span>
-	</div>  
+	</div>
 
 	<div class="scrollbar-sidebar">
 		<div class="app-sidebar__inner">
@@ -50,31 +50,31 @@ loadlib("function","function.olah_tabel");
 				$nama_modular=baca_tabel("dc_modular","nama_modular","WHERE id_dc_modular=".$id_dc_modular);
 				?>
 				<li class="app-sidebar__heading"><?=$nama_modular?></li>
-				<?			
+				<?
 				foreach ($modulnya[$id_dc_modular] as $k=>$id_dc_modul) {
-				
+
 				$rModul=read_tabel("dc_modul","*","WHERE id_dc_modul=".$id_dc_modul);
-				
-				while ($resModul=$rModul->FetchRow()) {						
+
+				while ($resModul=$rModul->FetchRow()) {
 					$icon=$resModul["logo"];
 					$arrIcon = explode(".",$icon);
 					$icon_hover = $arrIcon[0]."_hover.".$arrIcon[1];
 					$nama_modul=$resModul["nama_modul"];
 					$id_dc_modul=$resModul["id_dc_modul"];
 					$folderx=$resModul["folder"];
-					
+
 					 if($id_dc_modul=='1'){
 						$folder=$resModul["folder"];
 						$modul=$id_dc_modul;
 					}else {
-						
+
 						if(!isset($modul)){
 							$folder=$resModul["folder"];
 							$modul=$id_dc_modul;
 						}
-						
-					} 
-					
+
+					}
+
 				}
 				?>
 				<li>
@@ -88,8 +88,8 @@ loadlib("function","function.olah_tabel");
 
 				}
 				?>
-				
+
 			</ul>
 		</div>
 	</div>
-</div> 
+</div>
