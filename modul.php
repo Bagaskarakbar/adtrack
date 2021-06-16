@@ -221,13 +221,13 @@ $_SESSION['logininfo']=$userInfo;
 	<!--end::Global Config-->
 	<!--begin::Global Theme Bundle(used by all pages)-->
 	<script src="assets/plugins/global/plugins.bundle.js?v=7.0.4"></script>
-	<script src="assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.4"></script>
-	<script src="assets/js/scripts.bundle.js?v=7.0.4"></script>
+	<!--<script src="assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.4"></script>
+	<script src="assets/js/scripts.bundle.js?v=7.0.4"></script>-->
 
 	<!--end::Global Theme Bundle-->
 
 	<!--begin::Page Vendors(used by this page)-->
-	<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?v=7.0.4"></script>
+	<!--<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?v=7.0.4"></script>-->
 
 	<!--end::Page Vendors-->
 

@@ -9,6 +9,9 @@ loadlib("function","function.pilihan_list");
 loadlib("function","function.olah_tabel");
 // $db->debug=true;
 ?>
+<<<<<<< HEAD
+<div id="idContent">
+=======
 <style media="screen">
 	input[type=number]::-webkit-inner-spin-button,
 	input[type=number]::-webkit-outer-spin-button {
@@ -19,11 +22,15 @@ loadlib("function","function.olah_tabel");
 			-moz-appearance:textfield;
 	}
 </style>
+>>>>>>> 723501c1219a6282ab31d8c63932f71b549c01da
 <div class="card-header">List Projek
 		<div class="btn-actions-pane-right" style="padding-right:10px;">
 				<button class="btn-wide btn btn-info" onclick="am_form()"><i class="fa fa-plus"></i>  Proyek Baru</button>
 		</div>
 </div>
+<div class="main-card mb-3 card">
+	<div class="card-body">
+		<div class="tab-content">
 		<div class="table-responsive">
 				<!-- <table class="align-middle mb-0 table table-borderless table-striped table-hover">
 						<thead>
@@ -131,14 +138,25 @@ loadlib("function","function.olah_tabel");
 
 				</table>
 		</div>
-<div class="d-block text-center card-footer">
-<!-- <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
-			<button class="btn-wide btn btn-success">Save</button> -->
+		</div>
+	</div>
 </div>
+</div>
+<<<<<<< HEAD
+<!--<div class="d-block text-center card-footer">
+ <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
+			<button class="btn-wide btn btn-success">Save</button> 
+</div>-->
+<script src="/assets/js/bot-ta/bootstrap-table.js"></script>
+=======
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
 <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
 <script type="text/javascript" src="./assets/scripts/jquery-3.6.0.min.js"></script>
+>>>>>>> 723501c1219a6282ab31d8c63932f71b549c01da
 <script>
+	function DetailProjek(a){
+		$("#idContent").load('../01_am/projek_detail.php',{id:a});
+	}
 	function detail_form(){
 			Swal.fire({
 				icon: 'error',

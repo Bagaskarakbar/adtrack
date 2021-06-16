@@ -39,7 +39,7 @@ loadlib("function","function.olah_tabel");
 				</span>
 			</button>
 		</span>
-	</div>  
+	</div>
 
 	<div class="scrollbar-sidebar">
 		<div class="app-sidebar__inner">
@@ -50,38 +50,36 @@ loadlib("function","function.olah_tabel");
 				$nama_modular=baca_tabel("dc_modular","nama_modular","WHERE id_dc_modular=".$id_dc_modular);
 				?>
 				<li class="app-sidebar__heading"><?=$nama_modular?></li>
-				<?			
+				<?
 				foreach ($modulnya[$id_dc_modular] as $k=>$id_dc_modul) {
-				
+
 				$rModul=read_tabel("dc_modul","*","WHERE id_dc_modul=".$id_dc_modul);
-				
-				while ($resModul=$rModul->FetchRow()) {						
+
+				while ($resModul=$rModul->FetchRow()) {
 					$icon=$resModul["logo"];
 					$arrIcon = explode(".",$icon);
 					$icon_hover = $arrIcon[0]."_hover.".$arrIcon[1];
 					$nama_modul=$resModul["nama_modul"];
 					$id_dc_modul=$resModul["id_dc_modul"];
 					$folderx=$resModul["folder"];
-					
+
 					 if($id_dc_modul=='1'){
 						$folder=$resModul["folder"];
 						$modul=$id_dc_modul;
 					}else {
-						
+
 						if(!isset($modul)){
 							$folder=$resModul["folder"];
 							$modul=$id_dc_modul;
 						}
-						
-					} 
-					
+
+					}
+
 				}
 				?>
 				<li>
-					<a class="mm" style="cursor: pointer; font-size: 11pt; padding-left: 10px;" onclick="loadModul('<?=$id_dc_modul?>','<?=$folderx?>')" >
-						<!-- <i class="metismenu-icon pe-7s-rocket"></i> -->
-						<img src="<?=$icon?>" style="width: 30px; height: auto;"> &nbsp;
-						<?=$nama_modul?>
+					<a class="mm" onclick="loadModul('<?=$id_dc_modul?>','<?=$folderx?>')" style="cursor: pointer;">
+						<i class="metismenu-icon"  style="opacity:1;"><img src="<?=$icon?>"  width="24" height="24"></i><?=strtolower($nama_modul)?>
 					</a>
 				</li>
 				<?
@@ -90,8 +88,8 @@ loadlib("function","function.olah_tabel");
 
 				}
 				?>
-				
+
 			</ul>
 		</div>
 	</div>
-</div> 
+</div>

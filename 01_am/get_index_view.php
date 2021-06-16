@@ -58,7 +58,7 @@
 		$DataList['nama_layanan']=$nama_layanan;
 		$DataList['paket_layanan']=$paket_layanan;
 		$DataList['tgl_input']=$tgl_input;
-		$DataList['details']="<button type='button' id='PopoverCustomT-4' class='btn btn-primary btn-sm'><a href='#' style='color: white; text-decoration: none;' onClick=''>Detail</a></button>";
+		$DataList['details']="<button type='button' id='PopoverCustomT-4' class='btn btn-primary btn-sm'><a href='#' style='color: white; text-decoration: none;' onClick='DetailProjek($id_tc_pengajuan)'>Detail</a></button>";
 		$data['items'][]=$DataList;
 	}
 
