@@ -60,8 +60,8 @@ loadlib("class","Security");
 
 				 <li class="nav-item">
 					<a onclick="loadKonten('<?=$url_sub_menu?>')" class="nav-link">
-						<i class="nav-link-icon fa fa-database"> </i>
-						<?=$nama_menu?>
+						<!--<i class="nav-link-icon fa fa-database"> </i>-->
+						<?=strtolower($nama_menu)?>
 					</a>
 				</li>
 			<?
