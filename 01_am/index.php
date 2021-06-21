@@ -29,97 +29,6 @@ loadlib("function","function.olah_tabel");
 	<div class="card-body">
 		<div class="tab-content">
 		<div class="table-responsive">
-				<!-- <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-						<thead>
-								<tr>
-										<th class="text-center">No</th>
-										<th>Nama Projek</th>
-										<th class="text-center">Jenis Pelanggan</th>
-										<th class="text-center">Layanan</th>
-										<th class="text-center">Paket Layanan</th>
-										<th class="text-center">Tanggal Input</th>
-										<th class="text-center">Aksi</th>
-								</tr>
-						</thead>
-						<tbody>
-								<tr>
-										<td class="text-center">1.</td>
-										<td>
-												<div class="widget-content p-0">
-														<div class="widget-content-wrapper">
-																<div class="widget-content-left flex2">
-																		<div class="widget-heading" style="color:#495057">Rs. Hermina</div>
-																</div>
-														</div>
-												</div>
-										</td>
-										<td class="text-center">RS</td>
-										<td class="text-center">HiSys</td>
-										<td class="text-center">Rs Basic</td>
-										<td class="text-center">10-05-2021</td>
-										<td class="text-center">
-												<button type="button" id="PopoverCustomT-4" class="btn btn-primary btn-sm"><a href="projek_detail.html" style="color: white; text-decoration: none;">Detail</a></button>
-										</td>
-								</tr>
-								<tr>
-										<td class="text-center">2.</td>
-										<td>
-												<div class="widget-content p-0">
-														<div class="widget-content-wrapper">
-																<div class="widget-content-left flex2">
-																		<div class="widget-heading" style="color:#495057">Klinik Pelita</div>
-																</div>
-														</div>
-												</div>
-										</td>
-										<td class="text-center">Klinik</td>
-										<td class="text-center">DigiClinic</td>
-										<td class="text-center">Klinik Light</td>
-										<td class="text-center">10-05-2021</td>
-										<td class="text-center">
-												<button type="button" id="PopoverCustomT-4" class="btn btn-primary btn-sm"><a href="projek_detail.html" style="color: white; text-decoration: none;">Detail</a></button>
-										</td>
-								</tr>
-								<tr>
-										<td class="text-center">3.</td>
-										<td>
-												<div class="widget-content p-0">
-														<div class="widget-content-wrapper">
-																<div class="widget-content-left flex2">
-																		<div class="widget-heading" style="color:#495057">Rs. Kebayoran</div>
-																</div>
-														</div>
-												</div>
-										</td>
-										<td class="text-center">RS</td>
-										<td class="text-center">HiSys</td>
-										<td class="text-center">Rs Enterprise</td>
-										<td class="text-center">10-05-2021</td>
-										<td class="text-center">
-												<button type="button" id="PopoverCustomT-4" class="btn btn-primary btn-sm"><a href="projek_detail.html" style="color: white; text-decoration: none;">Detail</a></button>
-										</td>
-								</tr>
-								<tr>
-										<td class="text-center">4.</td>
-										<td>
-												<div class="widget-content p-0">
-														<div class="widget-content-wrapper">
-																<div class="widget-content-left flex2">
-																		<div class="widget-heading" style="color:#495057">Puskesmas Cikini</div>
-																</div>
-														</div>
-												</div>
-										</td>
-										<td class="text-center">Puskesmas</td>
-										<td class="text-center">ePuskesmas</td>
-										<td class="text-center">Puskesmas Standard</td>
-										<td class="text-center">10-05-2021</td>
-										<td class="text-center">
-												<button type="button" id="PopoverCustomT-4" class="btn btn-primary btn-sm"><a href="projek_detail.html" style="color: white; text-decoration: none;">Detail</a></button>
-										</td>
-								</tr>
-						</tbody>
-				</table> -->
 				<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/01_am/get_index_view.php" data-pagination="true" data-trim-on-search="false"  data-search="true" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
 				<thead>
 				<tr>
@@ -139,10 +48,6 @@ loadlib("function","function.olah_tabel");
 	</div>
 </div>
 </div>
-<!--<div class="d-block text-center card-footer">
- <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
-			<button class="btn-wide btn btn-success">Save</button>
-</div>-->
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
 <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
@@ -167,14 +72,11 @@ loadlib("function","function.olah_tabel");
 		var q4;
 
 		const pages = ['1', '2', '3', '4'];
-		// const values = [];
-		// let currPage;
 		Swal.mixin({
 		confirmButtonText: 'Selanjutnya &rarr;',
 		confirmButtonColor: '#007bff',
 		cancelButtonText:	'Batal',
 		cancelButtonColor:	'#dc3545',
-			// showCancelButton:	true,
 		reverseButtons:	true,
 		focusConfirm: false,
 		showCloseButton: true,
@@ -198,9 +100,6 @@ loadlib("function","function.olah_tabel");
 					?>
 				</select>
 				<textarea rows="4" cols="50" placeholder="Keterangan" class="swal2-textarea" id="keterangan"></textarea>`,
-			// inputValue: 1,
-			// showCancelButton: 1,
-	    // currentProgressStep: 1,
 			preConfirm: ()=>{
 				const nama_pelanggan = Swal.getPopup().querySelector('#nama_pelanggan').value
 				const id_dd_user = <?=$_SESSION['logininfo']['id_dd_user']?>;
@@ -268,9 +167,6 @@ loadlib("function","function.olah_tabel");
 					  pilihan_list($getChannel,"nama_channel","id_mt_channel","id_mt_channel");
 					  ?>
 					</select>`,
-			// inputValue: 2,
-			// showCancelButton: 2,
-      // currentProgressStep: 2,
 			cancelButtonText:	'Kembali',
 			preConfirm: ()=>{
 				const layanan = Swal.getPopup().querySelector('#layanan').value
@@ -335,17 +231,12 @@ loadlib("function","function.olah_tabel");
 			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
 			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
 			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="checkbox" id="cb_ri" name="cb_ri" value="1" class="swal2-checkbox" onchange="checkedRI()"><label for="cb_ri">Masukkan transaksi RI?</label><br>
+			<input type="checkbox" id="cb_trans" name="cb_trans" value="1" class="swal2-checkbox" onchange="checkedTrans()"><label for="cb_ri">Masukkan nilai transaksional?</label><br>
 			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="checkbox" id="cb_rj" name="cb_rj" value="1" class="swal2-checkbox"onchange="checkedRJ()"><label for="cb_rj">Masukkan transaksi RJ?</label><br>
 			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="checkbox" id="cb_min_caps" name="cb_min_caps" value="1" class="swal2-checkbox" onchange="checkedMinCaps()"><label for="cb_min_caps">Masukkan minimum caps?</label><br>
 			<input type="number" id="min_caps" class="swal2-input" placeholder="Jumlah minimum caps" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
 			<input type="checkbox" id="cb_kso" name="cb_kso" value="1" class="swal2-checkbox"onchange="checkedKSO()"><label for="cb_kso">Masukkan KSO Flat?</label><br>
 			<input type="number" id="kso" class="swal2-input" placeholder="Jumlah KSO Flat" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">`,
-			// inputValue: 3,
-			// showCancelButton: 3,
-      // currentProgressStep: 3,
 			cancelButtonText:	'Kembali',
 			preConfirm: ()=>{
 				const lama_kontrak = Swal.getPopup().querySelector('#lama_kontrak').value
@@ -399,9 +290,6 @@ loadlib("function","function.olah_tabel");
 			<label for="myfile">SPK/WO: </label>&nbsp;<input type="file" class="swal2-file" id="spk_wo" name="spk_wo" style="max-width:60% !important;"><br>
 			<div class="col-lg-8" id="loadImage"></div><br>
 			<label for="myfile">Form Pengajuan: </label>&nbsp;<input type="file" class="swal2-file" id="form_pengajuan" name="form_pengajuan" style="max-width:60% !important;"><br>`,
-			// inputValue: 3,
-			// showCancelButton: 3,
-      // currentProgressStep: 3,
 			confirmButtonText: 'Masukkan',
 			cancelButtonText:	'Kembali',
 			preConfirm: ()=>{
@@ -481,18 +369,6 @@ loadlib("function","function.olah_tabel");
 		    })
 		  }
 		})
-
-		// for (currPage = 0; currPage < pages.length;) {
-		//   if (queuePages.value) {
-		//     values[currPage] = queuePages.value
-		//     currPage++
-		//   } else if (queuePages.dismiss === Swal.DismissReason.cancel) {
-		//     currPage--
-		//   } else {
-		//     break
-		//   }
-		// }
-
   }
 
 	function checkNum(evt) {
@@ -510,27 +386,15 @@ loadlib("function","function.olah_tabel");
 		}
 	}
 
-  function checkedRI(){
-    if($("#cb_ri").is(":checked")){
+  function checkedTrans(){
+    if($("#cb_trans").is(":checked")){
       $("#transaksional_ri").show();
+			$("#transaksional_rj").show();
+			$("#min_caps").show();
     }else{
       $("#transaksional_ri").hide();
-    }
-  }
-
-  function checkedRJ(){
-    if($("#cb_rj").is(":checked")){
-      $("#transaksional_rj").show();
-    }else{
-      $("#transaksional_rj").hide();
-    }
-  }
-
-	function checkedMinCaps(){
-    if($("#cb_min_caps").is(":checked")){
-      $("#min_caps").show();
-    }else{
-      $("#min_caps").hide();
+			$("#transaksional_rj").hide();
+			$("#min_caps").hide();
     }
   }
 
