@@ -6,11 +6,11 @@ loadlib("function","function.max_kode_number");
 
 // $db->debug=true;
 
-// print_r();
-
-// $result=false;
+// $result=true;
 
 $db->BeginTrans();
+
+print_r($_POST["q4"]);
 
 $date=date("Y-m-d H:i:s");
 // $id_tc_pengajuan=max_kode_number("tc_pengajuan","id_tc_pengajuan");
@@ -84,10 +84,9 @@ if($_POST["q4"]["sk_direktur"]!=''){
 }
 
 if($_POST["q4"]["spk_wo"]!=''){
-	// $ArrDat=explode(";",$_POST["q4"]["spk_wo"]);
-	// $ArrDat1=explode("/",$ArrDat[0]);
-	// $typeFile=$ArrDat1[1];
-	$typeFile=$_POST["q4"]["ext_spk_wo"];
+	$ArrDat=explode(";",$_POST["q4"]["spk_wo"]);
+	$ArrDat1=explode("/",$ArrDat[0]);
+	$typeFile=$ArrDat1[1];
 
 	$rawData = $_POST["q4"]["spk_wo"];
 	list($type, $rawData) = explode(';', $rawData);
@@ -102,10 +101,9 @@ if($_POST["q4"]["spk_wo"]!=''){
 }
 
 if($_POST["q4"]["form_pengajuan"]!=''){
-	// $ArrDat=explode(";",$_POST["q4"]["form_pengajuan"]);
-	// $ArrDat1=explode("/",$ArrDat[0]);
-	// $typeFile=$ArrDat1[1];
-	$typeFile=$_POST["q4"]["ext_form_pengajuan"];
+	$ArrDat=explode(";",$_POST["q4"]["form_pengajuan"]);
+	$ArrDat1=explode("/",$ArrDat[0]);
+	$typeFile=$ArrDat1[1];
 
 	$rawData = $_POST["q4"]["form_pengajuan"];
 	list($type, $rawData) = explode(';', $rawData);

@@ -397,6 +397,7 @@ loadlib("function","function.olah_tabel");
 			<label for="myfile">TDP: </label>&nbsp;<input type="file" class="swal2-file" id="tdp" name="tdp" style="max-width:60% !important;"><br>
 			<label for="myfile">SK Direktur: </label>&nbsp;<input type="file" class="swal2-file" id="sk_direktur" name="sk_direktur" style="max-width:60% !important;"><br>
 			<label for="myfile">SPK/WO: </label>&nbsp;<input type="file" class="swal2-file" id="spk_wo" name="spk_wo" style="max-width:60% !important;"><br>
+			<div class="col-lg-8" id="loadImage"></div><br>
 			<label for="myfile">Form Pengajuan: </label>&nbsp;<input type="file" class="swal2-file" id="form_pengajuan" name="form_pengajuan" style="max-width:60% !important;"><br>`,
 			// inputValue: 3,
 			// showCancelButton: 3,
@@ -405,11 +406,17 @@ loadlib("function","function.olah_tabel");
 			cancelButtonText:	'Kembali',
 			preConfirm: ()=>{
 				const npwp = Swal.getPopup().querySelector('#npwp').value
+				var ext_npwp = npwp.split('/').pop().split('.')[1];
 				const surat_ijin = Swal.getPopup().querySelector('#surat_ijin').value
+				var ext_surat_ijin = surat_ijin.split('/').pop().split('.')[1];
 				const tdp = Swal.getPopup().querySelector('#tdp').value
+				var ext_tdp = tdp.split('/').pop().split('.')[1];
 				const sk_direktur = Swal.getPopup().querySelector('#sk_direktur').value
+				var ext_sk_direktur = sk_direktur.split('/').pop().split('.')[1];
 				const spk_wo = Swal.getPopup().querySelector('#spk_wo').value
+				var ext_spk_wo = spk_wo.split('/').pop().split('.')[1];
 				const form_pengajuan = Swal.getPopup().querySelector('#form_pengajuan').value
+				var ext_form_pengajuan = form_pengajuan.split('/').pop().split('.')[1];
 				if(!spk_wo){
 					Swal.showValidationMessage(`SPK/WO harus dimasukan!!`)
 				}
@@ -418,11 +425,17 @@ loadlib("function","function.olah_tabel");
 				}
 				var	arr4 = {
 					npwp: npwp,
+					ext_npwp: ext_npwp,
 					surat_ijin: surat_ijin,
+					ext_surat_ijin: ext_surat_ijin,
 					tdp: tdp,
+					ext_tdp: ext_tdp,
 					sk_direktur: sk_direktur,
+					ext_sk_direktur: ext_sk_direktur,
 					spk_wo: spk_wo,
-					form_pengajuan: form_pengajuan
+					ext_spk_wo: ext_spk_wo,
+					form_pengajuan: form_pengajuan,
+					ext_form_pengajuan: ext_form_pengajuan
 				}
 				q4=arr4;
 				return{
