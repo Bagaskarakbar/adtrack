@@ -120,16 +120,16 @@ loadlib("function","function.olah_tabel");
 								</tr>
 						</tbody>
 				</table> -->
-				<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/01_am/get_index_view.php" data-pagination="true" data-trim-on-search="false"  data-search="false" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
+				<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/01_am/get_index_view.php" data-pagination="true" data-trim-on-search="false"  data-search="true" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
 				<thead>
 				<tr>
-					<th class="thno" data-field="no">No.</th>
-					<th style="text-align:left;" width="150" data-field="nama_pelanggan">Nama Pelanggan</th>
-					<th style="text-align:left;" width="150" data-field="jenis_pelanggan">Jenis Pelanggan</th>
-					<th style="text-align:left;" width="150" data-field="nama_layanan">Nama Layanan</th>
-					<th style="text-align:left;" width="150" data-field="paket_layanan">Paket Layanan</th>
-					<th style="text-align:left;" width="150" data-field="tgl_input">Tanggal Input</th>
-					<th class="thicons" data-field="details">Aksi</th>
+					<th data-field="no" >No.</th>
+					<th data-field="nama_pelanggan" style="text-align:center;">Nama Pelanggan</th>
+					<th data-field="jenis_pelanggan">Jenis Pelanggan</th>
+					<th data-field="nama_layanan">Nama Layanan</th>
+					<th data-field="paket_layanan">Paket Layanan</th>
+					<th data-field="tgl_input">Tanggal Input</th>
+					<th data-field="details" align="center">Aksi</th>
 				</tr>
 				</thead>
 
