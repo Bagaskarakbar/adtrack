@@ -4,7 +4,7 @@ require_once("../_lib/function/db.php");
 loadlib("function","function.olah_tabel");
 loadlib("function","function.max_kode_number");
 
-$db->debug=true;
+// $db->debug=true;
 
 // print_r();
 
