@@ -151,7 +151,7 @@ if($npwp!=''){
 	// $insertNPWP["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertNPWP["id_mt_dokumen"]=1;
 	$insertNPWP["url_dokumen"]=$npwp;
-	$insertNPWP["tg_input"]=$date;
+	$insertNPWP["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertNPWP);
 }
@@ -160,7 +160,7 @@ if($surat_ijin!=''){
 	// $insertSI["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertSI["id_mt_dokumen"]=2;
 	$insertSI["url_dokumen"]=$surat_ijin;
-	$insertSI["tg_input"]=$date;
+	$insertSI["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSI);
 }
@@ -169,7 +169,7 @@ if($tdp!=''){
 	// $insertTDP["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertTDP["id_mt_dokumen"]=3;
 	$insertTDP["url_dokumen"]=$tdp;
-	$insertTDP["tg_input"]=$date;
+	$insertTDP["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertTDP);
 }
@@ -178,7 +178,7 @@ if($sk_direktur!=''){
 	// $insertSK["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertSK["id_mt_dokumen"]=4;
 	$insertSK["url_dokumen"]=$sk_direktur;
-	$insertSK["tg_input"]=$date;
+	$insertSK["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSK);
 }
@@ -187,7 +187,7 @@ if($spk_wo!=''){
 	// $insertSPKWO["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertSPKWO["id_mt_dokumen"]=5;
 	$insertSPKWO["url_dokumen"]=$spk_wo;
-	$insertSPKWO["tg_input"]=$date;
+	$insertSPKWO["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSPKWO);
 }
@@ -196,7 +196,7 @@ if($form_pengajuan!=''){
 	// $insertPengajuan["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertPengajuan["id_mt_dokumen"]=9;
 	$insertPengajuan["url_dokumen"]=$form_pengajuan;
-	$insertPengajuan["tg_input"]=$date;
+	$insertPengajuan["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertPengajuan);
 }

@@ -6,7 +6,11 @@
 	require_once("../_lib/function/db.php");
 	loadlib("function","variabel");
 	loadlib("class","Paging");
+<<<<<<< HEAD
 	//$db->debug=true;
+=======
+	// $db->debug=true;
+>>>>>>> dfc74e36e14738dda1f9cff9ba84a4ae2ad4d5e7
 
 	/* switch ($tipeCari) {
 		case "kelompok" :
