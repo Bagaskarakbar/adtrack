@@ -26,19 +26,9 @@ loadlib("class","Security");
 <!-- 	End Footer 	-->
 
 <script src="assets/plugins/global/plugins.bundle.js?v=7.0.4"></script>
-<!--<script src="assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.4"></script>
-<script src="assets/js/scripts.bundle.js?v=7.0.4"></script>-->
-
-<!--end::Global Theme Bundle-->
-
-<!--begin::Page Vendors(used by this page)-->
-<!--<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?v=7.0.4"></script>
-
-<!--end::Page Vendors-->
-
-<!--begin::Page Scripts(used by this page)-->
 <script src="assets/js/pages/widgets.js?v=7.0.4"></script>
 <script type="text/javascript" src="./assets/scripts/main.js"></script>
+<script src="_av_js/main.js"></script>
 <script>
 loadKonten("<?=$link?>");
 </script>

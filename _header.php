@@ -61,7 +61,7 @@ loadlib("class","Security");
 				 <li class="nav-item">
 					<a onclick="loadKonten('<?=$url_sub_menu?>')" class="nav-link">
 						<!--<i class="nav-link-icon fa fa-database"> </i>-->
-						<?=strtolower($nama_menu)?>
+						<?=$nama_menu?>
 					</a>
 				</li>
 			<?
@@ -75,5 +75,4 @@ loadlib("class","Security");
 
 
 </div>
-
 <?php include "profil_user.php"?>

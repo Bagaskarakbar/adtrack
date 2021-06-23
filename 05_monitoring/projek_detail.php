@@ -150,28 +150,20 @@ $term6 = $hasil->Fields('term6');
 		
 		<div class="row">
 			<div class="col-md-6">
+			
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
 				<div class="main-card mb-3 card">
-					<div class="card-header"><i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Dokumen Data
+					<div class="card-header"><i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Progres Dokument
 					
 					</div>
 					<div class="card-body">
 						<div class="tab-content">
 							<div class="row">
 								<div class="col-md-12">
-								<!--begin::Table-->
-									<div class="table-responsive" id="idAntrian">
-									<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/json/get_dokumen_data.php" data-pagination="true" data-trim-on-search="false"  data-search="false" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
-									<thead>
-									<tr>
-										<th data-field="no" >No.</th>
-										<th data-field="tipe_dokumen" style="text-align:center;">Jenis Dokumen</th>
-										<th data-field="tgl" style="text-align:center;">Tanggal</th>
-										<th data-field="">#</th>
-									</tr>
-									</thead>
-									</table>
-									</div>
-									<!--end::Table-->
+								
 								</div>
 							</div>
 						</div>
@@ -181,7 +173,7 @@ $term6 = $hasil->Fields('term6');
 			</div>
 			<div class="col-md-6">
 				<div class="main-card mb-3 card">
-					<div class="card-header"><i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Nilai Kontrak
+					<div class="card-header"><i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Dokument Data
 					</div>
 					<div class="card-body">
 						<div class="tab-content">
@@ -189,63 +181,17 @@ $term6 = $hasil->Fields('term6');
 								<div class="col-md-12">
 								<!--begin::Table-->
 									<div class="table-responsive" id="idAntrian">
-									<label>Nilai OTC : <b> Rp. <?=$otc?></b> </label>
-										<table class="table" >
-											<tr>
-												<td class="text-left">
-													<span class="text-dark-75 font-weight-bolder d-block font-size-sm">
-														Term 1
-													</span>
-												</td>
-												<td class="text-center">:</td>
-												<td class="text-left">Rp. <?=$term1?></td>
-											</tr>
-											<tr>
-												<td class="text-left">
-													<span class="text-dark-75 font-weight-bolder d-block font-size-sm">
-														Term 2
-													</span>
-												</td>
-												<td class="text-center">:</td>
-												<td class="text-left">Rp. <?=$term2?></td>
-											</tr>
-											<tr>
-												<td class="text-left">
-													<span class="text-dark-75 font-weight-bolder d-block font-size-sm">
-														Term 3
-													</span>
-												</td>
-												<td class="text-center">:</td>
-												<td class="text-left">Rp. <?=$term3?></td>
-											</tr>
-											<tr>
-												<td class="text-left">
-													<span class="text-dark-75 font-weight-bolder d-block font-size-sm">
-														Term 4
-													</span>
-												</td>
-												<td class="text-center">:</td>
-												<td class="text-left">Rp. <?=$term4?></td>
-											</tr>
-											<tr>
-												<td class="text-left">
-													<span class="text-dark-75 font-weight-bolder d-block font-size-sm">
-														Term 5
-													</span>
-												</td>
-												<td class="text-center">:</td>
-												<td class="text-left">Rp. <?=$term5?></td>
-											</tr>
-											<tr>
-												<td class="text-left">
-													<span class="text-dark-75 font-weight-bolder d-block font-size-sm">
-														Term 6
-													</span>
-												</td>
-												<td class="text-center">:</td>
-												<td class="text-left">Rp. <?=$term6?></td>
-											</tr>
-										</table>
+									<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/json/get_dokumen.php" data-pagination="true" data-trim-on-search="false"  data-search="false" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
+									<thead>
+									<tr>
+										<th data-field="no" >No.</th>
+										<th data-field="tipe_dokumen" style="text-align:center;">Jenis Dokumen</th>
+										<th data-field="tgl" style="text-align:center;">Tanggal</th>
+										<th data-field="nama_bagian" style="text-align:center;">Bagian</th>
+										<th data-field="action">#</th>
+									</tr>
+									</thead>
+									</table>
 									</div>
 									<!--end::Table-->
 								</div>
@@ -261,15 +207,16 @@ $term6 = $hasil->Fields('term6');
 		
 	</div>
 </div>
+	
 <script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
 function Back(){
-	$("#idContent").load('../01_am/index.php');
+	$("#idContent").load('../05_monitoring/index.php');
 }
 
-function dokumen_view(a){
-		$("#idIsiModal").load('/01_am/dokumen_view.php',{id_dd_user:a,act:'edit'},function(){
-			$("#BuatModal").modal("show");
-		});
-	}
+function DokView(a){
+	$("#idIsiModalLarge").load("/05_monitoring/dokumen_view.php",{id:a},function(){
+		$("#BuatModalLarge").modal('show');
+	});
+}
 </script>

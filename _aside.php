@@ -79,7 +79,7 @@ loadlib("function","function.olah_tabel");
 				?>
 				<li>
 					<a class="mm" onclick="loadModul('<?=$id_dc_modul?>','<?=$folderx?>')" style="cursor: pointer;">
-						<i class="metismenu-icon"  style="opacity:1;"><img src="<?=$icon?>"  width="24" height="24"></i><?=strtolower($nama_modul)?>
+						<i class="metismenu-icon"  style="opacity:1;"><img src="<?=$icon?>"  width="24" height="24"></i><b><?=$nama_modul?></b>
 					</a>
 				</li>
 				<?
