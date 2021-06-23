@@ -7,6 +7,7 @@ session_start();
 require_once("../_lib/function/db.php");
 loadlib("function","function.pilihan_list");
 loadlib("function","function.olah_tabel");
+loadlib("function","function.uang");
 // $db->debug=true;
 ?>
 <style media="screen">
@@ -17,7 +18,33 @@ loadlib("function","function.olah_tabel");
 	}
 	input[type=number] {
 			-moz-appearance:textfield;
+			&:placeholder-shown + #btnReset{
+		    opacity: 0;
+		    pointer-events: none;
+		  }
 	}
+	#btnReset{
+    --size: 22px;
+    position: absolute;
+    border: none;
+    display: block;
+    width: var(--size);
+    height: var(--size);
+    line-height: var(--size);
+    font-size: calc(var(--size) - 3px);
+    border-radius: 50%;
+    top: 0;
+    bottom: 0;
+    right: calc(var(--size)/2);
+    margin: auto;
+    background-color: salmon;
+    color: white;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: .1s;
+  }
 </style>
 <div id="idContent">
 <div class="card-header">List Projek
@@ -48,7 +75,6 @@ loadlib("function","function.olah_tabel");
 	</div>
 </div>
 </div>
-<script src="/assets/js/bot-ta/bootstrap-table.js"></script>
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
 <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
 <script type="text/javascript" src="./assets/scripts/jquery-3.6.0.min.js"></script>
@@ -159,7 +185,7 @@ loadlib("function","function.olah_tabel");
 					  ?>
 					</select>
 					<label for="npwp" style="text-align: left;float: left;">Tanggal SPK: </label><br><input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
-					<label for="npwp" style="text-align: left;float: left;">Tanggal Nomor: </label><br><input type="text" id="nomor" class="swal2-input" placeholder="Format: xx/xx/xx" style="max-width:none !important;">
+					<label for="npwp" style="text-align: left;float: left;">Nomor: </label><br><input type="text" id="nomor" class="swal2-input" placeholder="Format: xx/xx/xx" style="max-width:none !important;">
 					<select name="channel" id="channel" class="swal2-input">
 					  <option value="" disabled selected>Channel</option>
 						<?
@@ -215,7 +241,7 @@ loadlib("function","function.olah_tabel");
 		{
 			title: 'Form Kontrak',
 			html: `<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak | Per Bulan" style="max-width:none !important;" onkeypress="checkNum(event)">
-			<input type="number" id="jumlah_dana" class="swal2-input" placeholder="Jumlah Dana" style="max-width:none !important;" onkeypress="checkNum(event)">
+			<input type="number" id="jumlah_dana" class="swal2-input" placeholder="Jumlah Dana" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
 			<select name="jumlah_term" id="jumlah_term" class="swal2-input" onchange="gantiTerm()">
 					<option value="0" disabled selected>Jumlah Term</option>
 					<option value="1">1 Term</option>
@@ -225,18 +251,18 @@ loadlib("function","function.olah_tabel");
 					<option value="5">5 Term</option>
 					<option value="6">6 Term</option>
 			</select>
-			<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="checkbox" id="cb_trans" name="cb_trans" value="1" class="swal2-checkbox" onchange="checkedTrans()"><label for="cb_ri">Masukkan nilai transaksional?</label><br>
-			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="number" id="min_caps" class="swal2-input" placeholder="Jumlah minimum caps" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">
-			<input type="checkbox" id="cb_kso" name="cb_kso" value="1" class="swal2-checkbox"onchange="checkedKSO()"><label for="cb_kso">Masukkan KSO Flat?</label><br>
-			<input type="number" id="kso" class="swal2-input" placeholder="Jumlah KSO Flat" style="max-width:none !important; display: none;" onkeypress="checkNum(event)">`,
+			<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="checkbox" id="cb_trans" name="cb_trans" value="1" class="swal2-checkbox hide_trans" onchange="checkedTrans()"><label for="cb_ri" class="hide_trans">Masukkan nilai transaksional?</label><br>
+			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="number" id="min_caps" class="swal2-input" placeholder="Jumlah minimum caps" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<input type="checkbox" id="cb_kso" name="cb_kso" value="1" class="swal2-checkbox hide_kso" onchange="checkedKSO()"><label for="cb_kso" class="hide_kso">Masukkan KSO Flat?</label><br>
+			<input type="number" id="kso" class="swal2-input" placeholder="Jumlah KSO Flat" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">`,
 			cancelButtonText:	'Kembali',
 			preConfirm: ()=>{
 				const lama_kontrak = Swal.getPopup().querySelector('#lama_kontrak').value
@@ -421,18 +447,22 @@ loadlib("function","function.olah_tabel");
       $("#transaksional_ri").show();
 			$("#transaksional_rj").show();
 			$("#min_caps").show();
+			$(".hide_kso").hide();
     }else{
       $("#transaksional_ri").hide();
 			$("#transaksional_rj").hide();
 			$("#min_caps").hide();
+			$(".hide_kso").show();
     }
   }
 
 	function checkedKSO(){
     if($("#cb_kso").is(":checked")){
       $("#kso").show();
+			$(".hide_trans").hide();
     }else{
       $("#kso").hide();
+			$(".hide_trans").show();
     }
   }
 
