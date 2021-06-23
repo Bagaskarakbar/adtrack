@@ -158,8 +158,8 @@ loadlib("function","function.olah_tabel");
 					  pilihan_list($getJenisLayanan,"jenis_project","id_mt_jenis_project","id_mt_jenis_project");
 					  ?>
 					</select>
-					<input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
-					<input type="number" id="nomor" class="swal2-input" placeholder="Nomor" style="max-width:none !important;" onkeypress="checkNum(event)">
+					<label for="npwp" style="text-align: left;float: left;">Tanggal SPK: </label><br><input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
+					<label for="npwp" style="text-align: left;float: left;">Tanggal Nomor: </label><br><input type="text" id="nomor" class="swal2-input" placeholder="Format: xx/xx/xx" style="max-width:none !important;">
 					<select name="channel" id="channel" class="swal2-input">
 					  <option value="" disabled selected>Channel</option>
 						<?
@@ -283,13 +283,14 @@ loadlib("function","function.olah_tabel");
 		},
 		{
 			title: 'Form Dokumen',
-			html: `<label for="myfile">npwp: </label>&nbsp;<input type="file" class="swal2-file" id="npwp" name="npwp" style="max-width:60% !important;"><br>
-			<label for="myfile">Surat Ijin: </label>&nbsp;<input type="file" class="swal2-file" id="surat_ijin" name="surat_ijin" style="max-width:60% !important;"><br>
-			<label for="myfile">TDP: </label>&nbsp;<input type="file" class="swal2-file" id="tdp" name="tdp" style="max-width:60% !important;"><br>
-			<label for="myfile">SK Direktur: </label>&nbsp;<input type="file" class="swal2-file" id="sk_direktur" name="sk_direktur" style="max-width:60% !important;"><br>
-			<label for="myfile">SPK/WO: </label>&nbsp;<input type="file" class="swal2-file" id="spk_wo" name="spk_wo" style="max-width:60% !important;"><br>
-			<div class="col-lg-8" id="loadImage"></div><br>
-			<label for="myfile">Form Pengajuan: </label>&nbsp;<input type="file" class="swal2-file" id="form_pengajuan" name="form_pengajuan" style="max-width:60% !important;"><br>`,
+			html: `<form id="formDokumen" action="#" method="post" enctype="multipart/form-data">
+			<label for="npwp">npwp: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="npwp" name="npwp" style="max-width:60% !important;"><br>
+			<label for="surat_ijin">Surat Ijin: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="surat_ijin" name="surat_ijin" style="max-width:60% !important;"><br>
+			<label for="tdp">TDP: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="tdp" name="tdp" style="max-width:60% !important;"><br>
+			<label for="sk_direktur">SK Direktur: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="sk_direktur" name="sk_direktur" style="max-width:60% !important;"><br>
+			<label for="spk_wo">SPK/WO: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="spk_wo" name="spk_wo" style="max-width:60% !important;"><br>
+			<label for="form_pengajuan">Form Pengajuan: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="form_pengajuan" name="form_pengajuan" style="max-width:60% !important;"><br>
+			</form>`,
 			confirmButtonText: 'Masukkan',
 			cancelButtonText:	'Kembali',
 			preConfirm: ()=>{
@@ -311,6 +312,16 @@ loadlib("function","function.olah_tabel");
 				if(!form_pengajuan){
 					Swal.showValidationMessage(`Form Pengajuan harus dipilih!!`)
 				}
+				// if(spk_wo){
+				//   const reader = new FileReader()
+				//   reader.onload = (e) => {
+				// 		console.log(e.target.result);
+				//   }
+				// 	reader.onerror = (e) => {
+				// 		console.log('Error : ' + e.type);
+				// 	}
+				//   reader.readAsDataURL(spk_wo);
+				// }
 				var	arr4 = {
 					npwp: npwp,
 					ext_npwp: ext_npwp,
@@ -334,11 +345,30 @@ loadlib("function","function.olah_tabel");
 		]).then(function(result){
 		  if(result.value){
 		    console.log("masuk if");
+				q4_new = new FormData($('#formDokumen')[0]);
+				// console.log(q4_new);
 		    $.ajax({
 		      method:"POST",
 		      dataType:"json",
 		      url:'/01_am/am_form_act.php',
 		      data:{q1,q2,q3,q4},
+					// cache: false,
+					// contentType: false,
+					// processData: false,
+					// xhr: function () {
+					//   var myXhr = $.ajaxSettings.xhr();
+					//   if (myXhr.upload) {
+					// 		myXhr.upload.addEventListener('progress', function (e) {
+					// 			if (e.lengthComputable) {
+					// 				$('progress').attr({
+					// 		  		value: e.loaded,
+					// 		  		max: e.total,
+					// 				});
+					// 	  	}
+					// 		}, false);
+					//   }
+					//   return myXhr;
+					// },
 		      success:function(data){
 		        if(data.code != "500" ){
 		          Swal.fire({
