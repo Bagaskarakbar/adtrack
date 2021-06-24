@@ -7,7 +7,8 @@ session_start();
 require_once("../_lib/function/db.php");
 loadlib("function","function.pilihan_list");
 loadlib("function","function.olah_tabel");
-loadlib("function","function.uang");
+// loadlib("function","function.uang");
+
 // $db->debug=true;
 ?>
 <style media="screen">
@@ -45,6 +46,25 @@ loadlib("function","function.uang");
     opacity: 0;
     transition: .1s;
   }
+	span.idr {
+    /* float:left;
+    text-align:left; */
+    position: relative;
+	}
+
+	span.idr::before {
+	    position: absolute;
+	    content: "Rp."; /* £ */
+	    /* padding:3px 4px 3px 3px; */
+			padding-left: 10px;
+	    left: 0;
+	    top:0;
+	    bottom:0;
+	}
+
+	span.idr input {
+    padding-left: 35px;
+}
 </style>
 <div id="idContent">
 <div class="card-header">List Projek
@@ -97,7 +117,7 @@ loadlib("function","function.uang");
 		var q3;
 		var q4;
 
-		const pages = ['1', '2', '3', '4'];
+		const pages = ['1', '2', '3'];
 		Swal.mixin({
 		confirmButtonText: 'Selanjutnya &rarr;',
 		confirmButtonColor: '#007bff',
@@ -184,8 +204,8 @@ loadlib("function","function.uang");
 					  pilihan_list($getJenisLayanan,"jenis_project","id_mt_jenis_project","id_mt_jenis_project");
 					  ?>
 					</select>
-					<label for="npwp" style="text-align: left;float: left;">Tanggal SPK: </label><br><input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
-					<label for="npwp" style="text-align: left;float: left;">Nomor: </label><br><input type="text" id="nomor" class="swal2-input" placeholder="Format: xx/xx/xx" style="max-width:none !important;">
+					<label for="tgl_spk" style="text-align: left;float: left;">Tanggal SPK: </label><br><input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
+					<label for="nomor" style="text-align: left;float: left;">Nomor: </label><br><input type="text" id="nomor" class="swal2-input" placeholder="Format: xx/xx/xx" style="max-width:none !important;">
 					<select name="channel" id="channel" class="swal2-input">
 					  <option value="" disabled selected>Channel</option>
 						<?
@@ -241,7 +261,9 @@ loadlib("function","function.uang");
 		{
 			title: 'Form Kontrak',
 			html: `<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak | Per Bulan" style="max-width:none !important;" onkeypress="checkNum(event)">
+			<span class="idr">
 			<input type="number" id="jumlah_dana" class="swal2-input" placeholder="Jumlah Dana" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
 			<select name="jumlah_term" id="jumlah_term" class="swal2-input" onchange="gantiTerm()">
 					<option value="0" disabled selected>Jumlah Term</option>
 					<option value="1">1 Term</option>
@@ -251,19 +273,40 @@ loadlib("function","function.uang");
 					<option value="5">5 Term</option>
 					<option value="6">6 Term</option>
 			</select>
-			<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
-			<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
-			<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
-			<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
-			<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
-			<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<span class="idr" id="span_term1" style="display: none;">
+				<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
+			<span class="idr" id="span_term2" style="display: none;">
+				<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
+			<span class="idr" id="span_term3" style="display: none;">
+				<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
+			<span class="idr" id="span_term4" style="display: none;">
+				<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
+			<span class="idr" id="span_term5" style="display: none;">
+				<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
+			<span class="idr" id="span_term6" style="display: none;">
+				<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
 			<input type="checkbox" id="cb_trans" name="cb_trans" value="1" class="swal2-checkbox hide_trans" onchange="checkedTrans()"><label for="cb_ri" class="hide_trans">Masukkan nilai transaksional?</label><br>
-			<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
-			<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
-			<input type="number" id="min_caps" class="swal2-input" placeholder="Jumlah minimum caps" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">
+			<span class="idr" id="span_trans_ri" style="display: none;">
+				<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
+			<span class="idr" id="span_trans_rj" style="display: none;">
+				<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
+			<span class="idr" id="span_min_caps" style="display: none;">
+				<input type="number" id="min_caps" class="swal2-input" placeholder="Jumlah minimum caps" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>
 			<input type="checkbox" id="cb_kso" name="cb_kso" value="1" class="swal2-checkbox hide_kso" onchange="checkedKSO()"><label for="cb_kso" class="hide_kso">Masukkan KSO Flat?</label><br>
-			<input type="number" id="kso" class="swal2-input" placeholder="Jumlah KSO Flat" style="max-width:none !important; display: none;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()">`,
+			<span class="idr" id="span_kso" style="display: none;">
+				<input type="number" id="kso" class="swal2-input" placeholder="Jumlah KSO Flat" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
+			</span>`,
 			cancelButtonText:	'Kembali',
+			confirmButtonText: 'Masukkan',
 			preConfirm: ()=>{
 				const lama_kontrak = Swal.getPopup().querySelector('#lama_kontrak').value
 				const jumlah_dana = Swal.getPopup().querySelector('#jumlah_dana').value
@@ -307,77 +350,64 @@ loadlib("function","function.uang");
 				}
 			}
 		},
-		{
-			title: 'Form Dokumen',
-			html: `<form id="formDokumen" action="#" method="post" enctype="multipart/form-data">
-			<label for="npwp">npwp: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="npwp" name="npwp" style="max-width:60% !important;"><br>
-			<label for="surat_ijin">Surat Ijin: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="surat_ijin" name="surat_ijin" style="max-width:60% !important;"><br>
-			<label for="tdp">TDP: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="tdp" name="tdp" style="max-width:60% !important;"><br>
-			<label for="sk_direktur">SK Direktur: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="sk_direktur" name="sk_direktur" style="max-width:60% !important;"><br>
-			<label for="spk_wo">SPK/WO: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="spk_wo" name="spk_wo" style="max-width:60% !important;"><br>
-			<label for="form_pengajuan">Form Pengajuan: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="form_pengajuan" name="form_pengajuan" style="max-width:60% !important;"><br>
-			</form>`,
-			confirmButtonText: 'Masukkan',
-			cancelButtonText:	'Kembali',
-			preConfirm: ()=>{
-				const npwp = Swal.getPopup().querySelector('#npwp').value
-				var ext_npwp = npwp.split('/').pop().split('.')[1];
-				const surat_ijin = Swal.getPopup().querySelector('#surat_ijin').value
-				var ext_surat_ijin = surat_ijin.split('/').pop().split('.')[1];
-				const tdp = Swal.getPopup().querySelector('#tdp').value
-				var ext_tdp = tdp.split('/').pop().split('.')[1];
-				const sk_direktur = Swal.getPopup().querySelector('#sk_direktur').value
-				var ext_sk_direktur = sk_direktur.split('/').pop().split('.')[1];
-				const spk_wo = Swal.getPopup().querySelector('#spk_wo').value
-				var ext_spk_wo = spk_wo.split('/').pop().split('.')[1];
-				const form_pengajuan = Swal.getPopup().querySelector('#form_pengajuan').value
-				var ext_form_pengajuan = form_pengajuan.split('/').pop().split('.')[1];
-				if(!spk_wo){
-					Swal.showValidationMessage(`SPK/WO harus dimasukan!!`)
-				}
-				if(!form_pengajuan){
-					Swal.showValidationMessage(`Form Pengajuan harus dipilih!!`)
-				}
-				// if(spk_wo){
-				//   const reader = new FileReader()
-				//   reader.onload = (e) => {
-				// 		console.log(e.target.result);
-				//   }
-				// 	reader.onerror = (e) => {
-				// 		console.log('Error : ' + e.type);
-				// 	}
-				//   reader.readAsDataURL(spk_wo);
-				// }
-				var	arr4 = {
-					npwp: npwp,
-					ext_npwp: ext_npwp,
-					surat_ijin: surat_ijin,
-					ext_surat_ijin: ext_surat_ijin,
-					tdp: tdp,
-					ext_tdp: ext_tdp,
-					sk_direktur: sk_direktur,
-					ext_sk_direktur: ext_sk_direktur,
-					spk_wo: spk_wo,
-					ext_spk_wo: ext_spk_wo,
-					form_pengajuan: form_pengajuan,
-					ext_form_pengajuan: ext_form_pengajuan
-				}
-				q4=arr4;
-				return{
-					q4
-				}
-			}
-		},
+		// {
+		// 	title: 'Form Dokumen',
+		// 	html: `<form id="formDokumen" action="#" method="post" enctype="multipart/form-data">
+		// 	<label for="npwp">npwp: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="npwp" name="npwp" style="max-width:60% !important;"><br>
+		// 	<label for="surat_ijin">Surat Ijin: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="surat_ijin" name="surat_ijin" style="max-width:60% !important;"><br>
+		// 	<label for="tdp">TDP: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="tdp" name="tdp" style="max-width:60% !important;"><br>
+		// 	<label for="sk_direktur">SK Direktur: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="sk_direktur" name="sk_direktur" style="max-width:60% !important;"><br>
+		// 	<label for="spk_wo">SPK/WO: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="spk_wo" name="spk_wo" style="max-width:60% !important;"><br>
+		// 	<label for="form_pengajuan">Form Pengajuan: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-file" id="form_pengajuan" name="form_pengajuan" style="max-width:60% !important;"><br>
+		// 	</form>`,
+		// 	confirmButtonText: 'Masukkan',
+		// 	cancelButtonText:	'Kembali',
+		// 	preConfirm: ()=>{
+		// 		const npwp = Swal.getPopup().querySelector('#npwp').value
+		// 		var ext_npwp = npwp.split('/').pop().split('.')[1];
+		// 		const surat_ijin = Swal.getPopup().querySelector('#surat_ijin').value
+		// 		var ext_surat_ijin = surat_ijin.split('/').pop().split('.')[1];
+		// 		const tdp = Swal.getPopup().querySelector('#tdp').value
+		// 		var ext_tdp = tdp.split('/').pop().split('.')[1];
+		// 		const sk_direktur = Swal.getPopup().querySelector('#sk_direktur').value
+		// 		var ext_sk_direktur = sk_direktur.split('/').pop().split('.')[1];
+		// 		const spk_wo = Swal.getPopup().querySelector('#spk_wo').value
+		// 		var ext_spk_wo = spk_wo.split('/').pop().split('.')[1];
+		// 		const form_pengajuan = Swal.getPopup().querySelector('#form_pengajuan').value
+		// 		var ext_form_pengajuan = form_pengajuan.split('/').pop().split('.')[1];
+		// 		if(!spk_wo){
+		// 			Swal.showValidationMessage(`SPK/WO harus dimasukan!!`)
+		// 		}
+		// 		if(!form_pengajuan){
+		// 			Swal.showValidationMessage(`Form Pengajuan harus dipilih!!`)
+		// 		}
+		// 		var	arr4 = {
+		// 			npwp: npwp,
+		// 			ext_npwp: ext_npwp,
+		// 			surat_ijin: surat_ijin,
+		// 			ext_surat_ijin: ext_surat_ijin,
+		// 			tdp: tdp,
+		// 			ext_tdp: ext_tdp,
+		// 			sk_direktur: sk_direktur,
+		// 			ext_sk_direktur: ext_sk_direktur,
+		// 			spk_wo: spk_wo,
+		// 			ext_spk_wo: ext_spk_wo,
+		// 			form_pengajuan: form_pengajuan,
+		// 			ext_form_pengajuan: ext_form_pengajuan
+		// 		}
+		// 		q4=arr4;
+		// 		return{
+		// 			q4
+		// 		}
+		// 	}
+		// },
 		]).then(function(result){
 		  if(result.value){
-		    console.log("masuk if");
-				q4_new = new FormData($('#formDokumen')[0]);
-				// console.log(q4_new);
 		    $.ajax({
 		      method:"POST",
 		      dataType:"json",
 		      url:'/01_am/am_form_act.php',
-		      data:{q1,q2,q3,q4},
+		      data:{q1,q2,q3},
 					// cache: false,
 					// contentType: false,
 					// processData: false,
@@ -416,7 +446,6 @@ loadlib("function","function.uang");
 		      // }
 		    })
 		  }else{
-		    console.log("masuk else");
 		    Swal.fire({
 		    icon: 'error',
 		    title: 'Oops...',
@@ -444,24 +473,28 @@ loadlib("function","function.uang");
 
   function checkedTrans(){
     if($("#cb_trans").is(":checked")){
-      $("#transaksional_ri").show();
-			$("#transaksional_rj").show();
-			$("#min_caps").show();
+			$("#span_trans_rj").show();
+			$("#span_trans_ri").show();
+			$("#span_min_caps").show();
 			$(".hide_kso").hide();
+			$("#span_kso").hide();
     }else{
-      $("#transaksional_ri").hide();
-			$("#transaksional_rj").hide();
-			$("#min_caps").hide();
+			$("#span_trans_rj").hide();
+			$("#span_trans_ri").hide();
+			$("#span_min_caps").hide();
 			$(".hide_kso").show();
     }
   }
 
 	function checkedKSO(){
     if($("#cb_kso").is(":checked")){
-      $("#kso").show();
+			$("#span_kso").show();
+			$("#span_trans_rj").hide();
+			$("#span_trans_ri").hide();
+			$("#span_min_caps").hide();
 			$(".hide_trans").hide();
     }else{
-      $("#kso").hide();
+			$("#span_kso").hide();
 			$(".hide_trans").show();
     }
   }
@@ -470,99 +503,99 @@ loadlib("function","function.uang");
 		var jumlah_term=$('#jumlah_term').val();
 		if(jumlah_term=='1'){
 			if(($('#term1').css('visibility') === 'hidden')){
-				$('#term1').show();
-				$('#term2').hide();
-				$('#term3').hide();
-				$('#term4').hide();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').hide();
+				$('#span_term3').hide();
+				$('#span_term4').hide();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}else{
-				$('#term1').show();
-				$('#term2').hide();
-				$('#term3').hide();
-				$('#term4').hide();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').hide();
+				$('#span_term3').hide();
+				$('#span_term4').hide();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}
 		}else if(jumlah_term=='2'){
 			if(($('#term2').css('visibility') === 'hidden')){
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').hide();
-				$('#term4').hide();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').hide();
+				$('#span_term4').hide();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}else{
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').hide();
-				$('#term4').hide();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').hide();
+				$('#span_term4').hide();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}
 		}else if(jumlah_term=='3'){
 			if(($('#term3').css('visibility') === 'hidden')){
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').hide();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').hide();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}else{
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').hide();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').hide();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}
 		}else if(jumlah_term=='4'){
 			if(($('#term4').css('visibility') === 'hidden')){
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').show();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').show();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}else{
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').show();
-				$('#term5').hide();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').show();
+				$('#span_term5').hide();
+				$('#span_term6').hide();
 			}
 		}else if(jumlah_term=='5'){
 			if(($('#term5').css('visibility') === 'hidden')){
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').show();
-				$('#term5').show();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').show();
+				$('#span_term5').show();
+				$('#span_term6').hide();
 			}else{
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').show();
-				$('#term5').show();
-				$('#term6').hide();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').show();
+				$('#span_term5').show();
+				$('#span_term6').hide();
 			}
 		}else{
 			if(($('#term6').css('visibility') === 'hidden')){
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').show();
-				$('#term5').show();
-				$('#term6').show();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').show();
+				$('#span_term5').show();
+				$('#span_term6').show();
 			}else{
-				$('#term1').show();
-				$('#term2').show();
-				$('#term3').show();
-				$('#term4').show();
-				$('#term5').show();
-				$('#term6').show();
+				$('#span_term1').show();
+				$('#span_term2').show();
+				$('#span_term3').show();
+				$('#span_term4').show();
+				$('#span_term5').show();
+				$('#span_term6').show();
 			}
 		}
 	}
