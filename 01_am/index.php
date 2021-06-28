@@ -129,15 +129,19 @@ loadlib("function","function.olah_tabel");
 		progressSteps: pages
 		}).queue([{
 			title: 'Form General',
-			html: `<input type="text" id="nama_am" class="swal2-input" placeholder="Nama AM" value="<?=$_SESSION['logininfo']['username']?>" disabled>
+			html: `<label for="nama_am" style="text-align: left;float: left;">Nama AM</label>
+				<input type="text" id="nama_am" class="swal2-input" placeholder="Nama AM" value="<?=$_SESSION['logininfo']['username']?>" disabled>
+				<label for="unit" style="text-align: left;float: left;">Departemen/Unit</label>
 				<select name="unit" id="unit" class="swal2-input">
-					<option value="" disabled selected>Departmen/Unit</option>
+					<option value="" disabled selected>Departemen/Unit</option>
 					<?
 					$getUnit="SELECT * FROM mt_unit ORDER BY id_mt_unit ASC";
 					pilihan_list($getUnit,"nama_unit","id_mt_unit","id_mt_unit");
 					?>
 				</select>
+				<label for="nama_pelanggan" style="text-align: left;float: left;">Nama Pelanggan</label>
 				<input type="text" id="nama_pelanggan" class="swal2-input" placeholder="Nama Pelanggan">
+				<label for="jenis_pelanggan" style="text-align: left;float: left;">Jenis Pelanggan</label>
 				<select name="jenis_pelanggan" id="jenis_pelanggan" class="swal2-input">
 					<option value="" disabled selected>Jenis Pelanggan</option>
 					<?
@@ -145,6 +149,7 @@ loadlib("function","function.olah_tabel");
 					pilihan_list($getJenisPelanggan,"jenis_pelanggan","id_mt_jenis_pelanggan","id_mt_jenis_pelanggan");
 					?>
 				</select>
+				<label for="keterangan" style="text-align: left;float: left;">Keterangan</label>
 				<textarea rows="4" cols="50" placeholder="Keterangan" class="swal2-textarea" id="keterangan"></textarea>`,
 			preConfirm: ()=>{
 				const nama_pelanggan = Swal.getPopup().querySelector('#nama_pelanggan').value
@@ -179,13 +184,15 @@ loadlib("function","function.olah_tabel");
 		},
 		{
 			title: 'Form Detail',
-			html: `<select name="layanan" id="layanan" class="swal2-input" onchange="get_jenis_layanan()">
+			html: `	<label for="layanan" style="text-align: left;float: left;">Jenis Layanan</label>
+					<select name="layanan" id="layanan" class="swal2-input" onchange="get_jenis_layanan()">
 					<option value="" disabled selected>Jenis Layanan</option>
 						<?
 					  $getJenisLayanan="SELECT * FROM mt_layanan ORDER BY id_mt_layanan ASC";
 					  pilihan_list($getJenisLayanan,"nama_layanan","id_mt_layanan","id_mt_layanan");
 					 	?>
 					</select>
+					<label for="bundling" style="text-align: left;float: left;">Jenis Bundling</label>
 					<select name="bundling" id="bundling" class="swal2-input">
 					  <option value="" disabled selected>Jenis Bundling</option>
 					  <?
@@ -193,10 +200,12 @@ loadlib("function","function.olah_tabel");
 					  pilihan_list($getJenisLayanan,"nama_bundling","id_mt_bundling","id_mt_bundling");
 					  ?>
 					</select>
+					<label for="paket_layanan" style="text-align: left;float: left;">Paket Layanan</label>
 					<select name="paket_layanan" id="paket_layanan" class="swal2-input">
 					  <option value="" disabled selected>Paket Layanan</option>
 					  <option value="" disabled>Mohon Ditunggu...</option>
 					</select>
+					<label for="jenis_projek" style="text-align: left;float: left;">Jenis Proyek</label>
 					<select name="jenis_projek" id="jenis_projek" class="swal2-input">
 					  <option value="" disabled selected>Jenis Projek</option>
 					  <?
@@ -206,6 +215,7 @@ loadlib("function","function.olah_tabel");
 					</select>
 					<label for="tgl_spk" style="text-align: left;float: left;">Tanggal SPK: </label><br><input type="text" id="tgl_spk" class="swal2-input" placeholder="Tanggal SPK | <?=date("m/d/Y")?>" onfocus="(this.type='date')">
 					<label for="nomor" style="text-align: left;float: left;">Nomor: </label><br><input type="text" id="nomor" class="swal2-input" placeholder="Format: xx/xx/xx" style="max-width:none !important;">
+					<label for="channel" style="text-align: left;float: left;">Channel</label>
 					<select name="channel" id="channel" class="swal2-input">
 					  <option value="" disabled selected>Channel</option>
 						<?
@@ -260,10 +270,14 @@ loadlib("function","function.olah_tabel");
 		},
 		{
 			title: 'Form Kontrak',
-			html: `<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak | Per Bulan" style="max-width:none !important;" onkeypress="checkNum(event)">
-			<span class="idr">
+			html: `
+			<label for="lama_kontrak" style="text-align: left;float: left;">Lama Kontrak</label>
+			<input type="number" id="lama_kontrak" class="swal2-input" placeholder="Lama Kontrak | Per Bulan" style="max-width:none !important;" onkeypress="checkNum(event)">
+			<label for="span_dana" style="text-align: left;float: left;">Jumlah Dana</label>
+			<span class="idr" id="span_dana">
 			<input type="number" id="jumlah_dana" class="swal2-input" placeholder="Jumlah Dana" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="jumlah_term" style="text-align: left;float: left;">Jumlah Term</label>
 			<select name="jumlah_term" id="jumlah_term" class="swal2-input" onchange="gantiTerm()">
 					<option value="0" disabled selected>Jumlah Term</option>
 					<option value="1">1 Term</option>
@@ -273,35 +287,45 @@ loadlib("function","function.olah_tabel");
 					<option value="5">5 Term</option>
 					<option value="6">6 Term</option>
 			</select>
+			<label for="span_term1" id="label_term1" style="text-align: left;float: left; display:none;">Termin 1</label>
 			<span class="idr" id="span_term1" style="display: none;">
 				<input type="number" id="term1" class="swal2-input" placeholder="Jumlah nominasi Term 1" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="span_term2" id="label_term2" style="text-align: left;float: left; display:none;">Termin 2</label>
 			<span class="idr" id="span_term2" style="display: none;">
 				<input type="number" id="term2" class="swal2-input" placeholder="Jumlah nominasi Term 2" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="span_term3" id="label_term3" style="text-align: left;float: left; display:none;">Termin 3</label>
 			<span class="idr" id="span_term3" style="display: none;">
 				<input type="number" id="term3" class="swal2-input" placeholder="Jumlah nominasi Term 3" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="span_term4" id="label_term4" style="text-align: left;float: left; display:none;">Termin 4</label>
 			<span class="idr" id="span_term4" style="display: none;">
 				<input type="number" id="term4" class="swal2-input" placeholder="Jumlah nominasi Term 4" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="span_term5" id="label_term5" style="text-align: left;float: left; display:none;">Termin 5</label>
 			<span class="idr" id="span_term5" style="display: none;">
 				<input type="number" id="term5" class="swal2-input" placeholder="Jumlah nominasi Term 5" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="span_term6" id="label_term6" style="text-align: left;float: left; display:none;">Termin 6</label>
 			<span class="idr" id="span_term6" style="display: none;">
 				<input type="number" id="term6" class="swal2-input" placeholder="Jumlah nominasi Term 6" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
 			<input type="checkbox" id="cb_trans" name="cb_trans" value="1" class="swal2-checkbox hide_trans" onchange="checkedTrans()"><label for="cb_ri" class="hide_trans">Masukkan nilai transaksional?</label><br>
+			<label for="span_trans_ri" id="label_ri" style="text-align: left;float: left; display:none;">Jumlah Transaksional RI</label>
 			<span class="idr" id="span_trans_ri" style="display: none;">
 				<input type="number" id="transaksional_ri" class="swal2-input" placeholder="Jumlah transaksional RI" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="span_trans_rj" id="label_rj" style="text-align: left;float: left; display:none;">Jumlah Transaksional RJ</label>
 			<span class="idr" id="span_trans_rj" style="display: none;">
 				<input type="number" id="transaksional_rj" class="swal2-input" placeholder="Jumlah transaksional RJ" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
+			<label for="span_min_caps" id="label_caps" style="text-align: left;float: left; display:none;">Jumlah Minimum Caps</label>
 			<span class="idr" id="span_min_caps" style="display: none;">
 				<input type="number" id="min_caps" class="swal2-input" placeholder="Jumlah minimum caps" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>
 			<input type="checkbox" id="cb_kso" name="cb_kso" value="1" class="swal2-checkbox hide_kso" onchange="checkedKSO()"><label for="cb_kso" class="hide_kso">Masukkan KSO Flat?</label><br>
+			<label for="span_kso" id="label_kso" style="text-align: left;float: left; display:none;">Jumlah KSO Flat</label>
 			<span class="idr" id="span_kso" style="display: none;">
 				<input type="number" id="kso" class="swal2-input" placeholder="Jumlah KSO Flat" style="max-width:none !important;" onkeypress="checkNum(event)" inputMode="decimal" onFocus="this.type='number'; this.value=this.lastValue" onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString('id-ID')">
 			</span>`,
@@ -473,14 +497,21 @@ loadlib("function","function.olah_tabel");
 
   function checkedTrans(){
     if($("#cb_trans").is(":checked")){
+    		$('#label_rj').show();
 			$("#span_trans_rj").show();
+			$('#label_ri').show();
 			$("#span_trans_ri").show();
+			$('#label_caps').show();
 			$("#span_min_caps").show();
 			$(".hide_kso").hide();
+			$('#label_kso').hide();
 			$("#span_kso").hide();
     }else{
+    		$('#label_rj').hide();
 			$("#span_trans_rj").hide();
+			$('#label_ri').hide();
 			$("#span_trans_ri").hide();
+			$('#label_caps').hide();
 			$("#span_min_caps").hide();
 			$(".hide_kso").show();
     }
@@ -488,12 +519,17 @@ loadlib("function","function.olah_tabel");
 
 	function checkedKSO(){
     if($("#cb_kso").is(":checked")){
+    		$('#label_kso').show();
 			$("#span_kso").show();
+			$('#label_rj').hide();
 			$("#span_trans_rj").hide();
+			$('#label_ri').hide();
 			$("#span_trans_ri").hide();
+			$('#label_caps').hide();
 			$("#span_min_caps").hide();
 			$(".hide_trans").hide();
     }else{
+    		$('#label_kso').hide();
 			$("#span_kso").hide();
 			$(".hide_trans").show();
     }
@@ -504,98 +540,171 @@ loadlib("function","function.olah_tabel");
 		if(jumlah_term=='1'){
 			if(($('#term1').css('visibility') === 'hidden')){
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').hide();
+				$('#label_term2').hide();
 				$('#span_term3').hide();
+				$('#label_term3').hide();
 				$('#span_term4').hide();
+				$('#label_term4').hide();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}else{
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').hide();
+				$('#label_term2').hide();
 				$('#span_term3').hide();
+				$('#label_term3').hide();
 				$('#span_term4').hide();
+				$('#label_term4').hide();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
+				$('#span_term6').hide();
+				$('#label_term6').hide();
 				$('#span_term6').hide();
 			}
 		}else if(jumlah_term=='2'){
 			if(($('#term2').css('visibility') === 'hidden')){
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').hide();
+				$('#label_term3').hide();
 				$('#span_term4').hide();
+				$('#label_term4').hide();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}else{
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').hide();
+				$('#label_term3').hide();
 				$('#span_term4').hide();
+				$('#label_term4').hide();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}
 		}else if(jumlah_term=='3'){
 			if(($('#term3').css('visibility') === 'hidden')){
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').hide();
+				$('#label_term4').hide();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}else{
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').hide();
+				$('#label_term4').hide();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}
 		}else if(jumlah_term=='4'){
 			if(($('#term4').css('visibility') === 'hidden')){
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').show();
+				$('#label_term4').show();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}else{
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').show();
+				$('#label_term4').show();
 				$('#span_term5').hide();
+				$('#label_term5').hide();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}
 		}else if(jumlah_term=='5'){
 			if(($('#term5').css('visibility') === 'hidden')){
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').show();
+				$('#label_term4').show();
 				$('#span_term5').show();
+				$('#label_term5').show();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}else{
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').show();
+				$('#label_term4').show();
 				$('#span_term5').show();
+				$('#label_term5').show();
 				$('#span_term6').hide();
+				$('#label_term6').hide();
 			}
 		}else{
 			if(($('#term6').css('visibility') === 'hidden')){
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').show();
+				$('#label_term4').show();
 				$('#span_term5').show();
+				$('#label_term5').show();
 				$('#span_term6').show();
+				$('#label_term6').show();
 			}else{
 				$('#span_term1').show();
+				$('#label_term1').show();
 				$('#span_term2').show();
+				$('#label_term2').show();
 				$('#span_term3').show();
+				$('#label_term3').show();
 				$('#span_term4').show();
+				$('#label_term4').show();
 				$('#span_term5').show();
+				$('#label_term5').show();
 				$('#span_term6').show();
+				$('#label_term6').show();
 			}
 		}
 	}
