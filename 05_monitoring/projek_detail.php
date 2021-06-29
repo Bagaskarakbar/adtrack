@@ -149,8 +149,17 @@ $term6 = $hasil->Fields('term6');
 		</div>
 		
 		<div class="row">
-			<div class="col-md-6">
-			
+			<div class="col-md-12">
+				<div class="main-card mb-3 card">
+					<div class="card-body">
+						<div class="tab-content">
+							<div class="row">
+								<div class="col-md-4">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -163,7 +172,21 @@ $term6 = $hasil->Fields('term6');
 						<div class="tab-content">
 							<div class="row">
 								<div class="col-md-12">
-								
+								<!--begin::Table-->
+									<div class="table-responsive" id="idAntrian">
+									<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/json/get_dokumen_data.php" data-pagination="true" data-trim-on-search="false"  data-search="false" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
+									<thead>
+									<tr>
+										<th data-field="no" >No.</th>
+										<th data-field="tipe_dokumen" style="text-align:center;">Jenis Dokumen</th>
+										<th data-field="tgl" style="text-align:center;">Tanggal</th>
+										<th data-field="download">Download</th>
+										<th data-field="">#</th>
+									</tr>
+									</thead>
+									</table>
+									</div>
+									<!--end::Table-->
 								</div>
 							</div>
 						</div>
@@ -185,10 +208,11 @@ $term6 = $hasil->Fields('term6');
 									<thead>
 									<tr>
 										<th data-field="no" >No.</th>
+										<th data-field="nama_bagian" style="text-align:center;">Bagian</th>
 										<th data-field="tipe_dokumen" style="text-align:center;">Jenis Dokumen</th>
 										<th data-field="tgl" style="text-align:center;">Tanggal</th>
-										<th data-field="nama_bagian" style="text-align:center;">Bagian</th>
-										<th data-field="action">#</th>
+										<th data-field="icon" style="text-align:center;">#</th>
+										<th data-field="action">Action</th>
 									</tr>
 									</thead>
 									</table>
@@ -218,5 +242,20 @@ function DokView(a){
 	$("#idIsiModalLarge").load("/05_monitoring/dokumen_view.php",{id:a},function(){
 		$("#BuatModalLarge").modal('show');
 	});
+}
+
+function DokDownload(a){
+	$("#idIsiModalLarge").load("/05_monitoring/download_dokumen.php",{id:a},function(){
+		$("#BuatModalLarge").modal('show');
+	});
+}
+
+function detailV(){
+		Swal.fire({
+			icon: 'error',
+			title: 'Dokumen...',
+			text: 'Something went wrong!',
+			footer: '<a href>Why do I have this issue?</a>'
+	})
 }
 </script>

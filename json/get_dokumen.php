@@ -22,6 +22,17 @@
 	if(!empty($search)){
 		$sqlPlus=" AND (tipe_dokumen like '%$search%' or tipe_dokumen like '%$search%')";
 	}
+	
+	//======================= Get Dokumen Has Been Done ============================//
+	$SqlGetDok="SELECT * FROM tc_pengajuan_dokumen where id_tc_pengajuan='$id'";
+	$RunGetDok=$db->Execute($SqlGetDok);
+	while($TplGetDok=$RunGetDok->fetchRow())
+	{
+		$id_tc_pengajuan_done	=$TplGetDok["id_tc_pengajuan"];
+		$tgl_berlaku			=$TplGetDok["tgl_berlaku"];
+		$arrLegal[$id_tc_pengajuan_done]=$id_tc_pengajuan_done;
+	}
+	//======================= Get Dokumen Has Been Done ============================//
 
 	$sql="select a.*,b.nama_bagian from mt_dokumen as a join mt_bagian as b on a.kode_bagian=b.kode_bagian ";
 	$sql_count="select count(a.id_mt_dokumen) as jum from ($sql) as a";
@@ -42,13 +53,22 @@
 		$tipe_dokumen		=$tampil["tipe_dokumen"];
 		$nama_bagian		=$tampil["nama_bagian"];
 		$no = $i.".";
-
+		
+		if(isset($arrDok[$id_dd_legalitas]))
+		{
+			$TplGetCalonPeserta['status'] = $sudah_upload;
+		}else{
+			$TplGetCalonPeserta['status'] = $belum_upload;
+		}
+		
 		$dokView="<i class='pe-7s-search text-success' style='cursor: pointer' onClick='DokView($id_mt_dokumen)'></i>";
+		$icon="<i class='pe-7s-check text-info' ></i>";
 		
 		$DataList['no']=$no;
 		$DataList['id_mt_dokumen']=$id_mt_dokumen;
 		$DataList['tipe_dokumen']=$tipe_dokumen;
 		$DataList['nama_bagian']=$nama_bagian;
+		$DataList['icon']=$icon;
 		$DataList['action']=$dokView;
 		$data['items'][]=$DataList;
 	}

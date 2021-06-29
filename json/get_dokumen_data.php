@@ -38,16 +38,22 @@
 
 	while ($tampil=$rsPaging->FetchRow()) {
 		$i++;
-		$id_mt_dokumen	=$tampil["id_mt_dokumen"];
-		$tipe_dokumen		=$tampil["tipe_dokumen"];
-		$tgl_input			=$tampil["tgl_input"];
-		$url_dokumen		=$tampil["url_dokumen"];
+		$id_tc_pengajuan_dokumen	=$tampil["id_tc_pengajuan_dokumen"];
+		$id_mt_dokumen				=$tampil["id_mt_dokumen"];
+		$tipe_dokumen				=$tampil["tipe_dokumen"];
+		$tgl_input					=$tampil["tgl_input"];
+		$url_dokumen				=$tampil["url_dokumen"];
 		$no = $i.".";
+		
+		//$download="<a href='#' onClick='DokView($url_dokumen)' ><i class='fa fa-download' style='color:#3699FF'></i></a>";
+		$download="<i class='fa fa-download text-success' style='cursor: pointer' onClick='DokDownload($id_tc_pengajuan_dokumen)'></i>";
+		$icon="<i class='pe-7s-check text-info' ></i>";
 
 		$DataList['no']=$no;
 		$DataList['id_mt_dokumen']=$id_mt_dokumen;
 		$DataList['tipe_dokumen']=$tipe_dokumen;
 		$DataList['tgl']=$tgl_input;
+		$DataList['download']=$download;
 		$data['items'][]=$DataList;
 	}
 
