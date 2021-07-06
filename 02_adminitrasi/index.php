@@ -48,11 +48,17 @@ loadlib("function","function.olah_tabel");
 	</div>
 </div>
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
-<script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
-<script type="text/javascript" src="./assets/scripts/jquery-3.6.0.min.js"></script>
+<!-- <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script> -->
+<!-- <script type="text/javascript" src="./assets/scripts/jquery-3.6.0.min.js"></script> -->
 <script>
 	function list_docs_modal(id){
 		$("#idIsiModal").load('../02_adminitrasi/load_list_documents.php',{id:id},function(){
+			$("#BuatModal").modal("show");
+		});
+	}
+
+	function list_docs(){
+		$("#idIsiModal").load('../02_adminitrasi/load_list_documents.php',function(){
 			$("#BuatModal").modal("show");
 		});
 	}
@@ -110,5 +116,53 @@ loadlib("function","function.olah_tabel");
 	// 		</table>`,
 	// 		showConfirmButton: false
 	// 	})
+	// }
+
+	// function test(){
+	// 	Swal.fire({
+	// 		title: 'NPWP',
+	// 		html: `<label for="npwp">npwp: </label>&nbsp;<input type="file" accept="application/pdf,image/png" class="swal2-input" id="npwp" name="npwp" style="max-width:60% !important;"><br>`,
+	// 		confirmButtonText: 'Masukkan',
+	// 		preConfirm: ()=>{
+	// 			const file = Swal.getPopup().querySelector( 'npwp' ).files[0]
+	// 			return{
+	// 				file
+	// 			}
+	// 		}
+	// 	}).then(function(result){
+	// 		if(result.value){
+	// 			const reader = new FileReader()
+	// 			reader.onloadend = (e) => {
+	// 				if ( e.target.readyState !== FileReader.DONE ) {
+	// 					return;
+	// 				}
+	// 				$.ajax({
+	// 					type:'post',
+	// 					dataType:'json',
+	// 					cache:'false',
+	// 					data:{
+	// 						bin_npwp: e.target.result,
+	// 					},
+	// 					success:function(data){
+	// 						if(data.code != "500" ){
+	// 							Swal.fire({
+	// 								icon: 'success',
+	// 								title: 'Yayy...',
+	// 								text: 'Dokumen berhasil diunggah!!'
+	// 							})
+	// 						}else{
+	// 							Swal.fire({
+	// 							icon: 'error',
+	// 							title: 'Oops...',
+	// 							text: 'Dokumen gagal diunggah!!',
+	// 							footer: 'Note: Terjadi kesalahan saat memasukan data!!'
+	// 							})
+	// 						}
+	// 					},
+	// 				});
+	// 			}
+	// 			reader.readAsDataURL(file)
+	// 		}
+	// 	});
 	// }
 </script>

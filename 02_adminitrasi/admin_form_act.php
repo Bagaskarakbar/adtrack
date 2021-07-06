@@ -6,21 +6,19 @@ loadlib("function","function.max_kode_number");
 
 // $db->debug=true;
 
-// $result=true;
+// print_r($_POST["bin_npwp"]);
 
 $db->BeginTrans();
-
-print_r($_POST["q4"]);
 
 $date=date("Y-m-d H:i:s");
 // $id_tc_pengajuan=max_kode_number("tc_pengajuan","id_tc_pengajuan");
 
-if($_POST["q4"]["npwp"]!=''){
-	$ArrDat=explode(";",$_POST["q4"]["npwp"]);
+if($_POST["bin_npwp"]!=''){
+	$ArrDat=explode(";",$_POST["bin_npwp"]);
 	$ArrDat1=explode("/",$ArrDat[0]);
 	$typeFile=$ArrDat1[1];
 
-	$rawData = $_POST["q4"]["npwp"];
+	$rawData = $_POST["bin_npwp"];
 	list($type, $rawData) = explode(';', $rawData);
 	list(, $rawData)      = explode(',', $rawData);
 	$dirFile="../assets/docs/npwp/";
@@ -32,12 +30,12 @@ if($_POST["q4"]["npwp"]!=''){
 	$npwp='';
 }
 
-if($_POST["q4"]["surat_ijin"]!=''){
-	$ArrDat=explode(";",$_POST["q4"]["surat_ijin"]);
+if($_POST["bin_si"]!=''){
+	$ArrDat=explode(";",$_POST["bin_si"]);
 	$ArrDat1=explode("/",$ArrDat[0]);
 	$typeFile=$ArrDat1[1];
 
-	$rawData = $_POST["q4"]["surat_ijin"];
+	$rawData = $_POST["bin_si"];
 	list($type, $rawData) = explode(';', $rawData);
 	list(, $rawData)      = explode(',', $rawData);
 	$dirFile="../assets/docs/surat_ijin/";
@@ -49,12 +47,12 @@ if($_POST["q4"]["surat_ijin"]!=''){
 	$surat_ijin='';
 }
 
-if($_POST["q4"]["tdp"]!=''){
-	$ArrDat=explode(";",$_POST["q4"]["tdp"]);
+if($_POST["bin_tdp"]!=''){
+	$ArrDat=explode(";",$_POST["bin_tdp"]);
 	$ArrDat1=explode("/",$ArrDat[0]);
 	$typeFile=$ArrDat1[1];
 
-	$rawData = $_POST["q4"]["tdp"];
+	$rawData = $_POST["bin_tdp"];
 	list($type, $rawData) = explode(';', $rawData);
 	list(, $rawData)      = explode(',', $rawData);
 	$dirFile="../assets/docs/tdp/";
@@ -66,12 +64,12 @@ if($_POST["q4"]["tdp"]!=''){
 	$tdp='';
 }
 
-if($_POST["q4"]["sk_direktur"]!=''){
-	$ArrDat=explode(";",$_POST["q4"]["sk_direktur"]);
+if($_POST["bin_sk_dir"]!=''){
+	$ArrDat=explode(";",$_POST["bin_sk_dir"]);
 	$ArrDat1=explode("/",$ArrDat[0]);
 	$typeFile=$ArrDat1[1];
 
-	$rawData = $_POST["q4"]["sk_direktur"];
+	$rawData = $_POST["bin_sk_dir"];
 	list($type, $rawData) = explode(';', $rawData);
 	list(, $rawData)      = explode(',', $rawData);
 	$dirFile="../assets/docs/sk_direktur/";
@@ -83,12 +81,12 @@ if($_POST["q4"]["sk_direktur"]!=''){
 	$sk_direktur='';
 }
 
-if($_POST["q4"]["spk_wo"]!=''){
-	$ArrDat=explode(";",$_POST["q4"]["spk_wo"]);
+if($_POST["bin_spk_wo"]!=''){
+	$ArrDat=explode(";",$_POST["bin_spk_wo"]);
 	$ArrDat1=explode("/",$ArrDat[0]);
 	$typeFile=$ArrDat1[1];
 
-	$rawData = $_POST["q4"]["spk_wo"];
+	$rawData = $_POST["bin_spk_wo"];
 	list($type, $rawData) = explode(';', $rawData);
 	list(, $rawData)      = explode(',', $rawData);
 	$dirFile="../assets/docs/spk_wo/";
@@ -100,12 +98,12 @@ if($_POST["q4"]["spk_wo"]!=''){
 	$spk_wo='';
 }
 
-if($_POST["q4"]["form_pengajuan"]!=''){
-	$ArrDat=explode(";",$_POST["q4"]["form_pengajuan"]);
+if($_POST["bin_form_pengajuan"]!=''){
+	$ArrDat=explode(";",$_POST["bin_form_pengajuan"]);
 	$ArrDat1=explode("/",$ArrDat[0]);
 	$typeFile=$ArrDat1[1];
 
-	$rawData = $_POST["q4"]["form_pengajuan"];
+	$rawData = $_POST["bin_form_pengajuan"];
 	list($type, $rawData) = explode(';', $rawData);
 	list(, $rawData)      = explode(',', $rawData);
 	$dirFile="../assets/docs/form_pengajuan/";
@@ -117,48 +115,19 @@ if($_POST["q4"]["form_pengajuan"]!=''){
 	$form_pengajuan='';
 }
 
-$insertAM["nama_pelanggan"]=$_POST["q1"]["nama_pelanggan"];
-$insertAM["id_dd_user"]=$_POST["q1"]["id_dd_user"];
-$insertAM["id_mt_unit"]=$_POST["q1"]["unit"];
-$insertAM["perihal"]=$_POST["q1"]["keterangan"];
-$insertAM["id_mt_jenis_pelanggan"]=$_POST["q1"]["jenis_pelanggan"];
-$insertAM["id_mt_layanan"]=$_POST["q2"]["layanan"];
-$insertAM["id_mt_bundling"]=$_POST["q2"]["bundling"];
-$insertAM["id_mt_paket"]=$_POST["q2"]["paket_layanan"];
-$insertAM["id_mt_jenis_project"]=$_POST["q2"]["jenis_projek"];
-$insertAM["tgl_spk"]=$_POST["q2"]["tgl_spk"];
-$insertAM["nomor"]=$_POST["q2"]["nomor"];
-$insertAM["id_mt_channel"]=$_POST["q2"]["channel"];
-$insertAM["lama_kontrak"]=$_POST["q3"]["lama_kontrak"];
-$insertAM["otc"]=$_POST["q3"]["jumlah_dana"];
-$insertAM["term1"]=$_POST["q3"]["term1"];
-$insertAM["term2"]=$_POST["q3"]["term2"];
-$insertAM["term3"]=$_POST["q3"]["term3"];
-$insertAM["term4"]=$_POST["q3"]["term4"];
-$insertAM["term5"]=$_POST["q3"]["term5"];
-$insertAM["term6"]=$_POST["q3"]["term6"];
-$insertAM["transaksional_ri"]=$_POST["q3"]["transaksional_ri"];
-$insertAM["transaksional_rj"]=$_POST["q3"]["transaksional_rj"];
-$insertAM["minimum_caps"]=$_POST["q3"]["min_caps"];
-$insertAM["kso_flat"]=$_POST["q3"]["kso"];
-$insertAM["tgl_input"]=$date;
-
-$result = insert_tabel("tc_pengajuan", $insertAM);
-
 if($npwp!=''){
 	// $insertNPWP["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertNPWP["id_mt_dokumen"]=1;
 	$insertNPWP["url_dokumen"]=$npwp;
-	$insertNPWP["tg_input"]=$date;
-
-	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertNPWP);
+	$insertNPWP["tgl_input"]=$date;
+	$result =insert_tabel("tc_pengajuan_dokumen", $insertNPWP);
 }
 
 if($surat_ijin!=''){
 	// $insertSI["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertSI["id_mt_dokumen"]=2;
 	$insertSI["url_dokumen"]=$surat_ijin;
-	$insertSI["tg_input"]=$date;
+	$insertSI["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSI);
 }
@@ -167,7 +136,7 @@ if($tdp!=''){
 	// $insertTDP["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertTDP["id_mt_dokumen"]=3;
 	$insertTDP["url_dokumen"]=$tdp;
-	$insertTDP["tg_input"]=$date;
+	$insertTDP["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertTDP);
 }
@@ -176,7 +145,7 @@ if($sk_direktur!=''){
 	// $insertSK["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertSK["id_mt_dokumen"]=4;
 	$insertSK["url_dokumen"]=$sk_direktur;
-	$insertSK["tg_input"]=$date;
+	$insertSK["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSK);
 }
@@ -185,7 +154,7 @@ if($spk_wo!=''){
 	// $insertSPKWO["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertSPKWO["id_mt_dokumen"]=5;
 	$insertSPKWO["url_dokumen"]=$spk_wo;
-	$insertSPKWO["tg_input"]=$date;
+	$insertSPKWO["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertSPKWO);
 }
@@ -194,7 +163,7 @@ if($form_pengajuan!=''){
 	// $insertPengajuan["id_tc_pengajuan"]=$id_tc_pengajuan;
 	$insertPengajuan["id_mt_dokumen"]=9;
 	$insertPengajuan["url_dokumen"]=$form_pengajuan;
-	$insertPengajuan["tg_input"]=$date;
+	$insertPengajuan["tgl_input"]=$date;
 
 	if($result) $result =insert_tabel("tc_pengajuan_dokumen", $insertPengajuan);
 }
