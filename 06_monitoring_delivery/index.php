@@ -54,6 +54,6 @@ loadlib("function","function.olah_tabel");
 
 <script>
 	function DetailProjek(a){
-		$("#idContent").load('../04_delivery/projek_detail.php',{id:a});
+		$("#idContent").load('../06_monitoring_delivery/projek_detail.php',{id:a});
 	}
 </script>
