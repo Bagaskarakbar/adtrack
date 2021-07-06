@@ -76,7 +76,7 @@ $act="tambah";
 						<label >Upload Dokumen PO ke Mitra <?=mandatory();?></label>
 					</div>
 					<div class="col-lg-8">
-						<input type="file" class="form-control"  id="foto_karyawan" name="foto_karyawan" value="<?=$foto_karyawan?>">
+						<input type="file" class="form-control"  id="dokumen" name="dokumen" value="<?=$dokumen?>">
 					</div>
 				</div> <br>
 				<div class="row">
@@ -90,6 +90,7 @@ $act="tambah";
 
 				<input type="hidden" name="id_dd_user" value="<?=$id_dd_user?>">
 				<input type="hidden" name="id_tc_transaksi" value="<?=$idt?>">
+				<input type="hidden" name="id_tc_pengajuan" value="<?=$id?>">
 				<input type="hidden" name="act" value="<?=$act?>">
 				<br>
 				<div class="row">
@@ -123,7 +124,7 @@ $act="tambah";
 
 			FR.addEventListener("load", function(e) {
 				$("#loadImage").html("<img src='"+e.target.result+"' width='150' height='100'>");
-				$("#loadImage").append("<input type='hidden' value='"+e.target.result+"' name='foto_karyawan'>");
+				$("#loadImage").append("<input type='hidden' value='"+e.target.result+"' name='dokumen'>");
 			}); 
 
 			FR.readAsDataURL( this.files[0] );
@@ -131,7 +132,7 @@ $act="tambah";
 
 	}
 	
-	$("#idTambahKaryawan input[name=foto_karyawan]").change(readFile); 
+	$("#idTambahLogistik input[name=dokumen]").change(readFile); 
 </script>
 
 <script>
@@ -145,7 +146,7 @@ $act="tambah";
 				if(data.code=='200'){
 					//Swal.fire("Success!","Data Berhasil ditambah!","success");
 					 //Swal.fire({icon: 'success',title: 'Yayy...',text: 'Data berhasil dimasukan!!'});
-					//$("#TableViewUserAdd").bootstrapTable('refresh');
+					Close(<?=$id?>)
 					$('#BuatModal').modal('hide');
 				}else{
 					//Swal.fire("Gagal!","Terjadi Kesalahan!","warning");

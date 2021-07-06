@@ -13,21 +13,24 @@ loadlib("function","function.max_kode_text");
 //Foto Handler
 switch($act){
 	case "tambah":
-	if(isset($_POST["foto_karyawan"])){
+	
+	if(isset($_POST["dokumen"])){
 
-		$ArrDat=explode(";",$_POST["foto_karyawan"]);
+		$ArrDat=explode(";",$_POST["dokumen"]);
 		$ArrDat1=explode("/",$ArrDat[0]);
 		$typeFile=$ArrDat1[1];
 
-		$rawData = $_POST['foto_karyawan'];
+		$rawData = $_POST['dokumen'];
 		list($type, $rawData) = explode(';', $rawData);
 		list(, $rawData)      = explode(',', $rawData);
-		$alamatimg="../_images/foto/foto_dokter/";
-		$nama_file_asli="_FotoKaryawan".$nama_pegawai.date("YmdHis").".".$typeFile;
-		file_put_contents($alamatimg.$nama_file_asli, base64_decode($rawData));
+		$dirFile="../assets/docs/po_mitra/";
+		$nama_file_asli="po_mitra".date("YmdHis").".".$typeFile;
+		file_put_contents($dirFile.$nama_file_asli, base64_decode($rawData));
 
-		$foto_karyawan=$alamatimg.$nama_file_asli;
+		$dokumen=$dirFile.$nama_file_asli;
 	}
+	
+	
 //end foto handler
 	$result = true;
 	$db->BeginTrans();
@@ -40,6 +43,15 @@ switch($act){
 	
 		//$result=false;
 	$result = insert_tabel("tc_logistik", $insertLogistik);
+	
+	unset($insertDok);
+	$insertDok["tgl_input"]			= date("Y-m-d H:i:s");
+	$insertDok["id_tc_pengajuan"]	= $id_tc_pengajuan;
+	$insertDok["id_mt_dokumen"]		= 10;
+	$insertDok["url_dokumen"]		= $dokumen;
+	if($result)$result = insert_tabel("tc_pengajuan_dokumen", $insertDok);
+	
+	
 	$db->CommitTrans($result !== false);
 
 	break;

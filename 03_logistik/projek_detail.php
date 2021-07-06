@@ -168,15 +168,15 @@ $term6 = $hasil->Fields('term6');
 							<div class="row">
 								<div class="col-md-12">
 								<!--begin::Table-->
-									<div class="table-responsive" id="idAntrian">
+									<div class="table-responsive" id="idDokDat">
 									<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/json/get_dokumen_data.php" data-pagination="true" data-trim-on-search="false"  data-search="false" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
 									<thead>
 									<tr>
-										<th data-field="no" >No.</th>
-										<th data-field="tipe_dokumen" style="text-align:center;">Jenis Dokumen</th>
-										<th data-field="tgl" style="text-align:center;">Tanggal</th>
-										<th data-field="download">Download</th>
-										<th data-field="">#</th>
+										<th data-align="center" data-field="no" >No.</th>
+										<th data-align="left" data-field="nama_bagian">Bagian</th>
+										<th data-align="left" data-field="tipe_dokumen">Jenis Dokumen</th>
+										<th data-align="center" data-field="tgl">Tanggal</th>
+										<th data-align="center" data-field="download">Download</th>
 									</tr>
 									</thead>
 									</table>
