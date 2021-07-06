@@ -23,7 +23,9 @@
 		$sqlPlus=" AND (c.tipe_dokumen like '%$search%' or a.tgl_input like '%$search%')";
 	}
 
-	$sql="SELECT a.*, c.tipe_dokumen,d.nama_bagian FROM tc_pengajuan_dokumen as a INNER JOIN tc_pengajuan as b ON b.id_tc_pengajuan = a.id_tc_pengajuan INNER JOIN mt_dokumen as c ON c.id_mt_dokumen = a.id_mt_dokumen INNER JOIN mt_bagian as d on c.kode_bagian = d.kode_bagian";
+	$sqlBagian="where c.kode_bagian in(010001,010002,010003)"
+	
+	$sql="SELECT a.*, c.tipe_dokumen,d.nama_bagian FROM tc_pengajuan_dokumen as a INNER JOIN tc_pengajuan as b ON b.id_tc_pengajuan = a.id_tc_pengajuan INNER JOIN mt_dokumen as c ON c.id_mt_dokumen = a.id_mt_dokumen INNER JOIN mt_bagian as d on c.kode_bagian = d.kode_bagian $sqlBagian";
 	$sql_count="select count(id_tc_pengajuan_dokumen) as jum from ($sql) as a";
 	$run_count=$db->Execute($sql_count);
 	while($tpl_count=$run_count->fetchRow()){
