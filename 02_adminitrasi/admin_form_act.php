@@ -11,7 +11,12 @@ loadlib("function","function.max_kode_number");
 $db->BeginTrans();
 
 $date=date("Y-m-d H:i:s");
-// $id_tc_pengajuan=max_kode_number("tc_pengajuan","id_tc_pengajuan");
+$id_tc_pengajuan_npwp=$_POST["id_tc_pengajuan_npwp"];
+$id_tc_pengajuan_si=$_POST["id_tc_pengajuan_si"];
+$id_tc_pengajuan_tdp=$_POST["id_tc_pengajuan_tdp"];
+$id_tc_pengajuan_sk_dir=$_POST["id_tc_pengajuan_sk_dir"];
+$id_tc_pengajuan_spk_wo=$_POST["id_tc_pengajuan_spk_wo"];
+$id_tc_pengajuan_form_pengajuan=$_POST["id_tc_pengajuan_form_pengajuan"];
 
 if($_POST["bin_npwp"]!=''){
 	$ArrDat=explode(";",$_POST["bin_npwp"]);
@@ -116,7 +121,7 @@ if($_POST["bin_form_pengajuan"]!=''){
 }
 
 if($npwp!=''){
-	// $insertNPWP["id_tc_pengajuan"]=$id_tc_pengajuan;
+	$insertNPWP["id_tc_pengajuan"]=$id_tc_pengajuan_npwp;
 	$insertNPWP["id_mt_dokumen"]=1;
 	$insertNPWP["url_dokumen"]=$npwp;
 	$insertNPWP["tgl_input"]=$date;
@@ -124,7 +129,7 @@ if($npwp!=''){
 }
 
 if($surat_ijin!=''){
-	// $insertSI["id_tc_pengajuan"]=$id_tc_pengajuan;
+	$insertSI["id_tc_pengajuan"]=$id_tc_pengajuan_si;
 	$insertSI["id_mt_dokumen"]=2;
 	$insertSI["url_dokumen"]=$surat_ijin;
 	$insertSI["tgl_input"]=$date;
@@ -133,7 +138,7 @@ if($surat_ijin!=''){
 }
 
 if($tdp!=''){
-	// $insertTDP["id_tc_pengajuan"]=$id_tc_pengajuan;
+	$insertTDP["id_tc_pengajuan"]=$id_tc_pengajuan_tdp;
 	$insertTDP["id_mt_dokumen"]=3;
 	$insertTDP["url_dokumen"]=$tdp;
 	$insertTDP["tgl_input"]=$date;
@@ -142,7 +147,7 @@ if($tdp!=''){
 }
 
 if($sk_direktur!=''){
-	// $insertSK["id_tc_pengajuan"]=$id_tc_pengajuan;
+	$insertSK["id_tc_pengajuan"]=$id_tc_pengajuan_sk_dir;
 	$insertSK["id_mt_dokumen"]=4;
 	$insertSK["url_dokumen"]=$sk_direktur;
 	$insertSK["tgl_input"]=$date;
@@ -151,7 +156,7 @@ if($sk_direktur!=''){
 }
 
 if($spk_wo!=''){
-	// $insertSPKWO["id_tc_pengajuan"]=$id_tc_pengajuan;
+	$insertSPKWO["id_tc_pengajuan"]=$id_tc_pengajuan_spk_wo;
 	$insertSPKWO["id_mt_dokumen"]=5;
 	$insertSPKWO["url_dokumen"]=$spk_wo;
 	$insertSPKWO["tgl_input"]=$date;
@@ -160,7 +165,7 @@ if($spk_wo!=''){
 }
 
 if($form_pengajuan!=''){
-	// $insertPengajuan["id_tc_pengajuan"]=$id_tc_pengajuan;
+	$insertPengajuan["id_tc_pengajuan"]=$id_tc_pengajuan_form_pengajuan;
 	$insertPengajuan["id_mt_dokumen"]=9;
 	$insertPengajuan["url_dokumen"]=$form_pengajuan;
 	$insertPengajuan["tgl_input"]=$date;

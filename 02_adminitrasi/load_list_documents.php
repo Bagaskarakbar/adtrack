@@ -6,10 +6,12 @@ loadlib("function","function.pilihan_list");
 loadlib("function","function.olah_tabel");
 //$db->debug=true;
 
-// $sql = "SELECT * FROM tc_pengajuan_dokumen WHERE id_tc_pengajuan = '$id'";
-// $hasil =& $db->Execute($sql);
-// $url_dokumen = $hasil->Fields('url_dokumen');
-// $id_mt_dokumen = $hasil->Fields('id_mt_dokumen');
+$sql = "SELECT * FROM tc_pengajuan_dokumen WHERE id_tc_pengajuan = '$id'";
+$hasil=$db->Execute($sql);
+while($tpl_hasil=$hasil->FetchRow()){
+	$url_dokumen			=$tpl_hasil["url_dokumen"];
+	$id_mt_dokumen		=$tpl_hasil["id_mt_dokumen"];
+}
 ?>
 
 	<div id="isiUtama">
@@ -50,7 +52,7 @@ loadlib("function","function.olah_tabel");
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_SI()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -61,7 +63,7 @@ loadlib("function","function.olah_tabel");
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_TDP()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -72,7 +74,7 @@ loadlib("function","function.olah_tabel");
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_sk_dir()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -83,7 +85,7 @@ loadlib("function","function.olah_tabel");
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_SPK_WO()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -94,7 +96,7 @@ loadlib("function","function.olah_tabel");
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_FORM_PENGAJUAN()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
             </tbody>
@@ -179,6 +181,7 @@ loadlib("function","function.olah_tabel");
             cache:'false',
             data:{
               bin_npwp: e.target.result,
+							id_tc_pengajuan_npwp:<?=$id?>
     					// file: file.name,
     					// file_type: file.type,
             },
@@ -231,7 +234,8 @@ loadlib("function","function.olah_tabel");
             dataType:'json',
             cache:'false',
             data:{
-              bin_si: e.target.result
+              bin_si: e.target.result,
+							id_tc_pengajuan_si:<?=$id?>
             },
 						url:'/02_adminitrasi/admin_form_act.php',
             success:function(data){
@@ -279,7 +283,8 @@ loadlib("function","function.olah_tabel");
             dataType:'json',
             cache:'false',
             data:{
-              bin_tdp: e.target.result
+              bin_tdp: e.target.result,
+							id_tc_pengajuan_tdp:<?=$id?>
             },
 						url:'/02_adminitrasi/admin_form_act.php',
             success:function(data){
@@ -328,8 +333,7 @@ loadlib("function","function.olah_tabel");
             cache:'false',
             data:{
               bin_sk_dir: e.target.result,
-    					// file: file.name,
-    					// file_type: file.type,
+    					id_tc_pengajuan_sk_dir:<?=$id?>
             },
 						url:'/02_adminitrasi/admin_form_act.php',
             success:function(data){
@@ -348,9 +352,6 @@ loadlib("function","function.olah_tabel");
   		          })
   		        }
   		      },
-  		      // error:function(xhr,ajaxOptions,thrownError){
-  		      //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
-  		      // }
           });
         }
         reader.readAsDataURL(file)
@@ -381,8 +382,7 @@ loadlib("function","function.olah_tabel");
             cache:'false',
             data:{
               bin_spk_wo: e.target.result,
-    					// file: file.name,
-    					// file_type: file.type,
+    					id_tc_pengajuan_spk_wo:<?=$id?>
             },
 						url:'/02_adminitrasi/admin_form_act.php',
             success:function(data){
@@ -401,9 +401,6 @@ loadlib("function","function.olah_tabel");
   		          })
   		        }
   		      },
-  		      // error:function(xhr,ajaxOptions,thrownError){
-  		      //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
-  		      // }
           });
         }
         reader.readAsDataURL(file)
@@ -434,8 +431,7 @@ loadlib("function","function.olah_tabel");
             cache:'false',
             data:{
               bin_form_pengajuan: e.target.result,
-    					// file: file.name,
-    					// file_type: file.type,
+    					id_tc_pengajuan_form_pengajuan:<?=$id?>
             },
 						url:'/02_adminitrasi/admin_form_act.php',
             success:function(data){
@@ -454,9 +450,6 @@ loadlib("function","function.olah_tabel");
   		          })
   		        }
   		      },
-  		      // error:function(xhr,ajaxOptions,thrownError){
-  		      //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
-  		      // }
           });
         }
         reader.readAsDataURL(file)
