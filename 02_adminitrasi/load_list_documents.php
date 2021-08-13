@@ -41,7 +41,7 @@ while($tpl_hasil=$hasil->FetchRow()){
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_NPWP()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_NPWP()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -52,7 +52,7 @@ while($tpl_hasil=$hasil->FetchRow()){
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_SI()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_SI()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -63,7 +63,7 @@ while($tpl_hasil=$hasil->FetchRow()){
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_TDP()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_TDP()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -74,7 +74,7 @@ while($tpl_hasil=$hasil->FetchRow()){
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_sk_dir()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_sk_dir()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -85,7 +85,7 @@ while($tpl_hasil=$hasil->FetchRow()){
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_SPK_WO()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_SPK_WO()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
               <tr>
@@ -96,7 +96,7 @@ while($tpl_hasil=$hasil->FetchRow()){
                     <td>-</td>
                   <?}else{?>
                     <td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
-                    <td><button class="mb-2 mr-2 btn btn-info" onClick="insert_FORM_PENGAJUAN()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
+                    <td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_FORM_PENGAJUAN()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
                   <?}?>
               </tr>
             </tbody>
@@ -158,7 +158,7 @@ while($tpl_hasil=$hasil->FetchRow()){
   <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
 	<script>
     async function insert_NPWP(){
-			event.preventDefault();
+			// event.preventDefault();
       const { value: file } = await Swal.fire({
         title: 'Unggah NPWP',
         input: 'file',
@@ -212,7 +212,7 @@ while($tpl_hasil=$hasil->FetchRow()){
     }
 
 		async function insert_SI(){
-			event.preventDefault();
+			// event.preventDefault();
       const { value: file } = await Swal.fire({
         title: 'Unggah Surat Ijin',
         input: 'file',
@@ -261,7 +261,7 @@ while($tpl_hasil=$hasil->FetchRow()){
     }
 
 		async function insert_TDP(){
-			event.preventDefault();
+			// event.preventDefault();
       const { value: file } = await Swal.fire({
         title: 'Unggah TDP',
         input: 'file',
@@ -310,7 +310,7 @@ while($tpl_hasil=$hasil->FetchRow()){
     }
 
 		async function insert_sk_dir(){
-			event.preventDefault();
+			// event.preventDefault();
       const { value: file } = await Swal.fire({
         title: 'Unggah SK Direktur',
         input: 'file',
@@ -359,7 +359,7 @@ while($tpl_hasil=$hasil->FetchRow()){
     }
 
 		async function insert_SPK_WO(){
-			event.preventDefault();
+			// event.preventDefault();
       const { value: file } = await Swal.fire({
         title: 'Unggah SPK/WO',
         input: 'file',
@@ -408,7 +408,7 @@ while($tpl_hasil=$hasil->FetchRow()){
     }
 
 		async function insert_FORM_PENGAJUAN(){
-			event.preventDefault();
+			// event.preventDefault();
       const { value: file } = await Swal.fire({
         title: 'Unggah Form Pengajuan',
         input: 'file',
