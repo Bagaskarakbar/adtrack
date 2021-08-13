@@ -48,8 +48,7 @@ loadlib("function","function.olah_tabel");
 	</div>
 </div>
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
-<!-- <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script> -->
-<!-- <script type="text/javascript" src="./assets/scripts/jquery-3.6.0.min.js"></script> -->
+<script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
 	function list_docs_modal(id){
 		$("#idIsiModal").load('../02_adminitrasi/load_list_documents.php',{id:id},function(){

@@ -2,11 +2,12 @@
 	// ini_set('display_errors', 1);
 	// ini_set('display_startup_errors', 1);
 	// error_reporting(E_ALL);
+	// $db->debug=true;
+
 	session_start();
 	require_once("../_lib/function/db.php");
 	loadlib("function","variabel");
 	loadlib("class","Paging");
-	// $db->debug=true;
 
 	/* switch ($tipeCari) {
 		case "kelompok" :
@@ -23,7 +24,15 @@
 		$sqlPlus=" AND (a.nama_pelanggan like '%$search%' or a.tgl_input like '%$search%' or f.jenis_pelanggan like '%$search%' or d.nama_layanan like '%$search%' or e.nama_paket like '%$search%')";
 	}
 
-	$sql="SELECT a.id_tc_transaksi, a.nama_pelanggan, a.tgl_input, b.jenis_project, c.nama_bundling, d.nama_layanan, e.nama_paket, f.jenis_pelanggan FROM tc_transaksi AS a JOIN mt_jenis_project AS b ON a.id_mt_jenis_project = b.id_mt_jenis_project JOIN mt_bundling AS c ON a.id_mt_bundling = c.id_mt_bundling JOIN mt_layanan AS d ON a.id_mt_layanan = d.id_mt_layanan JOIN mt_paket AS e ON a.id_mt_paket = e.id_mt_paket JOIN mt_jenis_pelanggan AS f ON a.id_mt_jenis_pelanggan = f.id_mt_jenis_pelanggan WHERE id_tc_transaksi is null $sqlPlus ORDER BY id_tc_transaksi";
+	$sql="SELECT a.id_tc_transaksi, a.nama_pelanggan, a.tgl_input, b.jenis_project, c.nama_bundling, d.nama_layanan, e.nama_paket, f.jenis_pelanggan 
+	FROM tc_transaksi AS a 
+	JOIN mt_jenis_project AS b ON a.id_mt_jenis_project = b.id_mt_jenis_project 
+	JOIN mt_bundling AS c ON a.id_mt_bundling = c.id_mt_bundling 
+	JOIN mt_layanan AS d ON a.id_mt_layanan = d.id_mt_layanan 
+	JOIN mt_paket AS e ON a.id_mt_paket = e.id_mt_paket 
+	JOIN mt_jenis_pelanggan AS f ON a.id_mt_jenis_pelanggan = f.id_mt_jenis_pelanggan
+	JOIN tc_pengajuan AS g ON a.id_tc_pengajuan = g.id_tc_pengajuan
+	WHERE a.id_tc_transaksi is not null $sqlPlus ORDER BY a.id_tc_transaksi";
 	$sql_count="select count(a.id_tc_transaksi) as jum from ($sql) as a";
 	$run_count=$db->Execute($sql_count);
 	while($tpl_count=$run_count->fetchRow()){

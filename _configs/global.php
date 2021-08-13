@@ -2,14 +2,14 @@
 $AV_CONF=array();
 
 $AV_CONF["db"]["type"]="MySQLi";
-$AV_CONF["db"]["user"]="root";
-//$AV_CONF["db"]["name"]="dev_adtrack";
-//$AV_CONF["db"]["pass"]="4verin4dmedik4123!";
-//$AV_CONF["db"]["host"]="103.28.53.66";
+$AV_CONF["db"]["user"]="bagas";
+$AV_CONF["db"]["name"]="dev_adtrack";
+$AV_CONF["db"]["pass"]="$6547nlghpg7qluhy7";
+$AV_CONF["db"]["host"]="distrex.co.id";
 
-$AV_CONF["db"]["name"]="dev_doc_tracking";
-$AV_CONF["db"]["pass"]="";
-$AV_CONF["db"]["host"]="localhost";
+// $AV_CONF["db"]["name"]="dev_doc_tracking";
+// $AV_CONF["db"]["pass"]="";
+// $AV_CONF["db"]["host"]="localhost";
 
 // $AV_CONF["db"]["type"]="mssqlnative";
 // $AV_CONF["db"]["user"]="sa";

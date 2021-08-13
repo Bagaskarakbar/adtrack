@@ -35,7 +35,7 @@ while($tpl_hasil=$hasil->FetchRow()){
             <tbody>
               <tr>
                   <th scope="row">1</th>
-                  <td>NPWP</td>
+                  <td>Perintah Tagih</td>
                   <?if($id_mt_dokumen==19 && $url_dokumen!=""){?>
                     <td><i class="fa fa-fw fa-check" aria-hidden="true" title="sudah upload" style="color:#00b200"></i></td>
                     <td>-</td>
@@ -46,7 +46,7 @@ while($tpl_hasil=$hasil->FetchRow()){
               </tr>
               <tr>
                   <th scope="row">2</th>
-                  <td>Surat Ijin</td>
+                  <td>Kwitansi</td>
                   <?if($id_mt_dokumen==25 && $url_dokumen!=""){?>
                     <td><i class="fa fa-fw fa-check" aria-hidden="true" title="sudah upload" style="color:#00b200"></i></td>
                     <td>-</td>
@@ -57,7 +57,7 @@ while($tpl_hasil=$hasil->FetchRow()){
               </tr>
               <tr>
                   <th scope="row">3</th>
-                  <td>TDP</td>
+                  <td>Faktur Pajak</td>
                   <?if($id_mt_dokumen==26 && $url_dokumen!=""){?>
                     <td><i class="fa fa-fw fa-check" aria-hidden="true" title="sudah upload" style="color:#00b200"></i></td>
                     <td>-</td>
