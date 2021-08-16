@@ -67,45 +67,37 @@ loadlib("function","function.olah_tabel");
 }
 </style>
 <div id="idContent">
-<div class="card-header">List Mitra
-		<div class="btn-actions-pane-right" style="padding-right:10px;">
-				<!-- <button class="btn-wide btn btn-info" onclick="list_mitra()"><i class="fa fa-plus"></i> Tambah Mitra</button> -->
-		</div>
-</div>
-<div class="main-card mb-3 card">
-	<div class="card-body">
-		<div class="tab-content">
-		<div class="table-responsive">
-				<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/09_mitra/get_index_view.php" data-pagination="true" data-trim-on-search="false"  data-search="true" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
-				<thead>
-				<tr>
-					<th data-field="no" >No.</th>
-					<th data-field="nama_pelanggan" style="text-align:center;">Nama Pelanggan</th>
-					<th data-field="jenis_pelanggan">Jenis Pelanggan</th>
-					<th data-field="nama_layanan">Nama Layanan</th>
-					<th data-field="paket_layanan">Paket Layanan</th>
-					<th data-field="tgl_input">Tanggal Input</th>
-					<th data-field="details" align="center">Aksi</th>
-				</tr>
-				</thead>
-
-				</table>
-		</div>
+	<div class="card-header">List Mitra
+			<div class="btn-actions-pane-right" style="padding-right:10px;">
+			</div>
+	</div>
+	<div class="main-card mb-3 card">
+		<div class="card-body">
+			<div class="tab-content">
+				<div class="table-responsive">
+					<table class="table table-separate table-head-custom table-checkable" data-toggle="table" data-url="/09_mitra/get_index_view.php" data-pagination="true" data-trim-on-search="false"  data-search="true" data-sort-order="asc" data-side-pagination="server" data-total-field="count" data-data-field="items" id="kt_datatable1">
+						<thead>
+							<tr>
+								<th data-field="no" >No.</th>
+								<th data-field="nama_pelanggan" style="text-align:center;">Nama Pelanggan</th>
+								<th data-field="jenis_pelanggan">Jenis Pelanggan</th>
+								<th data-field="nama_layanan">Nama Layanan</th>
+								<th data-field="paket_layanan">Paket Layanan</th>
+								<th data-field="tgl_input">Tanggal Input</th>
+								<th data-field="details" align="center">Aksi</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 <script type="text/javascript" src="./assets/scripts/sweetalert2@10.js"></script>
 <script type="text/javascript" src="./assets/js/bot-ta/bootstrap-table.js"></script>
 <script>
 function list_mitra_modal(id){
 	$("#idIsiModal").load('../09_mitra/load_list_documents_mitra.php',{id:id},function(){
-		$("#BuatModal").modal("show");
-	});
-}
-
-function list_mitra(){
-	$("#idIsiModal").load('../09_mitra/load_list_documents_mitra.php',function(){
 		$("#BuatModal").modal("show");
 	});
 }
