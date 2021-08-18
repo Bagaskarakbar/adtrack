@@ -13,10 +13,6 @@ loadlib("function","function.max_kode_text");
 
 $db->BeginTrans();
 
-// echo $_POST["id_tc_transaksi"];
-// echo $_POST["jenis_dokumen"];
-// echo $_POST["dokumen_mitra"];
-
 $date=date("Y-m-d H:i:s");
 $id_mt_dokumen=$_POST["jenis_dokumen"];
 
@@ -115,6 +111,12 @@ switch($case){
 		$result = insert_tabel("tc_transaksi_dokumen", $insertFakturPajak);
 
 		$db->CommitTrans($result!==false);
+	break;
+	case "update":
+	break;
+	case "delete":
+		$result = delete_tabel("tc_transaksi_dokumen", "WHERE id_tc_transaksi_dokumen=$id_dokumen");
+		$db->CommitTrans($result !== false);
 	break;
 }
 

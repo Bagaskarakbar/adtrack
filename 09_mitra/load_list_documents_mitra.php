@@ -42,35 +42,35 @@ loadlib("function","function.olah_tabel");
 				<tr>
 					<th scope="row">1</th>
 					<td>Perintah Tagih</td>
-					<?if($id_mt_dokumen==19 && $url_dokumen!="" && $id_tc_transaksi==$id){?>
+					<?//if($id_mt_dokumen==19 && $url_dokumen!="" && $id_tc_transaksi==$id){?>
 						<td><i class="fa fa-fw fa-check" aria-hidden="true" title="sudah upload" style="color:#00b200"></i></td>
 						<td>-</td>
-					<?}else{?>
+					<?//}else{?>
 						<td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
 						<td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_perintah_tagih()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
-					<?}?>
+					<?//}?>
 				</tr>
 				<tr>
 					<th scope="row">2</th>
 					<td>Kwitansi</td>
-					<?if($id_mt_dokumen==25 && $url_dokumen!="" && $id_tc_transaksi==$id){?>
+					<?//if($id_mt_dokumen==25 && $url_dokumen!="" && $id_tc_transaksi==$id){?>
 						<td><i class="fa fa-fw fa-check" aria-hidden="true" title="sudah upload" style="color:#00b200"></i></td>
 						<td>-</td>
-					<?}else{?>
+					<?//}else{?>
 						<td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
 						<td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_kwitansi()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
-					<?}?>
+					<?//}?>
 				</tr>
 				<tr>
 					<th scope="row">3</th>
 					<td>Faktur Pajak</td>
-					<?if($id_mt_dokumen==26 && $url_dokumen!="" && $id_tc_transaksi==$id){?>
+					<?//if($id_mt_dokumen==26 && $url_dokumen!="" && $id_tc_transaksi==$id){?>
 						<td><i class="fa fa-fw fa-check" aria-hidden="true" title="sudah upload" style="color:#00b200"></i></td>
 						<td>-</td>
-					<?}else{?>
+					<?//}else{?>
 						<td><i class="fa fa-fw fa-times" aria-hidden="true" title="belum upload" style="color:#cc0000"></i></td>
 						<td><button type="button" class="mb-2 mr-2 btn btn-info" onClick="insert_faktur_pajak()"><i class="fa fa-fw fa-upload" aria-hidden="true" title="upload file"></i></button></td>
-					<?}?>
+					<?//}?>
 				</tr>
 				</tbody>
 			</table> -->
@@ -116,6 +116,54 @@ loadlib("function","function.olah_tabel");
 		});
 	}
 
+	function delete_docs_mitra(id){
+		const modalSwal = Swal.mixin({
+			customClass: {
+				confirmButton: 'mb-2 mr-2 btn btn-success',
+				cancelButton: 'mb-2 mr-2 btn btn-danger'
+			},
+			buttonsStyling: false
+		})
+		
+		modalSwal.fire({
+			title: 'Apakah Anda Yakin?',
+			text: "Berkas Yang Terhapus Tidak Dapat Dikembalikan Lagi!",
+			icon: 'warning',
+			showCancelButton: true,
+			reverseButtons:	true,
+			cancelButtonText:'Batal',
+			confirmButtonText: 'Hapus'
+		}).then((result) => {
+			if(result.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url:'/09_mitra/mitra_form_act.php',
+					data: {
+							id_dokumen:id,
+							case:'delete'
+						},
+					success: function(data){
+						if(data.code='200'){
+							Swal.fire('Berhasil!','Berkas berhasil dihapus!!','success');
+							$("#table_dokumen_mitra").bootstrapTable('refresh');
+							$('#BuatModal').modal('hide');
+						}else{
+							Swal.fire("Gagal!","Terjadi Kesalahan dalam menghapus berkas!!","error");
+						}
+					},
+					dataType: "json"
+				});
+			}else if(result.dismiss === Swal.DismissReason.cancel){
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Berkas gagal dimasukan!!',
+					footer: 'Note: Proses Dibatalkan oleh user!'
+				});
+			}
+		})
+	}
+
     async function insert_perintah_tagih(){
       const { value: file } = await Swal.fire({
         title: 'Unggah Perintah Tagih',
@@ -138,10 +186,10 @@ loadlib("function","function.olah_tabel");
             dataType:'json',
             cache:'false',
             data:{
-              bin_perintah_tagih: e.target.result,
-			  id_tc_transaksi_perintah_tagih:<?=$id?>
-    					// file: file.name,
-    					// file_type: file.type,
+            	bin_perintah_tagih: e.target.result,
+				id_tc_transaksi_perintah_tagih:<?=$id?>
+    			// file: file.name,
+    			// file_type: file.type,
             },
 			url:'/09_mitra/mitra_form_act.php',
             success:function(data){
@@ -165,7 +213,7 @@ loadlib("function","function.olah_tabel");
   		        }
   		      },
   		    //   error:function(xhr,ajaxOptions,thrownError){
-  		    //     alert("ERROR:" + xhr.responseText+" - "+thrownError);
+  		    //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
   		    //   }
           });
         }
@@ -195,10 +243,10 @@ loadlib("function","function.olah_tabel");
             dataType:'json',
             cache:'false',
             data:{
-              bin_kwitansi: e.target.result,
-			  id_tc_transaksi_kwitansi:<?=$id?>
-    					// file: file.name,
-    					// file_type: file.type,
+            	bin_kwitansi: e.target.result,
+				id_tc_transaksi_kwitansi:<?=$id?>
+    			// file: file.name,
+    			// file_type: file.type,
             },
 			url:'/09_mitra/mitra_form_act.php',
             success:function(data){
@@ -222,7 +270,7 @@ loadlib("function","function.olah_tabel");
   		        }
   		      },
   		    //   error:function(xhr,ajaxOptions,thrownError){
-  		    //     alert("ERROR:" + xhr.responseText+" - "+thrownError);
+  		    //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
   		    //   }
           });
         }
@@ -252,10 +300,10 @@ loadlib("function","function.olah_tabel");
             dataType:'json',
             cache:'false',
             data:{
-              bin_faktur_pajak: e.target.result,
-			  id_tc_transaksi_faktur_pajak:<?=$id?>
-    					// file: file.name,
-    					// file_type: file.type,
+            	bin_faktur_pajak: e.target.result,
+				id_tc_transaksi_faktur_pajak:<?=$id?>
+    			// file: file.name,
+    			// file_type: file.type,
             },
 			url:'/09_mitra/mitra_form_act.php',
             success:function(data){

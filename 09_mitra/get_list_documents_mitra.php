@@ -29,7 +29,7 @@
 
 	while ($tampil=$rsPaging->FetchRow()) {
 		$i++;
-		$id_tc_transaksi_dokumen=$tampil["tc_transaksi_dokumen"];
+		$id_tc_transaksi_dokumen=$tampil["id_tc_transaksi_dokumen"];
 		$id_mt_dokumen=$tampil["id_mt_dokumen"];
         $dokumen=$tampil["url_dokumen"];
 		$no = $i.".";
@@ -46,11 +46,12 @@
 
         if(isset($dokumen)){
             $DataList['status']="<i class='fa fa-fw fa-check' aria-hidden='true' title='sudah upload' style='color:#00b200'>";
-            $DataList['details']="<button type='button' class='mb-2 mr-2 btn btn-success' onClick='insert_faktur_pajak()'><i class='fa fa-fw fa-edit' aria-hidden='true' title='perbaharui file'></i></button><button type='button' class='mb-2 mr-2 btn btn-danger' onClick='insert_faktur_pajak()'><i class='fa fa-fw fa-times' aria-hidden='true' title='hapus file'></i></button>";
-        }else{
-            $DataList['status']="<i class='fa fa-fw fa-times' aria-hidden='true' title='belum upload' style='color:#cc0000'>";
-            $DataList['details']="<button type='button' class='mb-2 mr-2 btn btn-info' onClick='insert_faktur_pajak()'><i class='fa fa-fw fa-upload' aria-hidden='true' title='unggah file'></i></button>";
+            $DataList['details']="<button type='button' class='mb-2 mr-2 btn btn-success' onClick='update_docs_mitra()'><i class='fa fa-fw fa-edit' aria-hidden='true' title='perbaharui file'></i></button><button type='button' class='mb-2 mr-2 btn btn-danger' onClick='delete_docs_mitra($id_tc_transaksi_dokumen)'><i class='fa fa-fw fa-times' aria-hidden='true' title='hapus file'></i></button>";
         }
+		// else{
+        //     $DataList['status']="<i class='fa fa-fw fa-times' aria-hidden='true' title='belum upload' style='color:#cc0000'>";
+        //     $DataList['details']="<button type='button' class='mb-2 mr-2 btn btn-info' onClick='insert_faktur_pajak()'><i class='fa fa-fw fa-upload' aria-hidden='true' title='unggah file'></i></button>";
+        // }
 
 		// $DataList['tgl_input']=date("d-m-Y", strtotime($tgl_input));
 		$data['items'][]=$DataList;
