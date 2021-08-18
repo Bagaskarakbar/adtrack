@@ -163,7 +163,7 @@ loadlib("function","function.olah_tabel");
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
-					text: 'Berkas gagal dimasukan!!',
+					text: 'Berkas gagal dihapus!!',
 					footer: 'Note: Proses Dibatalkan oleh user!'
 				});
 			}
