@@ -48,7 +48,12 @@ if(isset($bin_perintah_tagih)){
 	file_put_contents($dirFile.$nama_file_asli, base64_decode($rawData));
 
 	$perintah_tagih=$dirFile.$nama_file_asli;
-	$case="perintah_tagih";
+	if($case==""){
+		$case="perintah_tagih";
+	}else{
+		$case="update";
+	}
+	
 }
 
 if(isset($bin_kwitansi)){
@@ -64,7 +69,11 @@ if(isset($bin_kwitansi)){
 	file_put_contents($dirFile.$nama_file_asli, base64_decode($rawData));
 
 	$kwitansi=$dirFile.$nama_file_asli;
-	$case="kwitansi";
+	if($case==""){
+		$case="kwitansi";
+	}else{
+		$case="update";
+	}
 }
 
 if(isset($bin_faktur_pajak)){
@@ -80,7 +89,11 @@ if(isset($bin_faktur_pajak)){
 	file_put_contents($dirFile.$nama_file_asli, base64_decode($rawData));
 
 	$faktur_pajak=$dirFile.$nama_file_asli;
-	$case="faktur_pajak";
+	if($case==""){
+		$case="faktur_pajak";
+	}else{
+		$case="update";
+	}
 }
 
 //upload to db
@@ -113,6 +126,21 @@ switch($case){
 		$db->CommitTrans($result!==false);
 	break;
 	case "update":
+		unset($updateDokumen);
+
+		$updateDokumen["id_mt_dokumen"]=$id_mt_dokumen;
+		$updateDokumen["tg_input"]=$date;
+
+		if(isset($perintah_tagih)){
+			$updateDokumen["url_dokumen"]=$perintah_tagih;
+		}else if(isset($kwitansi)){
+			$updateDokumen["url_dokumen"]=$kwitansi;
+		}else if(isset($faktur_pajak)){
+			$updateDokumen["url_dokumen"]=$faktur_pajak;
+		}
+
+		$result = update_tabel("tc_transaksi_dokumen", $updateDokumen,"WHERE id_tc_transaksi_dokumen=$id_dokumen");
+		$db->CommitTrans($result !== false);
 	break;
 	case "delete":
 		$result = delete_tabel("tc_transaksi_dokumen", "WHERE id_tc_transaksi_dokumen=$id_dokumen");

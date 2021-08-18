@@ -46,7 +46,7 @@
 
         if(isset($dokumen)){
             $DataList['status']="<i class='fa fa-fw fa-check' aria-hidden='true' title='sudah upload' style='color:#00b200'>";
-            $DataList['details']="<button type='button' class='mb-2 mr-2 btn btn-success' onClick='update_docs_mitra()'><i class='fa fa-fw fa-edit' aria-hidden='true' title='perbaharui file'></i></button><button type='button' class='mb-2 mr-2 btn btn-danger' onClick='delete_docs_mitra($id_tc_transaksi_dokumen)'><i class='fa fa-fw fa-times' aria-hidden='true' title='hapus file'></i></button>";
+            $DataList['details']="<button type='button' class='mb-2 mr-2 btn btn-success' onClick='update_docs_mitra($id,$id_tc_transaksi_dokumen)'><i class='fa fa-fw fa-edit' aria-hidden='true' title='perbaharui file'></i></button><button type='button' class='mb-2 mr-2 btn btn-danger' onClick='delete_docs_mitra($id_tc_transaksi_dokumen)'><i class='fa fa-fw fa-times' aria-hidden='true' title='hapus file'></i></button>";
         }
 		// else{
         //     $DataList['status']="<i class='fa fa-fw fa-times' aria-hidden='true' title='belum upload' style='color:#cc0000'>";

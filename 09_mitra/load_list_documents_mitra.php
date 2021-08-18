@@ -116,6 +116,12 @@ loadlib("function","function.olah_tabel");
 		});
 	}
 
+	function update_docs_mitra(id,id_dokumen){
+		$("#idIsiModal").load('../09_mitra/update_documents_mitra.php',{id:id,id_dokumen:id_dokumen},function(){
+			$("#BuatModal").modal("show");
+		});
+	}
+
 	function delete_docs_mitra(id){
 		const modalSwal = Swal.mixin({
 			customClass: {
@@ -175,47 +181,47 @@ loadlib("function","function.olah_tabel");
         }
       })
 
-      if (file) {
+      if(file){
         const reader = new FileReader()
         reader.onloadend = (e) => {
-          if ( e.target.readyState !== FileReader.DONE ) {
-    				return;
-    			}
-          $.ajax({
-            type:'post',
-            dataType:'json',
-            cache:'false',
-            data:{
-            	bin_perintah_tagih: e.target.result,
-				id_tc_transaksi_perintah_tagih:<?=$id?>
-    			// file: file.name,
-    			// file_type: file.type,
-            },
-			url:'/09_mitra/mitra_form_act.php',
-            success:function(data){
-  		        if(data.code != "500" ){
-  		          Swal.fire({
-  		            icon: 'success',
-  		            title: 'Yayy...',
-  		            text: 'Dokumen berhasil diunggah!!'
-  		          })
-					$('#BuatModal').modal('hide');
-					$('.modal-backdrop').hide();
-  		        }else{
-  		          Swal.fire({
-  		          icon: 'error',
-  		          title: 'Oops...',
-  		          text: 'Dokumen gagal diunggah!!',
-  		          footer: 'Note: Terjadi kesalahan saat memasukan data!!'
-  		          })
-					$('#BuatModal').modal('hide');
-					$('.modal-backdrop').hide();
-  		        }
-  		      },
-  		    //   error:function(xhr,ajaxOptions,thrownError){
-  		    //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
-  		    //   }
-          });
+			if(e.target.readyState !== FileReader.DONE){
+				return;
+    		}
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				cache:'false',
+				data:{
+					bin_perintah_tagih: e.target.result,
+					id_tc_transaksi_perintah_tagih:<?=$id?>
+					// file: file.name,
+					// file_type: file.type,
+				},
+				url:'/09_mitra/mitra_form_act.php',
+				success:function(data){
+					if(data.code != "500" ){
+					Swal.fire({
+						icon: 'success',
+						title: 'Yayy...',
+						text: 'Dokumen berhasil diunggah!!'
+					})
+						$('#BuatModal').modal('hide');
+						$('.modal-backdrop').hide();
+					}else{
+					Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Dokumen gagal diunggah!!',
+					footer: 'Note: Terjadi kesalahan saat memasukan data!!'
+					})
+						$('#BuatModal').modal('hide');
+						$('.modal-backdrop').hide();
+					}
+				},
+				//   error:function(xhr,ajaxOptions,thrownError){
+				//   alert("ERROR:" + xhr.responseText+" - "+thrownError);
+				//   }
+			});
         }
         reader.readAsDataURL(file)
       }
@@ -232,47 +238,47 @@ loadlib("function","function.olah_tabel");
         }
       })
 
-      if (file) {
+      if(file){
         const reader = new FileReader()
         reader.onloadend = (e) => {
-          if ( e.target.readyState !== FileReader.DONE ) {
-    			return;
-    	  }
-          $.ajax({
-            type:'post',
-            dataType:'json',
-            cache:'false',
-            data:{
-            	bin_kwitansi: e.target.result,
-				id_tc_transaksi_kwitansi:<?=$id?>
-    			// file: file.name,
-    			// file_type: file.type,
-            },
-			url:'/09_mitra/mitra_form_act.php',
-            success:function(data){
-  		        if(data.code != "500" ){
-  		          Swal.fire({
-  		            icon: 'success',
-  		            title: 'Yayy...',
-  		            text: 'Dokumen berhasil diunggah!!'
-  		          })
-					$('#BuatModal').modal('hide');
-					$('.modal-backdrop').hide();
-  		        }else{
-  		          Swal.fire({
-  		          icon: 'error',
-  		          title: 'Oops...',
-  		          text: 'Dokumen gagal diunggah!!',
-  		          footer: 'Note: Terjadi kesalahan saat memasukan data!!'
-  		          })
-					$('#BuatModal').modal('hide');
-					$('.modal-backdrop').hide();
-  		        }
-  		      },
-  		    //   error:function(xhr,ajaxOptions,thrownError){
-  		    //   alert("ERROR:" + xhr.responseText+" - "+thrownError);
-  		    //   }
-          });
+			if(e.target.readyState !== FileReader.DONE){
+				return;
+			}
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				cache:'false',
+				data:{
+					bin_kwitansi: e.target.result,
+					id_tc_transaksi_kwitansi:<?=$id?>
+					// file: file.name,
+					// file_type: file.type,
+				},
+				url:'/09_mitra/mitra_form_act.php',
+				success:function(data){
+					if(data.code != "500" ){
+					Swal.fire({
+						icon: 'success',
+						title: 'Yayy...',
+						text: 'Dokumen berhasil diunggah!!'
+					})
+						$('#BuatModal').modal('hide');
+						$('.modal-backdrop').hide();
+					}else{
+					Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Dokumen gagal diunggah!!',
+					footer: 'Note: Terjadi kesalahan saat memasukan data!!'
+					})
+						$('#BuatModal').modal('hide');
+						$('.modal-backdrop').hide();
+					}
+				},
+				//   error:function(xhr,ajaxOptions,thrownError){
+				//   alert("ERROR:" + xhr.responseText+" - "+thrownError);
+				//   }
+			});
         }
         reader.readAsDataURL(file)
       }
@@ -282,54 +288,54 @@ loadlib("function","function.olah_tabel");
       const { value: file } = await Swal.fire({
         title: 'Unggah Faktur Pajak',
         input: 'file',
-				confirmButtonText: 'Masukkan',
+		confirmButtonText: 'Masukkan',
         inputAttributes: {
           'accept': 'application/pdf',
           'aria-label': 'Silahkan Unggah Perintah Tagih'
         }
       })
 
-      if (file) {
+      if(file){
         const reader = new FileReader()
         reader.onloadend = (e) => {
-          if ( e.target.readyState !== FileReader.DONE ) {
-    				return;
-    			}
-          $.ajax({
-            type:'post',
-            dataType:'json',
-            cache:'false',
-            data:{
-            	bin_faktur_pajak: e.target.result,
-				id_tc_transaksi_faktur_pajak:<?=$id?>
-    			// file: file.name,
-    			// file_type: file.type,
-            },
-			url:'/09_mitra/mitra_form_act.php',
-            success:function(data){
-  		        if(data.code != "500" ){
-  		          Swal.fire({
-  		            icon: 'success',
-  		            title: 'Yayy...',
-  		            text: 'Dokumen berhasil diunggah!!'
-  		          })
-					$('#BuatModal').modal('hide');
-					$('.modal-backdrop').hide();
-  		        }else{
-  		          Swal.fire({
-  		          icon: 'error',
-  		          title: 'Oops...',
-  		          text: 'Dokumen gagal diunggah!!',
-  		          footer: 'Note: Terjadi kesalahan saat memasukan data!!'
-  		          })
-					$('#BuatModal').modal('hide');
-					$('.modal-backdrop').hide();
-  		        }
-  		      },
-  		    //   error:function(xhr,ajaxOptions,thrownError){
-  		    //     alert("ERROR:" + xhr.responseText+" - "+thrownError);
-  		    //   }
-          });
+			if(e.target.readyState !== FileReader.DONE){
+				return;
+    		}
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				cache:'false',
+				data:{
+					bin_faktur_pajak: e.target.result,
+					id_tc_transaksi_faktur_pajak:<?=$id?>
+					// file: file.name,
+					// file_type: file.type,
+				},
+				url:'/09_mitra/mitra_form_act.php',
+				success:function(data){
+					if(data.code != "500" ){
+					Swal.fire({
+						icon: 'success',
+						title: 'Yayy...',
+						text: 'Dokumen berhasil diunggah!!'
+					})
+						$('#BuatModal').modal('hide');
+						$('.modal-backdrop').hide();
+					}else{
+					Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Dokumen gagal diunggah!!',
+					footer: 'Note: Terjadi kesalahan saat memasukan data!!'
+					})
+						$('#BuatModal').modal('hide');
+						$('.modal-backdrop').hide();
+					}
+				},
+				//   error:function(xhr,ajaxOptions,thrownError){
+				//     alert("ERROR:" + xhr.responseText+" - "+thrownError);
+				//   }
+			});
         }
         reader.readAsDataURL(file)
       }

@@ -10,6 +10,12 @@ loadlib("function","function.olah_tabel");
 loadlib("function","function.pilihan_list");
 loadlib("function","function.mandatory");
 // $db->debug=true;
+
+$case="update";
+$sql="SELECT * FROM tc_transaksi_dokumen WHERE id_tc_transaksi_dokumen = $id_dokumen";
+$hasil=$db->Execute($sql);
+$url_dokumen=$hasil->Fields("url_dokumen");
+$id_mt_dokumen = $hasil->Fields("id_mt_dokumen");
 ?>
 <div id="insertDocsModal">
 	<form id="idTambahDokumen" method="POST" action="#"  enctype="multipart/form-data">
@@ -33,7 +39,7 @@ loadlib("function","function.mandatory");
 						<select class="form-control" name="jenis_dokumen">
 							<?  
 							$sql_dokumen= "SELECT * FROM mt_dokumen WHERE id_mt_dokumen IN (19, 25, 26)";
-							pilihan_list($sql_dokumen,"tipe_dokumen","id_mt_dokumen","id_mt_dokumen","id_mt_dokumen");
+							pilihan_list($sql_dokumen,"tipe_dokumen","id_mt_dokumen","id_mt_dokumen",$id_mt_dokumen);
 							?>
 						</select>
 					</div>
@@ -45,7 +51,7 @@ loadlib("function","function.mandatory");
 						<label>Upload Dokumen <?=mandatory();?></label>
 					</div>
 					<div class="col-lg-8">
-						<input type="file" class="form-control" accept="application/pdf"  id="dokumen_mitra" name="dokumen_mitra">
+						<input type="file" class="form-control" accept="application/pdf"  id="dokumen_mitra" name="dokumen_mitra" value="<?=$url_dokumen?>">
 					</div>
 				</div>
                  <br>
@@ -55,13 +61,15 @@ loadlib("function","function.mandatory");
 					<div class="col-lg-8" id="loadDokumen"></div>
 				</div>
 
+                <input type="hidden" name="id_dokumen" value="<?=$id_dokumen?>">
+                <input type="hidden" name="case" value="<?=$case?>">
 				<input type="hidden" id="id_tc_transaksi" name="id_tc_transaksi" value="<?=$id?>">
 				<br>
 
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card-footer" align="right">
-							<button type="button" class="btn btn-success font-weight-bolder font-size-sm" onclick="add_documents_mitra()">Masukkan</button>
+							<button type="button" class="btn btn-success font-weight-bolder font-size-sm" onclick="update_documents_mitra()">Masukkan</button>
 							<button type="button" class="btn btn-danger font-weight-bolder font-size-sm" data-dismiss="modal">Batal</button>
 						</div>
 					</div>
@@ -90,7 +98,7 @@ loadlib("function","function.mandatory");
 		$("#insertDocsModal").load("/09_mitra/index.php");
 	}
 
-	function add_documents_mitra(){
+	function update_documents_mitra(){
 		var dataform=$("#idTambahDokumen").serialize();
 		$.ajax({
 			type: "POST",
@@ -99,17 +107,17 @@ loadlib("function","function.mandatory");
 			data: dataform,
 			success: function(data){
 				if(data.code=='200'){
-					Swal.fire("Berhasil!","Dokumen berhasil Diunggah!","success");
+                    Swal.fire("Berhasil!","Dokumen berhasil Diperbaharui!","success");
                     setTimeout(function(){
                         $("#table_dokumen_mitra").bootstrapTable('refresh');
 					    $('#BuatModal').modal('hide');
                     }, 1500);
 				}else{
-					Swal.fire({
+                    Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Berkas gagal Diunggah!!',
-                        footer: 'Note: Terjadi Kesalahan Dalam Proses Mengunggah!'
+                        text: 'Berkas gagal Diperbaharui!!',
+                        footer: 'Note: Terjadi Kesalahan Dalam Proses Memperbaharui!'
                     });
 				}
 			},
