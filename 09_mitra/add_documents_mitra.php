@@ -39,6 +39,16 @@ loadlib("function","function.mandatory");
 					</div>
 				</div>
 				<br>
+
+				<div class="row">
+					<div class="col-lg-4">
+						<label>Keterangan <?=mandatory();?></label>
+					</div>
+					<div class="col-lg-8">
+                        <textarea id="keterangan_dokumen" name="keterangan_dokumen" rows="4" cols="46" placeholder="isi keterangan..."></textarea>
+					</div>
+				</div>
+                 <br>
                 
 				<div class="row">
 					<div class="col-lg-4">

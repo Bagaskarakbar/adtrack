@@ -16,6 +16,7 @@ $sql="SELECT * FROM tc_transaksi_dokumen WHERE id_tc_transaksi_dokumen = $id_dok
 $hasil=$db->Execute($sql);
 $url_dokumen=$hasil->Fields("url_dokumen");
 $id_mt_dokumen = $hasil->Fields("id_mt_dokumen");
+$keterangan = $hasil->Fields("keterangan");
 ?>
 <div id="insertDocsModal">
 	<form id="idTambahDokumen" method="POST" action="#"  enctype="multipart/form-data">
@@ -45,6 +46,16 @@ $id_mt_dokumen = $hasil->Fields("id_mt_dokumen");
 					</div>
 				</div>
 				<br>
+
+                <div class="row">
+					<div class="col-lg-4">
+						<label>Keterangan <?=mandatory();?></label>
+					</div>
+					<div class="col-lg-8">
+                        <textarea id="keterangan_dokumen" name="keterangan_dokumen" rows="4" cols="46" placeholder="isi keterangan..."><?=$keterangan?></textarea>
+					</div>
+				</div>
+                 <br>
                 
 				<div class="row">
 					<div class="col-lg-4">

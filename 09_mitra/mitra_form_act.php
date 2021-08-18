@@ -15,6 +15,7 @@ $db->BeginTrans();
 
 $date=date("Y-m-d H:i:s");
 $id_mt_dokumen=$_POST["jenis_dokumen"];
+$keterangan=$_POST["keterangan_dokumen"];
 
 if($id_mt_dokumen==19){
 	$id_tc_transaksi_perintah_tagih=$_POST["id_tc_transaksi"];
@@ -102,6 +103,7 @@ switch($case){
 		$insertPerintahTagih["id_tc_transaksi"]=$id_tc_transaksi_perintah_tagih;
 		$insertPerintahTagih["id_mt_dokumen"]=$id_mt_dokumen;
 		$insertPerintahTagih["url_dokumen"]=$perintah_tagih;
+		$insertPerintahTagih["keterangan"]=$keterangan;
 		$insertPerintahTagih["tg_input"]=$date;
 		$result = insert_tabel("tc_transaksi_dokumen", $insertPerintahTagih);
 
@@ -111,6 +113,7 @@ switch($case){
 		$insertKwitansi["id_tc_transaksi"]=$id_tc_transaksi_kwitansi;
 		$insertKwitansi["id_mt_dokumen"]=$id_mt_dokumen;
 		$insertKwitansi["url_dokumen"]=$kwitansi;
+		$insertKwitansi["keterangan"]=$keterangan;
 		$insertKwitansi["tg_input"]=$date;
 		$result = insert_tabel("tc_transaksi_dokumen", $insertKwitansi);
 
@@ -120,6 +123,7 @@ switch($case){
 		$insertFakturPajak["id_tc_transaksi"]=$id_tc_transaksi_faktur_pajak;
 		$insertFakturPajak["id_mt_dokumen"]=$id_mt_dokumen;
 		$insertFakturPajak["url_dokumen"]=$faktur_pajak;
+		$insertFakturPajak["keterangan"]=$keterangan;
 		$insertFakturPajak["tg_input"]=$date;
 		$result = insert_tabel("tc_transaksi_dokumen", $insertFakturPajak);
 
@@ -130,6 +134,7 @@ switch($case){
 
 		$updateDokumen["id_mt_dokumen"]=$id_mt_dokumen;
 		$updateDokumen["tg_input"]=$date;
+		$updateDokumen["keterangan"]=$keterangan;
 
 		if(isset($perintah_tagih)){
 			$updateDokumen["url_dokumen"]=$perintah_tagih;
