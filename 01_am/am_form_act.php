@@ -9,7 +9,7 @@ loadlib("function","function.max_kode_number");
 $db->BeginTrans();
 
 $date=date("Y-m-d H:i:s");
-// $id_tc_pengajuan=max_kode_number("tc_pengajuan","id_tc_pengajuan");
+$id_tc_pengajuan=max_kode_number("tc_pengajuan","id_tc_pengajuan");
 
 // if($_POST["q4"]["npwp"]!=''){
 // 	$ArrDat=explode(";",$_POST["q4"]["npwp"]);
@@ -113,6 +113,7 @@ $date=date("Y-m-d H:i:s");
 // 	$form_pengajuan='';
 // }
 
+//insert ke am
 $insertAM["nama_pelanggan"]=$_POST["q1"]["nama_pelanggan"];
 $insertAM["id_dd_user"]=$_POST["q1"]["id_dd_user"];
 $insertAM["id_mt_unit"]=$_POST["q1"]["unit"];
@@ -127,12 +128,6 @@ $insertAM["nomor"]=$_POST["q2"]["nomor"];
 $insertAM["id_mt_channel"]=$_POST["q2"]["channel"];
 $insertAM["lama_kontrak"]=$_POST["q3"]["lama_kontrak"];
 $insertAM["otc"]=$_POST["q3"]["jumlah_dana"];
-$insertAM["term1"]=$_POST["q3"]["term1"];
-$insertAM["term2"]=$_POST["q3"]["term2"];
-$insertAM["term3"]=$_POST["q3"]["term3"];
-$insertAM["term4"]=$_POST["q3"]["term4"];
-$insertAM["term5"]=$_POST["q3"]["term5"];
-$insertAM["term6"]=$_POST["q3"]["term6"];
 $insertAM["transaksional_ri"]=$_POST["q3"]["transaksional_ri"];
 $insertAM["transaksional_rj"]=$_POST["q3"]["transaksional_rj"];
 $insertAM["minimum_caps"]=$_POST["q3"]["min_caps"];
@@ -140,6 +135,66 @@ $insertAM["kso_flat"]=$_POST["q3"]["kso"];
 $insertAM["tgl_input"]=$date;
 
 $result = insert_tabel("tc_pengajuan", $insertAM);
+
+//term1
+if($_POST["q3"]["term1"]!=""){
+  $insertTerm1["nominal_term"]=$_POST["q3"]["term1"];
+  $insertTerm1["id_mt_term"]=1;
+  $insertTerm1["tgl_input"]=$date;
+  $insertTerm1["id_tc_pengajuan"]=$id_tc_pengajuan;
+
+  if($result) $result =insert_tabel("tc_term", $insertTerm1);
+}
+
+//term2
+if($_POST["q3"]["term2"]!=""){
+  $insertTerm2["nominal_term"]=$_POST["q3"]["term2"];
+  $insertTerm2["id_mt_term"]=2;
+  $insertTerm2["tgl_input"]=$date;
+  $insertTerm2["id_tc_pengajuan"]=$id_tc_pengajuan;
+
+  if($result) $result =insert_tabel("tc_term", $insertTerm2);
+}
+
+//term3
+if($_POST["q3"]["term3"]!=""){
+  $insertTerm3["nominal_term"]=$_POST["q3"]["term3"];
+  $insertTerm3["id_mt_term"]=3;
+  $insertTerm3["tgl_input"]=$date;
+  $insertTerm3["id_tc_pengajuan"]=$id_tc_pengajuan;
+
+  if($result) $result =insert_tabel("tc_term", $insertTerm3);
+}
+
+//term4
+if($_POST["q3"]["term4"]!=""){
+  $insertTerm4["nominal_term"]=$_POST["q3"]["term4"];
+  $insertTerm4["id_mt_term"]=4;
+  $insertTerm4["tgl_input"]=$date;
+  $insertTerm4["id_tc_pengajuan"]=$id_tc_pengajuan;
+
+  if($result) $result =insert_tabel("tc_term", $insertTerm4);
+}
+
+//term5
+if($_POST["q3"]["term5"]!=""){
+  $insertTerm5["nominal_term"]=$_POST["q3"]["term5"];
+  $insertTerm5["id_mt_term"]=5;
+  $insertTerm5["tgl_input"]=$date;
+  $insertTerm5["id_tc_pengajuan"]=$id_tc_pengajuan;
+
+  if($result) $result =insert_tabel("tc_term", $insertTerm5);
+}
+
+//term6
+if($_POST["q3"]["term6"]!=""){
+  $insertTerm6["nominal_term"]=$_POST["q3"]["term6"];
+  $insertTerm6["id_mt_term"]=6;
+  $insertTerm6["tgl_input"]=$date;
+  $insertTerm6["id_tc_pengajuan"]=$id_tc_pengajuan;
+
+  if($result) $result =insert_tabel("tc_term", $insertTerm6);
+}
 
 // if($npwp!=''){
 // 	$insertNPWP["id_tc_pengajuan"]=$id_tc_pengajuan;
